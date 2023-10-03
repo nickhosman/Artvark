@@ -20,6 +20,10 @@ class Post(db.Model):
 
   def to_dict(self):
     image_dict = dict(zip([image.id for image in self.post_images], [image.to_dict() for image in self.post_images]))
+    for image in self.post_images:
+      if image.preview:
+        previewImg = image.url
+        break
     return {
       "id": self.id,
       "title": self.title,
@@ -27,6 +31,8 @@ class Post(db.Model):
       "createdAt": self.created_at,
       "updatedAt": self.updated_at,
       "postImages": image_dict,
+      "previewImg": previewImg,
+      "numReactions": len(self.reactions)
     }
 
   def to_dict_with_reactions(self):

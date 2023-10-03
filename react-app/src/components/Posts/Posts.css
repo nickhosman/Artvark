@@ -1,0 +1,46 @@
+.post-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-left: 1rem;
+}
+
+.author-icon {
+  aspect-ratio: 1;
+  height: 3rem;
+  border-radius: 50%;
+}
+
+.post-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.post-image {
+  width: 50rem;
+  border-radius: 20px;
+}
+
+.post-wrapper {
+  padding-block: 3rem;
+  padding-inline: 2rem;
+  border-bottom: 1px solid brown;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.post-stats {
+  display: flex;
+  margin-left: 1rem;
+}
+
+#post-stat-reacts {
+  display: flex;
+  gap: .5em;
+}
+
+#post-stat-reacts > svg:hover {
+  cursor: pointer;
+  fill: yellow;
+}
