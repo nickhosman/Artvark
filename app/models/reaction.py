@@ -13,3 +13,17 @@ class Reaction(db.Model):
   content = db.Column(db.String(10), nullable=False)
   created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
   updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
+
+  #relationships
+  user = db.relationship("User", back_populates="reactions")
+  post = db.relationship("Post", back_populates="reactions")
+
+  def to_dict(self):
+    return {
+      "id": self.id,
+      "postId": self.post_id,
+      "content": self.content,
+      "author": self.user.to_dict(),
+      "createdAt": self.created_at,
+      "updatedAt": self.updated_at
+    }
