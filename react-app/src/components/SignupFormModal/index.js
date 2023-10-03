@@ -10,6 +10,9 @@ function SignupFormModal() {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
+	const [firstName, setFirstName] = useState("");
+	const [lastName, setLastName] = useState("");
+	const [profileImg, setProfileImg] = useState("");
 	const [errors, setErrors] = useState([]);
 	const { closeModal } = useModal();
 
@@ -38,6 +41,32 @@ function SignupFormModal() {
 						<li key={idx}>{error}</li>
 					))}
 				</ul>
+				<label>
+					Profile Image
+					<input
+						type="url"
+						value={profileImg}
+						onChange={(e) => setProfileImg(e.target.value)}
+					/>
+				</label>
+				<label>
+						First Name
+						<input
+							type="text"
+							value={firstName}
+							onChange={(e) => setFirstName(e.target.value)}
+							required
+						/>
+				</label>
+				<label>
+						Last Name
+						<input
+							type="text"
+							value={lastName}
+							onChange={(e) => setLastName(e.target.value)}
+							required
+						/>
+				</label>
 				<label>
 					Email
 					<input
