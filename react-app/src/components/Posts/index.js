@@ -1,24 +1,42 @@
 import React from "react";
-import { FaRegGrin } from "react-icons/fa"
-import './Posts.css'
+import { useSelector } from "react-redux";
+import { FaRegGrin } from "react-icons/fa";
+import OpenModalElement from "../OpenModalElement";
+import DeleteModal from "../DeleteModal";
+import EditPostFormModal from "./EditPostFormModal";
+import "./Posts.css";
 
 function Post({ post }) {
+    const current_user = useSelector((state) => state.session.user);
 
     return (
         <div className="post-wrapper">
             <div className="post-header">
-                <img className="author-icon" title={post.author.username} alt="" src={post.author.profileImg} />
-                <span className="post-title">{post.title}</span>
+                <div id="post-info">
+                    <img
+                        className="author-icon"
+                        title={post.author.username}
+                        alt=""
+                        src={post.author.profileImg}
+                    />
+                    <span className="post-title">{post.title}</span>
+                </div>
+                {current_user && current_user?.id === post.author.id ? (
+                    <div id="post-btn-wrapper">
+                        <OpenModalElement id="post-update" text="edit" modalComponent={<EditPostFormModal post={post} />}/>
+                        <OpenModalElement id="post-delete" text="delete" modalComponent={<DeleteModal post={post} />}/>
+                    </div>
+                ) : null}
             </div>
-            <img className="post-image" alt="" src={post.previewImg}/>
+            <img className="post-image" alt="" src={post.previewImg} />
             <div className="post-stats">
-              <div id="post-stat-reacts">
-                <FaRegGrin />
-                <span>{post.numReactions}</span>
-              </div>
+                <div id="post-stat-reacts">
+                    <FaRegGrin />
+                    <span>{post.numReactions}</span>
+                </div>
             </div>
         </div>
     );
 }
 
-export default Post
+export default Post;

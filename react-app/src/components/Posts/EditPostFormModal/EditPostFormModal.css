@@ -1,0 +1,62 @@
+#edit-post-form-wrapper {
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  background-color: #e9cab9;
+}
+
+#file-upload-wrapper {
+  display: flex;
+  gap: 2rem;
+}
+
+#edit-post-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+  border-radius: 20px;
+}
+
+#edit-post-form > button {
+  height: 3rem;
+  width: 8rem;
+  border-radius: 30px;
+  border: none;
+  background-color: #705852;
+  color: white;
+}
+
+#edit-post-form > button:hover {
+  cursor: pointer;
+  background-color: #3c2f2c;
+}
+/* .post-image-upload {
+  border: 1px solid #6f5851;
+  height: 5rem;
+  width: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.post-image-upload:hover {
+  cursor: pointer;
+}
+
+.post-image-upload:hover > svg {
+  transform: scale(1.2)
+}
+
+.post-image-upload > svg {
+  transition: all .5s;
+  transform-origin: 50% 50%;
+  fill: #6f5851;
+}
+
+.post-img-preview {
+  height: 5rem;
+  width: 5rem;
+  opacity: 40%;
+} */

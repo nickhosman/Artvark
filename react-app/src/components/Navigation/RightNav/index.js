@@ -1,6 +1,7 @@
 import React from "react";
 import CreatePostFormModal from "../../Posts/CreatPostFormModal";
 import OpenModalButton from "../../OpenModalButton";
+import "./RightNav.css"
 
 function RightNav() {
     return (
