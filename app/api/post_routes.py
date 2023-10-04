@@ -116,3 +116,31 @@ def delete_post(postId):
 
 
   return {"message": "Successfully deleted post."}
+
+
+@post_routes.route("/<int:postId>", methods=["PUT"])
+@login_required
+def edit_post(postId):
+  """
+  Update a post title
+  """
+  post = Post.query.get(postId)
+  images = post.post_images
+
+  if not post:
+    return {"error": "Post not found"}, 404
+
+  if post.user_id != current_user.id:
+    return {"error": "Unauthorized"}, 401
+
+  form = PostForm()
+  form['csrf_token'].data = request.cookies['csrf_token']
+  if form.validate_on_submit():
+    post.title = form.data["title"]
+
+    image1 = form.data["image1"]
+    image2 = form.data["image2"]
+    image3 = form.data["image3"]
+    image4 = form.data["image4"]
+
+  image_ids = [image.id for image in images]

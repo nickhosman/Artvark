@@ -1,0 +1,47 @@
+#edit-post-form-wrapper {
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  background-color: #e9cab9;
+}
+
+#file-upload-wrapper {
+  display: flex;
+  gap: 2rem;
+}
+
+#edit-post-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+  border-radius: 20px;
+}
+
+input[type='file'] {
+  display: none;
+}
+
+.post-image-upload {
+  border: 1px solid #6f5851;
+  height: 5rem;
+  width: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.post-image-upload:hover {
+  cursor: pointer;
+}
+
+.post-image-upload:hover > svg {
+  transform: scale(1.2)
+}
+
+.post-image-upload > svg {
+  transition: all .5s;
+  transform-origin: 50% 50%;
+  fill: #6f5851;
+}

@@ -36,7 +36,7 @@ function CreatePostFormModal() {
   }
 
   return (
-    <>
+    <div id="create-post-form-wrapper">
       <h1>Create Post</h1>
       <form encType="multipart/form-data" onSubmit={handleSubmit}>
         <label>
@@ -82,7 +82,7 @@ function CreatePostFormModal() {
         <button type="submit">Create Post</button>
         {(imagesLoading)&& <p>Loading...</p>}
       </form>
-    </>
+    </div>
   )
 }
 
