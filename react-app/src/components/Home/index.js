@@ -19,7 +19,7 @@ function Home() {
   return (
     <div id="home-wrapper">
       {postArr.map((post) => (
-        <Post post={post} />
+        <Post post={post} key={post.id}/>
       ))}
       <RightNav />
     </div>

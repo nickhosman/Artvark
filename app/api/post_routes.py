@@ -125,7 +125,6 @@ def edit_post(postId):
   Update a post title
   """
   post = Post.query.get(postId)
-  images = post.post_images
 
   if not post:
     return {"error": "Post not found"}, 404
@@ -137,10 +136,9 @@ def edit_post(postId):
   form['csrf_token'].data = request.cookies['csrf_token']
   if form.validate_on_submit():
     post.title = form.data["title"]
+    db.session.commit()
 
-    image1 = form.data["image1"]
-    image2 = form.data["image2"]
-    image3 = form.data["image3"]
-    image4 = form.data["image4"]
+    return post.to_dict(), 201
 
-  image_ids = [image.id for image in images]
+  if form.errors:
+    return {"errors": form.errors}, 400

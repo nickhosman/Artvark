@@ -9,10 +9,6 @@ import EditPostFormModal from "./EditPostFormModal";
 function Post({ post }) {
     const current_user = useSelector((state) => state.session.user);
 
-    const handleEditClick = async (e) => {
-
-    }
-
     return (
         <div className="post-wrapper">
             <div className="post-header">
@@ -27,8 +23,8 @@ function Post({ post }) {
                 </div>
                 {current_user && current_user?.id === post.author.id ? (
                     <div id="post-btn-wrapper">
-                        <OpenModalElement id="post-update" text="edit" modalComponent={EditPostFormModal(post)}/>
-                        <OpenModalElement id="post-delete" text="delete" modalComponent={DeleteModal(post)}/>
+                        <OpenModalElement id="post-update" text="edit" modalComponent={<EditPostFormModal post={post} />}/>
+                        <OpenModalElement id="post-delete" text="delete" modalComponent={<DeleteModal psot={post} />}/>
                     </div>
                 ) : null}
             </div>

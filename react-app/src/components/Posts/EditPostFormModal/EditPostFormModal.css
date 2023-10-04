@@ -14,16 +14,25 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: 2rem;
   padding: 2rem;
   border-radius: 20px;
 }
 
-input[type='file'] {
-  display: none;
+#edit-post-form > button {
+  height: 3rem;
+  width: 8rem;
+  border-radius: 30px;
+  border: none;
+  background-color: #705852;
+  color: white;
 }
 
-.post-image-upload {
+#edit-post-form > button:hover {
+  cursor: pointer;
+  background-color: #3c2f2c;
+}
+/* .post-image-upload {
   border: 1px solid #6f5851;
   height: 5rem;
   width: 5rem;
@@ -45,3 +54,9 @@ input[type='file'] {
   transform-origin: 50% 50%;
   fill: #6f5851;
 }
+
+.post-img-preview {
+  height: 5rem;
+  width: 5rem;
+  opacity: 40%;
+} */

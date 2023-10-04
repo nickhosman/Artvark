@@ -2,8 +2,9 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
 import { fetchDeletePost } from '../../store/posts';
+import './DeleteModal.css'
 
-function DeleteModal(post) {
+function DeleteModal({post}) {
   const dispatch = useDispatch()
   const { closeModal } = useModal()
 
