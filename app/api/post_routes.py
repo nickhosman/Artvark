@@ -3,7 +3,7 @@ from flask_login import login_required, current_user
 from ..forms import PostForm, PostImagesForm
 from ..models import Post, PostImage, db, User, Reaction
 from ..api.auth_routes import validation_errors_to_error_messages
-from app.api.aws_helpers import upload_file_to_s3, get_unique_filename
+from app.api.aws_helpers import upload_file_to_s3, get_unique_filename, remove_file_from_s3
 
 post_routes = Blueprint("posts", __name__)
 
@@ -44,7 +44,7 @@ def create_post():
   form['csrf_token'].data = request.cookies['csrf_token']
   if form.validate_on_submit():
     post = Post(
-      title = form.data.title,
+      title = form.data["title"],
       user_id = current_user.id
     )
     db.session.add(post)
@@ -71,12 +71,13 @@ def add_images_to_post(postId):
     images = [image1, image2, image3, image4]
 
     for i, image in enumerate(images):
-      if image.filename:
+      if image != None:
         image.filename = get_unique_filename(image.filename)
         upload = upload_file_to_s3(image)
         print("UPLOAD RESULTS:", upload)
 
         if "url" not in upload:
+          print({"errors": [upload]})
           return {"errors": [upload]}
 
         url = upload["url"]
@@ -92,3 +93,26 @@ def add_images_to_post(postId):
   if form.errors:
     print("ERRORS:", form.errors)
     return {"errors": form.errors}, 400
+
+
+@post_routes.route("/<int:postId>", methods=["DELETE"])
+@login_required
+def delete_post(postId):
+  """
+  Delete a post
+  """
+  post = Post.query.get(postId)
+  if not post:
+    return {"errors": "Post not found"}, 404
+
+  if post.user_id != current_user.id:
+    return {"error": "Unauthorized"}, 401
+
+  image_urls = [image.url for image in post.post_images]
+  [remove_file_from_s3(url) for url in image_urls]
+
+  db.session.delete(post)
+  db.session.commit()
+
+
+  return {"message": "Successfully deleted post."}

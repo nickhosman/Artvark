@@ -1,15 +1,10 @@
 const LOAD_POSTS = "posts/LOAD_POSTS"
-const CREATE_POST = "posts/CREATE_POST"
 
 const loadPosts = (posts) => ({
   type: LOAD_POSTS,
   payload: posts,
 });
 
-const createPost = (post) => ({
-  type: CREATE_POST,
-  payload: post,
-})
 
 export const fetchLoadPosts = () => async (dispatch) => {
   const response = await fetch("/api/posts");
@@ -33,8 +28,8 @@ export const fetchCreatePost = (post, images) => async (dispatch) => {
   });
 
   if (response.ok) {
-    const { resPost } = await response.json()
-    dispatch(createPost(resPost));
+    const resPost = await response.json()
+    // console.log("RESPOST:", resPost)
 
     const imageResponse = await fetch(`/api/posts/${resPost.id}/images`, {
       method: "POST",
@@ -42,9 +37,11 @@ export const fetchCreatePost = (post, images) => async (dispatch) => {
     });
 
     if (imageResponse.ok) {
+      dispatch(fetchLoadPosts());
       return resPost
     } else {
       console.log("SOMETHING WRONG WITH IMAGES")
+      console.log(imageResponse)
     }
   }
 

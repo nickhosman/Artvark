@@ -16,10 +16,11 @@ class Post(db.Model):
   #relationships
   user = db.relationship("User", back_populates="posts")
   reactions = db.relationship("Reaction", back_populates="post")
-  post_images = db.relationship("PostImage", back_populates="post")
+  post_images = db.relationship("PostImage", back_populates="post", cascade="all, delete, delete-orphan")
 
   def to_dict(self):
     image_dict = dict(zip([image.id for image in self.post_images], [image.to_dict() for image in self.post_images]))
+    previewImg = None
     for image in self.post_images:
       if image.preview:
         previewImg = image.url

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchLoadPosts } from "../../store/posts";
 import Post from "../Posts";
+import RightNav from "../Navigation/RightNav";
 
 function Home() {
   const dispatch = useDispatch()
@@ -20,6 +21,7 @@ function Home() {
       {postArr.map((post) => (
         <Post post={post} />
       ))}
+      <RightNav />
     </div>
   )
 }

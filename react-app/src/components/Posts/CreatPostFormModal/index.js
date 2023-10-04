@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useModal } from "../../context/Modal";
+import { useModal } from "../../../context/Modal";
 import { useHistory } from "react-router-dom";
 import { fetchCreatePost } from "../../../store/posts";
 
@@ -23,21 +23,22 @@ function CreatePostFormModal() {
     formData.append("title", title);
 
     const imageFormData = new FormData();
-    imageformData.append("image1", image1);
-    imageformData.append("image2", image2);
-    imageformData.append("image3", image3);
-    imageformData.append("image4", image4);
+    imageFormData.append("image1", image1);
+    imageFormData.append("image2", image2);
+    imageFormData.append("image3", image3);
+    imageFormData.append("image4", image4);
 
     await dispatch(fetchCreatePost(formData, imageFormData));
 
     setImagesLoading(true);
+    closeModal();
     history.push("/posts")
   }
 
   return (
     <>
       <h1>Create Post</h1>
-      <form encType="multipart/form-data">
+      <form encType="multipart/form-data" onSubmit={handleSubmit}>
         <label>
           Image #1
           <input
@@ -84,3 +85,5 @@ function CreatePostFormModal() {
     </>
   )
 }
+
+export default CreatePostFormModal;
