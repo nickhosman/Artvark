@@ -1,9 +1,15 @@
 const LOAD_POSTS = "posts/LOAD_POSTS"
+const CREATE_POST = "posts/CREATE_POST"
 
 const loadPosts = (posts) => ({
   type: LOAD_POSTS,
   payload: posts,
 });
+
+const createPost = (post) => ({
+  type: CREATE_POST,
+  payload: post,
+})
 
 export const fetchLoadPosts = () => async (dispatch) => {
   const response = await fetch("/api/posts");
@@ -19,6 +25,31 @@ export const fetchLoadPosts = () => async (dispatch) => {
     return errors;
   }
 };
+
+export const fetchCreatePost = (post, images) => async (dispatch) => {
+  const response = await fetch("/api/posts/new", {
+    method: "POST",
+    body: post
+  });
+
+  if (response.ok) {
+    const { resPost } = await response.json()
+    dispatch(createPost(resPost));
+
+    const imageResponse = await fetch(`/api/posts/${resPost.id}/images`, {
+      method: "POST",
+      body: images
+    });
+
+    if (imageResponse.ok) {
+      return resPost
+    } else {
+      console.log("SOMETHING WRONG WITH IMAGES")
+    }
+  }
+
+  return {"errors": "There was an error making your post."}
+}
 
 const initialState = {};
 const postReducer = (state = initialState, action) => {

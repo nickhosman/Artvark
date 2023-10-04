@@ -12,7 +12,7 @@ function SignupFormModal() {
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
-	const [profileImg, setProfileImg] = useState("");
+	// const [profileImg, setProfileImg] = useState("");
 	const [errors, setErrors] = useState([]);
 	const { closeModal } = useModal();
 
@@ -41,14 +41,6 @@ function SignupFormModal() {
 						<li key={idx}>{error}</li>
 					))}
 				</ul>
-				<label>
-					Profile Image
-					<input
-						type="url"
-						value={profileImg}
-						onChange={(e) => setProfileImg(e.target.value)}
-					/>
-				</label>
 				<label>
 						First Name
 						<input
