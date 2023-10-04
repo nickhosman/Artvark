@@ -1,8 +1,5 @@
 from ..models import db, Reaction, environment, SCHEMA
-from faker import Faker
 from sqlalchemy.sql import text
-
-dake = Faker()
 
 def seed_reactions():
   reactions = [
