@@ -1,0 +1,14 @@
+#right-nav-wrapper > button {
+  height: 4rem;
+  width: 12rem;
+  border-radius: 30px;
+  border: none;
+  background-color: #b18e83;
+  color: white;
+  font-size: 20px;
+}
+
+#right-nav-wrapper > button:hover {
+  cursor: pointer;
+  background-color: #7d655d;
+}
