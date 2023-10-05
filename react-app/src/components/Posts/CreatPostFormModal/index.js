@@ -21,13 +21,21 @@ function CreatePostFormModal() {
         const formData = new FormData();
         formData.append("title", title);
 
-        const imageFormData = new FormData();
-        imageFormData.append("image1", image1);
-        imageFormData.append("image2", image2);
-        imageFormData.append("image3", image3);
-        imageFormData.append("image4", image4);
+        // const imageFormData = new FormData();
+        // imageFormData.append("image1", image1);
+        // imageFormData.append("image2", image2);
+        // imageFormData.append("image3", image3);
+        // imageFormData.append("image4", image4);
+        const images = [image1, image2, image3, image4]
+        const imageData = []
+        for (let image of images) {
+            if (image) {
+                imageData.push(image)
+            }
+        }
 
-        await dispatch(fetchCreatePost(formData, imageFormData));
+        console.log(imageData)
+        await dispatch(fetchCreatePost(formData, imageData));
 
         setImagesLoading(true);
         closeModal();

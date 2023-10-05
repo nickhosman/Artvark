@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from ..forms import PostForm, PostImagesForm, ReactionForm
+from ..forms import PostForm, PostImagesForm, ReactionForm, EditPostImagesForm
 from ..models import Post, PostImage, db, User, Reaction
 from ..api.auth_routes import validation_errors_to_error_messages
 from app.api.aws_helpers import upload_file_to_s3, get_unique_filename, remove_file_from_s3
@@ -53,46 +53,84 @@ def create_post():
   return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
+# @post_routes.route("/<int:postId>/images", methods=["POST"])
+# @login_required
+# def bulk_add_images_to_post(postId):
+#   """
+#   Adds images to a post by id
+#   """
+#   form = PostImagesForm()
+#   form['csrf_token'].data = request.cookies['csrf_token']
+#   if form.validate_on_submit():
+
+#     image1 = form.data["image1"]
+#     image2 = form.data["image2"]
+#     image3 = form.data["image3"]
+#     image4 = form.data["image4"]
+
+#     images = [image1, image2, image3, image4]
+
+#     for i, image in enumerate(images):
+#       if image != None:
+#         image.filename = get_unique_filename(image.filename)
+#         upload = upload_file_to_s3(image)
+#         print("UPLOAD RESULTS:", upload)
+
+#         if "url" not in upload:
+#           print({"errors": [upload]})
+#           return {"errors": [upload]}
+
+#         url = upload["url"]
+#         if i == 0:
+#           new_image = PostImage(url=url, preview=True, post_id=postId)
+#         else:
+#           new_image = PostImage(url=url, preview=False, post_id=postId)
+#         db.session.add(new_image)
+#     db.session.commit()
+#     post = Post.query.get(postId)
+#     return post.to_dict_with_reactions()
+
+#   if form.errors:
+#     print("ERRORS:", form.errors)
+#     return {"errors": form.errors}, 400
+
+
 @post_routes.route("/<int:postId>/images", methods=["POST"])
 @login_required
-def add_images_to_post(postId):
+def add_image_to_post(postId):
   """
-  Adds an image to a post by id
+  Add an image to a post
   """
+  post = Post.query.get(postId)
+
+  is_first = len(post.post_images) == 0
+
   form = PostImagesForm()
   form['csrf_token'].data = request.cookies['csrf_token']
   if form.validate_on_submit():
+    image = form.data["image"]
 
-    image1 = form.data["image1"]
-    image2 = form.data["image2"]
-    image3 = form.data["image3"]
-    image4 = form.data["image4"]
+    image.filename = get_unique_filename(image.filename)
+    upload = upload_file_to_s3(image)
+    print("UPLOAD RESULTS:", upload)
 
-    images = [image1, image2, image3, image4]
+    if "url" not in upload:
+      print({"errors": [upload]})
+      return {"errors": [upload]}
 
-    for i, image in enumerate(images):
-      if image != None:
-        image.filename = get_unique_filename(image.filename)
-        upload = upload_file_to_s3(image)
-        print("UPLOAD RESULTS:", upload)
+    url = upload["url"]
+    new_image = PostImage(url=url, preview=is_first, post_id=postId)
 
-        if "url" not in upload:
-          print({"errors": [upload]})
-          return {"errors": [upload]}
-
-        url = upload["url"]
-        if i == 0:
-          new_image = PostImage(url=url, preview=True, post_id=postId)
-        else:
-          new_image = PostImage(url=url, preview=False, post_id=postId)
-        db.session.add(new_image)
+    db.session.add(new_image)
     db.session.commit()
-    post = Post.query.get(postId)
     return post.to_dict_with_reactions()
 
   if form.errors:
-    print("ERRORS:", form.errors)
     return {"errors": form.errors}, 400
+
+
+
+
 
 
 @post_routes.route("/<int:postId>", methods=["DELETE"])
