@@ -1,3 +1,9 @@
+#right-nav-wrapper {
+  position: sticky;
+  top: 2rem;
+  height: fit-content;
+}
+
 #right-nav-wrapper > button {
   height: 4rem;
   width: 12rem;
