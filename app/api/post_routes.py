@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from ..forms import PostForm, PostImagesForm
+from ..forms import PostForm, PostImagesForm, ReactionForm
 from ..models import Post, PostImage, db, User, Reaction
 from ..api.auth_routes import validation_errors_to_error_messages
 from app.api.aws_helpers import upload_file_to_s3, get_unique_filename, remove_file_from_s3
@@ -161,3 +161,24 @@ def get_reactions_by_post(postId):
 
     reaction_dict[str(reaction.id)] = data
   return reaction_dict
+
+
+@post_routes.route("/<int:postId>/reactions", methods=["POST"])
+@login_required
+def add_reaction_to_post(postId):
+  """
+  Add a reaction to a post
+  """
+  form = ReactionForm()
+  form['csrf_token'].data = request.cookies['csrf_token']
+  if form.validate_on_submit():
+    reaction = Reaction(
+      post_id = postId,
+      user_id = current_user.id,
+      content = form.data["content"],
+    )
+
+    db.session.add(reaction)
+    db.session.commit()
+    return reaction.to_dict(), 201
+  return {"errors": validation_errors_to_error_messages(form.errors)}, 400
