@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from ..forms import EditPostImagesForm, PostImagesForm
+from ..forms import PostImagesForm
 from ..models import PostImage, Post, db
 from .auth_routes import validation_errors_to_error_messages
 from app.api.aws_helpers import upload_file_to_s3, get_unique_filename, remove_file_from_s3
@@ -15,7 +15,7 @@ def edit_post_image(id):
   if not post_image:
     return {"errors": "That image could not be found"}, 404
 
-  form = EditPostImagesForm()
+  form = PostImagesForm()
   form['csrf_token'].data = request.cookies['csrf_token']
   if form.validate_on_submit():
     image = form.data["image"]
@@ -32,6 +32,7 @@ def edit_post_image(id):
     remove_file_from_s3(post_image.url)
     post_image.url = new_url
     db.session.commit()
+    return post_image.to_dict()
 
   if form.errors:
     return {"errors": form.errors}, 400

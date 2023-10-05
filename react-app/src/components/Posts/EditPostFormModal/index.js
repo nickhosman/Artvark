@@ -21,6 +21,7 @@ function EditPostFormModal({ post }) {
     const [newImage4, setNewImage4] = useState(null);
     const [previewNewImage4, setPreviewNewImage4] = useState("");
     const [title, setTitle] = useState("");
+    const [loadingImages, setLoadingImages] = useState(false);
     const { closeModal } = useModal();
 
     const compareIds = (a, b) => {
@@ -107,15 +108,112 @@ function EditPostFormModal({ post }) {
         });
         // console.log("POST:", post);
         if (response.ok) {
+            let imageFormData;
+            if (newImage1) {
+                if (image1) {
+                    imageFormData = new FormData();
+                    imageFormData.append("image", newImage1);
+                    const image1Response = await fetch(`/api/images/${image1.id}`, {
+                        method: "PUT",
+                        body: imageFormData,
+                    });
+
+                    if (!image1Response.ok) {
+                        console.log("ERROR UPDATING IMAGE #1");
+                    }
+                }
+            }
+            if (newImage2) {
+                if (image2) {
+                    imageFormData = new FormData();
+                    imageFormData.append("image", newImage2);
+                    const image2Response = await fetch(`/api/images/${image2.id}`, {
+                        method: "PUT",
+                        body: imageFormData,
+                    });
+
+                    if (!image2Response.ok) {
+                        console.log("ERROR UPDATING IMAGE #2");
+                    }
+                } else {
+                    imageFormData = new FormData();
+                    imageFormData.append("image", newImage2);
+                    const image2Response = await fetch(
+                        `/api/posts/${post.id}/images`,
+                        {
+                            method: "POST",
+                            body: imageFormData,
+                        }
+                    );
+
+                    if (!image2Response.ok) {
+                        console.log("ERROR ADDING IMAGE #2");
+                    }
+                }
+            }
+            if (newImage3) {
+                if (image3) {
+                    imageFormData = new FormData();
+                    imageFormData.append("image", newImage3);
+                    const image3Response = await fetch(`/api/images/${image3.id}`, {
+                        method: "PUT",
+                        body: imageFormData,
+                    });
+
+                    if (!image3Response.ok) {
+                        console.log("ERROR UPDATING IMAGE #3");
+                    }
+                } else {
+                    imageFormData = new FormData();
+                    imageFormData.append("image", newImage3);
+                    const image3Response = await fetch(
+                        `/api/posts/${post.id}/images`,
+                        {
+                            method: "POST",
+                            body: imageFormData,
+                        }
+                    );
+
+                    if (!image3Response.ok) {
+                        console.log("ERROR ADDING IMAGE #3");
+                    }
+                }
+            }
+            if (newImage4) {
+                if (image4) {
+                    imageFormData = new FormData();
+                    imageFormData.append("image", newImage4);
+                    const image4Response = await fetch(`/api/images/${image4.id}`, {
+                        method: "PUT",
+                        body: imageFormData,
+                    });
+
+                    if (!image4Response.ok) {
+                        console.log("ERROR UPDATING IMAGE #4");
+                    }
+                } else {
+                    imageFormData = new FormData();
+                    imageFormData.append("image", newImage4);
+                    const image4Response = await fetch(
+                        `/api/posts/${post.id}/images`,
+                        {
+                            method: "POST",
+                            body: imageFormData,
+                        }
+                    );
+
+                    if (!image4Response.ok) {
+                        console.log("ERROR ADDING IMAGE #4");
+                    }
+                }
+            }
+            setLoadingImages(true);
             await dispatch(fetchLoadPosts());
             closeModal();
             history.push("/posts");
         } else {
             console.log(response.errors);
         }
-
-        const images = [newImage1, newImage2, newImage3, newImage4]
-        
     };
 
     return (
@@ -140,13 +238,11 @@ function EditPostFormModal({ post }) {
                             </div>
                         ) : (
                             <div id="edit-image-thumb">
-                                {image1 ? (
                                     <img
                                         alt=""
                                         src={previewNewImage1}
                                         className="image-thumb"
                                     />
-                                ) : null}
                             </div>
                         )}
 
@@ -169,13 +265,11 @@ function EditPostFormModal({ post }) {
                             </div>
                         ) : (
                             <div id="edit-image-thumb">
-                                {image2 ? (
                                     <img
                                         alt=""
                                         src={previewNewImage2}
                                         className="image-thumb"
                                     />
-                                ) : null}
                             </div>
                         )}
 
@@ -198,13 +292,11 @@ function EditPostFormModal({ post }) {
                             </div>
                         ) : (
                             <div id="edit-image-thumb">
-                                {image3 ? (
                                     <img
                                         alt=""
                                         src={previewNewImage3}
                                         className="image-thumb"
                                     />
-                                ) : null}
                             </div>
                         )}
 
@@ -227,13 +319,11 @@ function EditPostFormModal({ post }) {
                             </div>
                         ) : (
                             <div id="edit-image-thumb">
-                                {image4 ? (
                                     <img
                                         alt=""
                                         src={previewNewImage4}
                                         className="image-thumb"
                                     />
-                                ) : null}
                             </div>
                         )}
 
@@ -254,6 +344,7 @@ function EditPostFormModal({ post }) {
                 </label>
                 <button type="submit">Edit Post</button>
             </form>
+            {loadingImages ? "Loading..." : null}
         </div>
     );
 }
