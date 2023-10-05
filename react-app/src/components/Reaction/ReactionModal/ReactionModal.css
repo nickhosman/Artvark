@@ -1,0 +1,5 @@
+#reaction-wrapper {
+  width: fit-content;
+  height: 30rem;
+  overflow-y: scroll;
+}
