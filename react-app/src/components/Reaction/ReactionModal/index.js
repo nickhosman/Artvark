@@ -28,7 +28,7 @@ function ReactionModal({ postId }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        alert("Not yet");
+        
     };
 
     const handleInputClick = (e) => {
@@ -36,7 +36,6 @@ function ReactionModal({ postId }) {
     };
 
     const handleEmojiClick = (emoji) => {
-        console.log(emoji);
         setEmojis((prevState) => (prevState += emoji.native));
     };
 
