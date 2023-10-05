@@ -8,6 +8,7 @@ function OpenModalElement({
   onModalClose,
   id,
   className,
+  title,
 }) {
   const { setModalContent, setOnModalClose } = useModal();
 
@@ -18,7 +19,7 @@ function OpenModalElement({
   };
 
   return (
-    <div id={id ? id : null} className={className ? className : null} onClick={onClick}>{text}</div>
+    <div id={id ? id : null} className={className ? className : null} onClick={onClick} title={title ? title : null}>{text}</div>
   )
 }
 
