@@ -142,3 +142,22 @@ def edit_post(postId):
 
   if form.errors:
     return {"errors": form.errors}, 400
+
+
+@post_routes.route("/<int:postId>/reactions")
+def get_reactions_by_post(postId):
+  """
+  Get reactions related to a specific post
+  """
+  post = Post.query.get(postId)
+
+  if not post:
+    return {"error": "Post not found"}, 404
+
+  reactions = Reaction.query.filter_by(post_id=postId).all()
+  reaction_dict = {}
+  for reaction in reactions:
+    data = reaction.to_dict()
+
+    reaction_dict[str(reaction.id)] = data
+  return reaction_dict

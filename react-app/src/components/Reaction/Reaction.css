@@ -1,0 +1,16 @@
+.reaction-container {
+  border-bottom: 1px solid black;
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+#reaction-user-img {
+  aspect-ratio: 1;
+  height: 6rem;
+  border-radius: 50%;
+}
+
+#reaction-content {
+  font-size: 4rem;
+}

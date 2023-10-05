@@ -1,9 +1,12 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { FaRegGrin } from "react-icons/fa";
+import { FaPencilAlt } from "react-icons/fa";
+import { FaTrashAlt } from "react-icons/fa";
 import OpenModalElement from "../OpenModalElement";
 import DeleteModal from "../DeleteModal";
 import EditPostFormModal from "./EditPostFormModal";
+import ReactionModal from "../Reaction/ReactionModal";
 import "./Posts.css";
 
 function Post({ post }) {
@@ -23,15 +26,30 @@ function Post({ post }) {
                 </div>
                 {current_user && current_user?.id === post.author.id ? (
                     <div id="post-btn-wrapper">
-                        <OpenModalElement id="post-update" text="edit" modalComponent={<EditPostFormModal post={post} />}/>
-                        <OpenModalElement id="post-delete" text="delete" modalComponent={<DeleteModal post={post} />}/>
+                        <OpenModalElement
+                            id="post-update"
+                            text={<FaPencilAlt />}
+                            modalComponent={<EditPostFormModal post={post} />}
+                            title={"edit"}
+                        />
+                        <OpenModalElement
+                            id="post-delete"
+                            text={<FaTrashAlt />}
+                            modalComponent={<DeleteModal post={post} />}
+                            title={"delete"}
+                        />
                     </div>
                 ) : null}
             </div>
             <img className="post-image" alt="" src={post.previewImg} />
             <div className="post-stats">
                 <div id="post-stat-reacts">
-                    <FaRegGrin />
+                    <OpenModalElement
+                        id="post-reactions"
+                        text={<FaRegGrin />}
+                        modalComponent={<ReactionModal postId={post.id} />}
+                        title={"Reactions"}
+                    />
                     <span>{post.numReactions}</span>
                 </div>
             </div>

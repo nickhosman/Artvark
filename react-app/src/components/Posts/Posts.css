@@ -64,7 +64,7 @@
   gap: .5em;
 }
 
-#post-stat-reacts > svg:hover {
+#post-stat-reacts svg:hover {
   cursor: pointer;
   fill: yellow;
 }
