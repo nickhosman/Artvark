@@ -15,7 +15,7 @@ class Post(db.Model):
 
   #relationships
   user = db.relationship("User", back_populates="posts")
-  reactions = db.relationship("Reaction", back_populates="post")
+  reactions = db.relationship("Reaction", back_populates="post", cascade="all, delete, delete-orphan")
   post_images = db.relationship("PostImage", back_populates="post", cascade="all, delete, delete-orphan")
 
   def to_dict(self):

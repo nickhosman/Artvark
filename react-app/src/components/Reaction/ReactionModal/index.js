@@ -4,31 +4,33 @@ import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 import { IoSend } from "react-icons/io5";
 import "./ReactionModal.css";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAddReaction, fetchLoadReactions } from "../../../store/reactions";
 
 function ReactionModal({ postId }) {
-    const [reactions, setReactions] = useState({});
+    const dispatch = useDispatch()
+    const reactions = useSelector(state => state.reactions)
     const [emojis, setEmojis] = useState("");
     const [showPicker, setShowPicker] = useState(false);
     const inputField = useRef(null);
 
     useEffect(() => {
-      async function fetchReactions() {
-        const response = await fetch(`/api/posts/${postId}/reactions`);
+        dispatch(fetchLoadReactions(postId))
+    }, [dispatch, postId]);
 
-        if (response.ok) {
-            const data = await response.json();
-            setReactions(data);
-            // console.log("REACTIONS:", Object.values(data));
-        }
-      }
-      fetchReactions()
-    }, [postId]);
+    if (!reactions) return null;
 
-    if (!reactions || Object.keys(reactions).length === 0) return null;
-
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        
+        const data = {
+            content: emojis,
+        }
+
+        const newReaction = await dispatch(fetchAddReaction(postId, data))
+        if (newReaction.errors) {
+            console.log(newReaction.errors);
+        }
+        setEmojis("")
     };
 
     const handleInputClick = (e) => {
@@ -40,7 +42,7 @@ function ReactionModal({ postId }) {
     };
 
     const handleBackspace = (e) => {
-        if (e.key === "Backspace" || e.key === "Delete") {
+        if (e.key === "Backspace" || e.key === "Delete" || e.key === "ArrowLeft" || e.key === "ArrowRight") {
             return true
         }
         e.preventDefault();
