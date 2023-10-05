@@ -8,19 +8,46 @@
   border-radius: 20px;
 }
 
-/* #reaction-wrapper::-webkit-scrollbar {
-  width: 15px;
+#input-wrapper {
+  width: 100%;
+  height: 10rem;
+  padding: 2rem;
+  border-bottom: 1px solid black;
 }
 
-#reaction-wrapper::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-  -webkit-border-radius: 20px;
-  border-radius: 20px;
+#reaction-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
-#reaction-wrapper::-webkit-scrollbar-thumb {
-  -webkit-border-radius: 20px;
-  border-radius: 20px;
-  background-color: #705852;
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
-} */
+#emoji-input {
+  height: 6rem;
+  width: 30rem;
+  border-inline: none;
+  border-top: none;
+  border-bottom: 1px solid black;
+  background-color: #e9cab9;
+  font-size: 4rem;
+}
+
+#emoji-input:focus {
+  outline: none;
+  border-bottom: 2px solid black;
+}
+
+#reaction-submit-btn {
+  height: 6rem;
+  width: 6rem;
+  border-inline: none;
+  border-top: none;
+  border-bottom: 1px solid black;
+  background-color: #e9cab9;
+}
+
+#reaction-submit-btn > svg {
+  height: 3rem;
+  width: 3rem;
+}
+
