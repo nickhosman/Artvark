@@ -23,6 +23,7 @@ function EditPostFormModal({ post }) {
     const [title, setTitle] = useState("");
     const [loadingImages, setLoadingImages] = useState(false);
     const { closeModal } = useModal();
+    const [formErrors, setFormErrors] = useState({});
 
     const compareIds = (a, b) => {
         return a - b;
@@ -109,6 +110,7 @@ function EditPostFormModal({ post }) {
         // console.log("POST:", post);
         if (response.ok) {
             let imageFormData;
+            let imageOk = true;
             if (newImage1) {
                 if (image1) {
                     imageFormData = new FormData();
@@ -119,7 +121,11 @@ function EditPostFormModal({ post }) {
                     });
 
                     if (!image1Response.ok) {
+                        const errors = await image1Response.json()
                         console.log("ERROR UPDATING IMAGE #1");
+                        console.log(errors.errors);
+                        imageOk = false;
+                        setFormErrors(errors.errors);
                     }
                 }
             }
@@ -133,7 +139,10 @@ function EditPostFormModal({ post }) {
                     });
 
                     if (!image2Response.ok) {
+                        const errors = await image2Response.json()
                         console.log("ERROR UPDATING IMAGE #2");
+                        imageOk = false;
+                        setFormErrors(errors.errors)
                     }
                 } else {
                     imageFormData = new FormData();
@@ -148,6 +157,9 @@ function EditPostFormModal({ post }) {
 
                     if (!image2Response.ok) {
                         console.log("ERROR ADDING IMAGE #2");
+                        const errors = await image2Response.json()
+                        imageOk = false;
+                        setFormErrors(errors.errors)
                     }
                 }
             }
@@ -162,6 +174,9 @@ function EditPostFormModal({ post }) {
 
                     if (!image3Response.ok) {
                         console.log("ERROR UPDATING IMAGE #3");
+                        const errors = await image3Response.json()
+                        imageOk = false;
+                        setFormErrors(errors.errors)
                     }
                 } else {
                     imageFormData = new FormData();
@@ -176,6 +191,9 @@ function EditPostFormModal({ post }) {
 
                     if (!image3Response.ok) {
                         console.log("ERROR ADDING IMAGE #3");
+                        const errors = await image3Response.json()
+                        imageOk = false;
+                        setFormErrors(errors.errors)
                     }
                 }
             }
@@ -190,6 +208,9 @@ function EditPostFormModal({ post }) {
 
                     if (!image4Response.ok) {
                         console.log("ERROR UPDATING IMAGE #4");
+                        const errors = await image4Response.json()
+                        imageOk = false;
+                        setFormErrors(errors.errors)
                     }
                 } else {
                     imageFormData = new FormData();
@@ -204,15 +225,23 @@ function EditPostFormModal({ post }) {
 
                     if (!image4Response.ok) {
                         console.log("ERROR ADDING IMAGE #4");
+                        const errors = await image4Response.json()
+                        imageOk = false;
+                        setFormErrors(errors.errors)
                     }
                 }
             }
-            setLoadingImages(true);
-            await dispatch(fetchLoadPosts());
-            closeModal();
-            history.push("/posts");
+            if (imageOk) {
+                console.log("WHAT IS THIS", formErrors)
+                setLoadingImages(true);
+                await dispatch(fetchLoadPosts());
+                closeModal();
+                history.push("/posts");
+            }
         } else {
-            console.log(response.errors);
+            const errors = await response.json()
+            console.log(errors);
+            setFormErrors(errors.errors);
         }
     };
 
@@ -334,6 +363,7 @@ function EditPostFormModal({ post }) {
                         />
                     </label>
                 </div>
+                {Object.keys(formErrors).length > 0 ? <p className="errors">{formErrors.image}</p> : null}
                 <label>
                     Title
                     <input
@@ -341,6 +371,7 @@ function EditPostFormModal({ post }) {
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                     />
+                    {Object.keys(formErrors).length > 0 ? <p className="errors">{formErrors.title}</p> : null}
                 </label>
                 <button type="submit">Edit Post</button>
             </form>

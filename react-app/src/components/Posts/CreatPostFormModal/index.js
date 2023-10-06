@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../../context/Modal";
-import { useHistory } from "react-router-dom";
 import { fetchCreatePost } from "../../../store/posts";
 import "./CreatePostFormModal.css";
 
 function CreatePostFormModal() {
     const dispatch = useDispatch();
-    const history = useHistory();
     const [image1, setImage1] = useState(null);
     const [previewImage1, setPreviewImage1] = useState("");
     const [image2, setImage2] = useState(null);

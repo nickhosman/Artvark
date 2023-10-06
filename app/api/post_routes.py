@@ -158,7 +158,7 @@ def add_image_to_post(postId):
     return post.to_dict_with_reactions()
 
   if form.errors:
-    return {"errors": form.errors}, 400
+    return {"errors": validation_errors_to_error_messages(form.errors)}, 400
 
 
 @post_routes.route("/<int:postId>", methods=["DELETE"])
@@ -207,7 +207,7 @@ def edit_post(postId):
     return post.to_dict(), 201
 
   if form.errors:
-    return {"errors": form.errors}, 400
+    return {"errors": validation_errors_to_error_messages(form.errors)}, 400
 
 
 @post_routes.route("/<int:postId>/reactions")
