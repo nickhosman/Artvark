@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import { FaRegGrin } from "react-icons/fa";
 import { FaPencilAlt } from "react-icons/fa";
 import { FaTrashAlt } from "react-icons/fa";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from "react-responsive-carousel";
 import OpenModalElement from "../OpenModalElement";
 import DeleteModal from "../DeleteModal";
 import EditPostFormModal from "./EditPostFormModal";
@@ -11,6 +13,10 @@ import "./Posts.css";
 
 function Post({ post }) {
     const current_user = useSelector((state) => state.session.user);
+    const sortById = (a, b) => {
+        return a.id - b.id;
+    };
+    const postImages = Object.values(post.postImages).sort(sortById);
 
     return (
         <div className="post-wrapper">
@@ -41,7 +47,11 @@ function Post({ post }) {
                     </div>
                 ) : null}
             </div>
-            <img className="post-image" alt="" src={post.previewImg} />
+            <Carousel showArrows={false} useKeyboardArrows={true} showIndicators={false} showStatus={false} thumbsWidth={200}>
+                {postImages.map((image) => (
+                    <img src={image.url} alt="" key={image.id} className="carousel-image" />
+                ))}
+            </Carousel>
             <div className="post-stats">
                 <div id="post-stat-reacts">
                     <OpenModalElement
