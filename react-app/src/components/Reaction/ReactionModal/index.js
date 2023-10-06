@@ -14,11 +14,16 @@ function ReactionModal({ postId }) {
     const [showPicker, setShowPicker] = useState(false);
     const inputField = useRef(null);
 
+
     useEffect(() => {
         dispatch(fetchLoadReactions(postId))
     }, [dispatch, postId]);
 
     if (!reactions) return null;
+
+    const sortByDate = (a, b) => {
+        return  new Date (b.createdAt) - new Date(a.createdAt);
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -83,7 +88,7 @@ function ReactionModal({ postId }) {
                     maxFrequentRows={0}
                 />
             ) : null}
-            {Object.values(reactions).map((reaction, index) => (
+            {Object.values(reactions).sort(sortByDate).map((reaction, index) => (
                 <Reaction reaction={reaction} key={index} />
             ))}
         </div>
