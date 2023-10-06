@@ -6,6 +6,7 @@ import { IoSend } from "react-icons/io5";
 import "./ReactionModal.css";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAddReaction, fetchLoadReactions } from "../../../store/reactions";
+import { fetchLoadPosts } from "../../../store/posts";
 
 function ReactionModal({ postId }) {
     const dispatch = useDispatch()
@@ -35,6 +36,7 @@ function ReactionModal({ postId }) {
         if (newReaction.errors) {
             console.log(newReaction.errors);
         }
+        dispatch(fetchLoadPosts())
         setEmojis("")
     };
 
