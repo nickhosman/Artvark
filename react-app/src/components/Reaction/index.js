@@ -96,7 +96,7 @@ function Reaction({ reaction }) {
     return (
         <div>
             <div className="reaction-container">
-                {reaction.author.id === current_user.id && !showPicker ? (
+                {reaction.author.id === current_user?.id && !showPicker ? (
                     <div id="reaction-button-wrapper">
                         <div
                             id="reaction-edit-btn"
