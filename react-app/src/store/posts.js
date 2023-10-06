@@ -36,18 +36,27 @@ export const fetchCreatePost = (post, images) => async (dispatch) => {
         const resPost = await response.json();
         // console.log("RESPOST:", resPost)
 
-        const imageResponse = await fetch(`/api/posts/${resPost.id}/images`, {
-            method: "POST",
-            body: images,
-        });
+        for (let image of images) {
+            console.log("IMAGES:", images)
+            const imageFormData = new FormData()
+            imageFormData.append("image", image)
 
-        if (imageResponse.ok) {
-            dispatch(fetchLoadPosts());
-            return resPost;
-        } else {
-            console.log("SOMETHING WRONG WITH IMAGES");
-            console.log(imageResponse);
+            console.log("IMAGE FORM DATA:", imageFormData)
+
+            let imageResponse = await fetch(`/api/posts/${resPost.id}/images`, {
+                method: "POST",
+                body: imageFormData,
+            })
+
+            if (!imageResponse.ok) {
+                const error = await imageResponse.json()
+                console.log("IMAGE ERROR", error)
+                return error;
+            }
         }
+
+        dispatch(fetchLoadPosts());
+        return resPost;
     }
     return { errors: "There was an error making your post." };
 };

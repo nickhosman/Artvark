@@ -74,3 +74,25 @@
   gap: .5em;
   justify-self: flex-end;
 }
+
+/* .carousel .thumbs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-right: 300px;
+} */
+
+.slider {
+  border-radius: 20px;
+}
+
+.carousel .slider-wrapper {
+  border-radius: 20px;
+}
+
+.carousel-image {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}

@@ -29,3 +29,18 @@
   background-color: #3c2f2c;
 }
 
+.create-post-thumb {
+  border: 1px solid #3c2f2c;
+  height: 10rem;
+  aspect-ratio: 1;
+}
+
+#create-post-img-wrapper {
+  display: flex;
+}
+
+.create-post-image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

@@ -3,6 +3,17 @@
   display: flex;
   gap: 2rem;
   padding: 2rem;
+  position: relative;
+}
+
+#reaction-button-wrapper {
+  display: flex;
+  gap: 1rem;
+  width: fit-content;
+  height: fit-content;
+  position: absolute;
+  right: 1.5rem;
+  top: 1.5rem;
 }
 
 #reaction-user-img {
@@ -11,6 +22,69 @@
   border-radius: 50%;
 }
 
-#reaction-content {
+.reaction-content {
   font-size: 4rem;
+}
+
+#reaction-edit-btn:hover {
+  cursor: pointer;
+  color: blue;
+}
+
+#reaction-delete-btn:hover {
+  cursor: pointer;
+  color: red;
+}
+
+#reaction-delete-confirm {
+  border: 1px solid black;
+  padding: 1rem;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  position: absolute;
+  background-color: #eacaba;
+  right: 1px;
+  top: 1.5rem;
+}
+
+#confirm-delete-wrapper {
+  display: flex;
+  gap: 2rem;
+}
+
+.reaction-delete-option {
+  padding-inline: 2rem;
+  padding-block: .5rem;
+  border-radius: 30px;
+}
+
+#confirm-delete {
+  background-color: #a94526;
+  color: white;
+}
+
+#cancel-delete {
+  background-color: #c0aba3;
+  color: white;
+}
+
+#confirm-delete:hover {
+  cursor: pointer;
+}
+
+#cancel-delete:hover {
+  cursor: pointer;
+}
+
+#reaction-content-input {
+  background-color: transparent;
+  width: 25rem;
+  border: none;
+}
+
+#reaction-content-input:focus {
+  outline: none;
 }

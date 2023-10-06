@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import OpenModalButton from "../OpenModalButton";
 import './Landing.css';
 import SignupFormModal from "../SignupFormModal";
 import LoginFormModal from "../LoginFormModal";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 function Landing() {
+    const history = useHistory()
+    const current_user = useSelector(state => state.session.user)
+
+    useEffect(() => {
+        if (current_user) {
+            console.log("WE DID IT")
+            history.push("/posts")
+        }
+    }, [current_user, history])
+
     return (
         <div id="landing-wrapper">
             <div id="landing-left">

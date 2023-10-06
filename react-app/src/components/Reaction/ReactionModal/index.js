@@ -3,32 +3,41 @@ import Reaction from "../../Reaction";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 import { IoSend } from "react-icons/io5";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAddReaction, fetchLoadReactions } from "../../../store/reactions";
+import { fetchLoadPosts } from "../../../store/posts";
 import "./ReactionModal.css";
 
 function ReactionModal({ postId }) {
-    const [reactions, setReactions] = useState({});
+    const dispatch = useDispatch();
+    const reactions = useSelector((state) => state.reactions);
     const [emojis, setEmojis] = useState("");
     const [showPicker, setShowPicker] = useState(false);
     const inputField = useRef(null);
 
     useEffect(() => {
-      async function fetchReactions() {
-        const response = await fetch(`/api/posts/${postId}/reactions`);
+        dispatch(fetchLoadReactions(postId));
+    }, [dispatch, postId]);
 
-        if (response.ok) {
-            const data = await response.json();
-            setReactions(data);
-            // console.log("REACTIONS:", Object.values(data));
-        }
-      }
-      fetchReactions()
-    }, [postId]);
+    if (!reactions) return null;
 
-    if (!reactions || Object.keys(reactions).length === 0) return null;
+    const sortByDate = (a, b) => {
+        return new Date(b.createdAt) - new Date(a.createdAt);
+    };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        
+        const data = {
+            content: emojis,
+        };
+
+        const newReaction = await dispatch(fetchAddReaction(postId, data));
+        if (newReaction.errors) {
+            console.log(newReaction.errors);
+        }
+        dispatch(fetchLoadPosts());
+        setEmojis("");
+        setShowPicker(false);
     };
 
     const handleInputClick = (e) => {
@@ -39,16 +48,25 @@ function ReactionModal({ postId }) {
         setEmojis((prevState) => (prevState += emoji.native));
     };
 
+    const handlePickerClose = () => {
+        setShowPicker(false);
+    };
+
     const handleBackspace = (e) => {
-        if (e.key === "Backspace" || e.key === "Delete") {
-            return true
+        if (
+            e.key === "Backspace" ||
+            e.key === "Delete" ||
+            e.key === "ArrowLeft" ||
+            e.key === "ArrowRight"
+        ) {
+            return true;
         }
         e.preventDefault();
     };
 
     const handlePasteAndDrop = (e) => {
-      e.preventDefault()
-    }
+        e.preventDefault();
+    };
 
     return (
         <div id="reaction-wrapper">
@@ -71,19 +89,28 @@ function ReactionModal({ postId }) {
                     </button>
                 </form>
             </div>
-            {showPicker ? (
-                <Picker
-                    data={data}
-                    onEmojiSelect={handleEmojiClick}
-                    emojiButtonSize={40}
-                    emojiSize={38}
-                    perLine={15}
-                    maxFrequentRows={0}
-                />
-            ) : null}
-            {Object.values(reactions).map((reaction, index) => (
-                <Reaction reaction={reaction} key={index} />
-            ))}
+            <div id="picker-wrapper">
+                {showPicker ? (
+                        <div id="close-picker-main" onClick={handlePickerClose}>
+                            Close
+                        </div>
+                ) : null}
+                {showPicker ? (
+                    <Picker
+                        data={data}
+                        onEmojiSelect={handleEmojiClick}
+                        emojiButtonSize={40}
+                        emojiSize={38}
+                        perLine={15}
+                        maxFrequentRows={0}
+                    />
+                ) : null}
+            </div>
+            {Object.values(reactions)
+                .sort(sortByDate)
+                .map((reaction, index) => (
+                    <Reaction reaction={reaction} key={index} />
+                ))}
         </div>
     );
 }

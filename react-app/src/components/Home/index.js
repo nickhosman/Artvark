@@ -14,13 +14,17 @@ function Home() {
         dispatch(fetchLoadPosts());
     }, [dispatch]);
 
+    const sortByDate = (a, b) => {
+        return  new Date (b.createdAt) - new Date(a.createdAt);
+    }
+
     if (!posts || Object.keys(posts).length === 0) return null;
     const postArr = Object.values(posts);
 
     return (
         <div id="home-wrapper">
             <div id="home-post-container">
-                {postArr.reverse().map((post) => (
+                {postArr.sort(sortByDate).map((post) => (
                     <Post post={post} key={post.id} />
                 ))}
             </div>
