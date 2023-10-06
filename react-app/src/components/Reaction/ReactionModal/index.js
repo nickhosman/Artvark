@@ -4,7 +4,7 @@ import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 import { IoSend } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAddReaction, fetchLoadReactions } from "../../../store/reactions";
+import { clearReactions, fetchAddReaction, fetchLoadReactions } from "../../../store/reactions";
 import { fetchLoadPosts } from "../../../store/posts";
 import "./ReactionModal.css";
 
@@ -14,10 +14,23 @@ function ReactionModal({ postId }) {
     const [emojis, setEmojis] = useState("");
     const [showPicker, setShowPicker] = useState(false);
     const inputField = useRef(null);
+    const [emojiArr, setEmojiArr] = useState([]);
+    const [errors, setErrors] = useState("");
 
     useEffect(() => {
         dispatch(fetchLoadReactions(postId));
+        return () => {
+            dispatch(clearReactions());
+        }
     }, [dispatch, postId]);
+
+    useEffect(() => {
+        if (emojiArr.length > 4) {
+            setErrors("You can post a maximum of 4 emojis.")
+        } else {
+            setErrors("")
+        }
+    }, [emojiArr])
 
     if (!reactions) return null;
 
@@ -27,17 +40,21 @@ function ReactionModal({ postId }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const data = {
-            content: emojis,
-        };
 
-        const newReaction = await dispatch(fetchAddReaction(postId, data));
-        if (newReaction.errors) {
-            console.log(newReaction.errors);
+        if (errors.length === 0) {
+            const data = {
+                content: emojis,
+            };
+
+            const newReaction = await dispatch(fetchAddReaction(postId, data));
+            if (newReaction.errors) {
+                console.log(newReaction.errors);
+            }
+            dispatch(fetchLoadPosts());
+            setEmojis("");
+            setEmojiArr([]);
+            setShowPicker(false);
         }
-        dispatch(fetchLoadPosts());
-        setEmojis("");
-        setShowPicker(false);
     };
 
     const handleInputClick = (e) => {
@@ -46,15 +63,26 @@ function ReactionModal({ postId }) {
 
     const handleEmojiClick = (emoji) => {
         setEmojis((prevState) => (prevState += emoji.native));
+        setEmojiArr((prevState) => ([...prevState, emoji.native]));
     };
 
     const handlePickerClose = () => {
         setShowPicker(false);
+        console.log(emojiArr);
+        setEmojis("");
+        setEmojiArr([]);
+        setErrors("");
     };
 
     const handleBackspace = (e) => {
         if (
-            e.key === "Backspace" ||
+            e.key === "Backspace"
+        ) {
+            const newEmojiArr = [...emojiArr];
+            newEmojiArr.pop()
+            setEmojiArr(newEmojiArr);
+            return true
+        }else if (
             e.key === "Delete" ||
             e.key === "ArrowLeft" ||
             e.key === "ArrowRight"
@@ -89,6 +117,7 @@ function ReactionModal({ postId }) {
                     </button>
                 </form>
             </div>
+            {errors.length > 0 ? <p className="errors">{errors}</p> : null}
             <div id="picker-wrapper">
                 {showPicker ? (
                         <div id="close-picker-main" onClick={handlePickerClose}>
