@@ -12,7 +12,7 @@ function Landing() {
 
     useEffect(() => {
         if (current_user) {
-            console.log("WE DID IT")
+            // console.log("WE DID IT")
             history.push("/posts")
         }
     }, [current_user, history])

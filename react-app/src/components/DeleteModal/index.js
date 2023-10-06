@@ -10,7 +10,7 @@ function DeleteModal({post}) {
 
   const handleConfirmDelete = async (e) => {
     e.preventDefault();
-    console.log("POST ID:", post.id);
+    // console.log("POST ID:", post.id);
     await dispatch(fetchDeletePost(post.id));
     closeModal();
   };

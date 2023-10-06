@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from ..forms import PostForm, PostImagesForm, ReactionForm
-from ..models import Post, PostImage, db, User, Reaction
+from ..forms import PostForm, PostImagesForm, ReactionForm, BulkPostImagesForm
+from ..models import Post, PostImage, db, Reaction
 from ..api.auth_routes import validation_errors_to_error_messages
 from app.api.aws_helpers import upload_file_to_s3, get_unique_filename, remove_file_from_s3
 
@@ -49,7 +49,39 @@ def create_post():
     )
     db.session.add(post)
     db.session.commit()
-    return post.to_dict(), 201
+
+    imageForm = BulkPostImagesForm()
+    imageForm['csrf_token'].data = request.cookies['csrf_token']
+    if imageForm.validate_on_submit():
+      image1 = imageForm.data["image1"]
+      image2 = imageForm.data["image2"]
+      image3 = imageForm.data["image3"]
+      image4 = imageForm.data["image4"]
+
+      images = [image1, image2, image3, image4]
+
+      for i, image in enumerate(images):
+        if image != None:
+          image.filename = get_unique_filename(image.filename)
+          upload = upload_file_to_s3(image)
+          print("UPLOAD RESULTS:", upload)
+
+          if "url" not in upload:
+            print({"errors": [upload]})
+            return {"errors": [upload]}
+
+          url = upload["url"]
+          if i == 0:
+            new_image = PostImage(url=url, preview=True, post_id = post.id)
+          else:
+            new_image = PostImage(url=url, preview=False, post_id = post.id)
+          db.session.add(new_image)
+      db.session.commit()
+      return post.to_dict(), 201
+    post = Post.query.get(post.id)
+    db.session.delete(post)
+    db.session.commit()
+    return {'errors': validation_errors_to_error_messages(imageForm.errors)}, 400
   return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
@@ -126,11 +158,7 @@ def add_image_to_post(postId):
     return post.to_dict_with_reactions()
 
   if form.errors:
-    return {"errors": form.errors}, 400
-
-
-
-
+    return {"errors": validation_errors_to_error_messages(form.errors)}, 400
 
 
 @post_routes.route("/<int:postId>", methods=["DELETE"])
@@ -179,7 +207,7 @@ def edit_post(postId):
     return post.to_dict(), 201
 
   if form.errors:
-    return {"errors": form.errors}, 400
+    return {"errors": validation_errors_to_error_messages(form.errors)}, 400
 
 
 @post_routes.route("/<int:postId>/reactions")
