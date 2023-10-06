@@ -152,6 +152,7 @@ function Reaction({ reaction }) {
                         autoComplete="off"
                         onPaste={handlePasteAndDrop}
                         onDrop={handlePasteAndDrop}
+                        autoFocus
                     />
                 ) : (
                     <span className="reaction-content">{reaction.content}</span>
