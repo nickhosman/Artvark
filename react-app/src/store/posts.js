@@ -26,7 +26,7 @@ export const fetchLoadPosts = () => async (dispatch) => {
     }
 };
 
-export const fetchCreatePost = (post, images) => async (dispatch) => {
+export const fetchCreatePost = (post) => async (dispatch) => {
     const response = await fetch("/api/posts/new", {
         method: "POST",
         body: post,
@@ -36,29 +36,31 @@ export const fetchCreatePost = (post, images) => async (dispatch) => {
         const resPost = await response.json();
         // console.log("RESPOST:", resPost)
 
-        for (let image of images) {
-            console.log("IMAGES:", images)
-            const imageFormData = new FormData()
-            imageFormData.append("image", image)
+        // for (let image of images) {
+        //     console.log("IMAGES:", images)
+        //     const imageFormData = new FormData()
+        //     imageFormData.append("image", image)
 
-            console.log("IMAGE FORM DATA:", imageFormData)
+        //     console.log("IMAGE FORM DATA:", imageFormData)
 
-            let imageResponse = await fetch(`/api/posts/${resPost.id}/images`, {
-                method: "POST",
-                body: imageFormData,
-            })
+        //     let imageResponse = await fetch(`/api/posts/${resPost.id}/images`, {
+        //         method: "POST",
+        //         body: imageFormData,
+        //     })
 
-            if (!imageResponse.ok) {
-                const error = await imageResponse.json()
-                console.log("IMAGE ERROR", error)
-                return error;
-            }
-        }
+        //     if (!imageResponse.ok) {
+        //         const error = await imageResponse.json()
+        //         console.log("IMAGE ERROR", error)
+        //         return error;
+        //     }
+        // }
 
         dispatch(fetchLoadPosts());
         return resPost;
+    } else {
+        const errors = response.json()
+        return errors;
     }
-    return { errors: "There was an error making your post." };
 };
 
 export const fetchDeletePost = (postId) => async (dispatch) => {

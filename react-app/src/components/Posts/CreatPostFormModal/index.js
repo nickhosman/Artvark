@@ -18,6 +18,7 @@ function CreatePostFormModal() {
     const [previewImage4, setPreviewImage4] = useState("");
     const [title, setTitle] = useState("");
     const [imagesLoading, setImagesLoading] = useState(false);
+    const [formErrors, setFormErrors] = useState({});
     const { closeModal } = useModal();
 
     useEffect(() => {
@@ -55,26 +56,23 @@ function CreatePostFormModal() {
         e.preventDefault();
         const formData = new FormData();
         formData.append("title", title);
+        formData.append("image1", image1);
+        formData.append("image2", image2);
+        formData.append("image3", image3);
+        formData.append("image4", image4);
 
-        // const imageFormData = new FormData();
-        // imageFormData.append("image1", image1);
-        // imageFormData.append("image2", image2);
-        // imageFormData.append("image3", image3);
-        // imageFormData.append("image4", image4);
-        const images = [image1, image2, image3, image4];
-        const imageData = [];
-        for (let image of images) {
-            if (image) {
-                imageData.push(image);
-            }
+        const response = await dispatch(fetchCreatePost(formData));
+        console.log("RESPONSE", response)
+
+        if (response.errors) {
+            const errors = response.errors
+            console.log("ERRORS",errors)
+            setFormErrors(errors);
+        } else {
+            setImagesLoading(true);
+            closeModal();
+            setFormErrors({});
         }
-
-        console.log(imageData);
-        await dispatch(fetchCreatePost(formData, imageData));
-
-        setImagesLoading(true);
-        closeModal();
-        history.push("/posts");
     };
 
     return (
@@ -104,6 +102,7 @@ function CreatePostFormModal() {
                             accept="image/*"
                             onChange={(e) => setImage1(e.target.files[0])}
                         />
+                        {Object.keys(formErrors).length > 0 ? <p className="errors">{formErrors.image1}</p> : null}
                     </label>
                     <label className="create-post-image">
                         {!previewImage2 ? (
@@ -122,6 +121,7 @@ function CreatePostFormModal() {
                             accept="image/*"
                             onChange={(e) => setImage2(e.target.files[0])}
                         />
+                        {Object.keys(formErrors).length > 0 ? <p className="errors">{formErrors.image2}</p> : null}
                     </label>
                     <label className="create-post-image">
                         {!previewImage3 ? (
@@ -140,6 +140,7 @@ function CreatePostFormModal() {
                             accept="image/*"
                             onChange={(e) => setImage3(e.target.files[0])}
                         />
+                        {Object.keys(formErrors).length > 0 ? <p className="errors">{formErrors.image3}</p> : null}
                     </label>
                     <label className="create-post-image">
                         {!previewImage4 ? (
@@ -158,6 +159,7 @@ function CreatePostFormModal() {
                             accept="image/*"
                             onChange={(e) => setImage4(e.target.files[0])}
                         />
+                        {Object.keys(formErrors).length > 0 ? <p className="errors">{formErrors.image4}</p> : null}
                     </label>
                 </div>
                 <label>
@@ -167,6 +169,7 @@ function CreatePostFormModal() {
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                     />
+                    {Object.keys(formErrors).length > 0 ? <p className="errors">{formErrors.title}</p> : null}
                 </label>
                 <button type="submit">Create Post</button>
                 {imagesLoading && <p>Loading...</p>}
