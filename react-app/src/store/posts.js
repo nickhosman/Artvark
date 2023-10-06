@@ -58,7 +58,7 @@ export const fetchCreatePost = (post) => async (dispatch) => {
         dispatch(fetchLoadPosts());
         return resPost;
     } else {
-        const errors = response.json()
+        const errors = response.json();
         return errors;
     }
 };
@@ -67,9 +67,9 @@ export const fetchDeletePost = (postId) => async (dispatch) => {
     const response = await fetch(`/api/posts/${postId}`, { method: "DELETE" });
 
     if (response.ok) {
-      const message = await response.json()
-      console.log("MESSAGE:", message)
-      dispatch(deletePost(postId));
+        const message = await response.json();
+        //   console.log("MESSAGE:", message)
+        dispatch(deletePost(postId));
     }
 };
 
@@ -85,10 +85,10 @@ const postReducer = (state = initialState, action) => {
             return newState;
         case DELETE_POST:
             newState = {
-              ...state,
-            }
-            delete newState[action.payload]
-            return newState
+                ...state,
+            };
+            delete newState[action.payload];
+            return newState;
         default:
             return state;
     }

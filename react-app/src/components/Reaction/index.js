@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaPencilAlt } from "react-icons/fa";
 import { FaTrashAlt } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,6 +14,25 @@ function Reaction({ reaction }) {
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
     const [reactionContent, setReactionContent] = useState("");
     const [showPicker, setShowPicker] = useState(false);
+    const [editedNumOfEmojis, setEditedNumOfEmojis] = useState(null);
+    const [editErrors, setEditErrors] = useState("");
+    const [formErrors, setFormErrors] = useState({});
+
+    useEffect(() => {
+        setEditedNumOfEmojis(getEmojiInputLength(reactionContent));
+    }, [reactionContent]);
+
+    useEffect(() => {
+        if (editedNumOfEmojis > 4) {
+            setEditErrors("You can post a maximum of 4 emojis.");
+        } else {
+            setEditErrors("");
+        }
+    }, [editedNumOfEmojis]);
+
+    const getEmojiInputLength = (str) => {
+        return [...new Intl.Segmenter().segment(str)].length;
+    };
 
     const handleTrashClick = () => {
         setShowDeleteConfirm(!showDeleteConfirm);
@@ -46,31 +65,36 @@ function Reaction({ reaction }) {
     };
 
     const handleConfirmEdit = async () => {
-      const data = {
-        content: reactionContent,
-      };
+        if (editErrors.length === 0) {
+            const data = {
+                content: reactionContent,
+            };
 
-      const response = await fetch(`/api/reactions/${reaction.id}`, {
-        method: "PUT",
-        headers: {"Content-Type": 'application/json'},
-        body: JSON.stringify(data),
-      })
+            const response = await fetch(`/api/reactions/${reaction.id}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data),
+            });
 
-      if (response.ok) {
-        const editedReaction = await response.json()
-        dispatch(fetchLoadReactions(reaction.postId))
-        setShowPicker(false)
-        return editedReaction
-      } else {
-        const errors = await response.json()
-        console.log(errors)
-        return errors;
-      }
-
-    }
+            if (response.ok) {
+                const editedReaction = await response.json();
+                dispatch(fetchLoadReactions(reaction.postId));
+                setShowPicker(false);
+                return editedReaction;
+            } else {
+                const errors = await response.json();
+                // console.log(errors);
+                setFormErrors(errors.errors);
+                return errors;
+            }
+        }
+    };
 
     const handlePickerClose = () => {
         setShowPicker(false);
+        setReactionContent("");
+        setEditErrors("");
+        setFormErrors({});
     };
 
     const handleEmojiClick = (emoji) => {
@@ -158,10 +182,16 @@ function Reaction({ reaction }) {
                     <span className="reaction-content">{reaction.content}</span>
                 )}
             </div>
+            {editErrors.length > 0 ? (
+                <p className="errors">{editErrors}</p>
+            ) : null}
+            {Object.keys(formErrors).length > 0 ? <p className="errors">{formErrors.content}</p> : null}
             <div id="picker-wrapper">
                 {showPicker ? (
                     <div id="picker-buttons">
-                        <div id="confirm-edit" onClick={handleConfirmEdit}>Confirm</div>
+                        <div id="confirm-edit" onClick={handleConfirmEdit}>
+                            Confirm
+                        </div>
                         <div id="close-picker" onClick={handlePickerClose}>
                             Close
                         </div>
