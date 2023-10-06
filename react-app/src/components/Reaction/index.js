@@ -1,68 +1,182 @@
 import React, { useState } from "react";
 import { FaPencilAlt } from "react-icons/fa";
 import { FaTrashAlt } from "react-icons/fa";
-import "./Reaction.css";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchLoadReactions } from "../../store/reactions";
 import { fetchLoadPosts } from "../../store/posts";
-
+import data from "@emoji-mart/data";
+import Picker from "@emoji-mart/react";
+import "./Reaction.css";
 
 function Reaction({ reaction }) {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const current_user = useSelector((state) => state.session.user);
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
-    const [editingEnabled, setEditingEnabled] = useState(false);
+    const [reactionContent, setReactionContent] = useState("");
+    const [showPicker, setShowPicker] = useState(false);
 
     const handleTrashClick = () => {
-      setShowDeleteConfirm(!showDeleteConfirm);
-    }
+        setShowDeleteConfirm(!showDeleteConfirm);
+    };
+
+    const handlePencilClick = () => {
+        setShowPicker(!showPicker);
+        setReactionContent(reaction.content);
+    };
 
     const handleCancelDelete = () => {
-      setShowDeleteConfirm(false);
-    }
+        setShowDeleteConfirm(false);
+    };
 
     const handleConfirmDelete = async () => {
-      const response = await fetch(`/api/reactions/${reaction.id}`, { method: "DELETE"});
+        const response = await fetch(`/api/reactions/${reaction.id}`, {
+            method: "DELETE",
+        });
+
+        if (response.ok) {
+            const message = await response.json();
+            dispatch(fetchLoadReactions(reaction.postId));
+            dispatch(fetchLoadPosts());
+            setShowDeleteConfirm(false);
+            return message;
+        } else {
+            const errors = await response.json();
+            return errors;
+        }
+    };
+
+    const handleConfirmEdit = async () => {
+      const data = {
+        content: reactionContent,
+      };
+
+      const response = await fetch(`/api/reactions/${reaction.id}`, {
+        method: "PUT",
+        headers: {"Content-Type": 'application/json'},
+        body: JSON.stringify(data),
+      })
 
       if (response.ok) {
-        const message = await response.json();
-        dispatch(fetchLoadReactions(reaction.postId));
-        dispatch(fetchLoadPosts())
-        setShowDeleteConfirm(false);
-        return message;
+        const editedReaction = await response.json()
+        dispatch(fetchLoadReactions(reaction.postId))
+        setShowPicker(false)
+        return editedReaction
       } else {
         const errors = await response.json()
+        console.log(errors)
         return errors;
       }
+
     }
 
+    const handlePickerClose = () => {
+        setShowPicker(false);
+    };
+
+    const handleEmojiClick = (emoji) => {
+        setReactionContent((prevState) => (prevState += emoji.native));
+    };
+
+    const handleBackspace = (e) => {
+        if (
+            e.key === "Backspace" ||
+            e.key === "Delete" ||
+            e.key === "ArrowLeft" ||
+            e.key === "ArrowRight"
+        ) {
+            return true;
+        }
+        e.preventDefault();
+    };
+
+    const handlePasteAndDrop = (e) => {
+        e.preventDefault();
+    };
+
     return (
-        <div className="reaction-container">
-            {reaction.author.id == current_user.id ? (
-                <div id="reaction-button-wrapper">
-                    <div id="reaction-edit-btn" title="edit">
-                        <FaPencilAlt />
-                    </div>
-                    <div id="reaction-delete-btn" title="delete" onClick={handleTrashClick}>
-                        <FaTrashAlt />
-                    </div>
-                    {showDeleteConfirm ? (
-                      <div id="reaction-delete-confirm">
-                        <p>Confirm Delete?</p>
-                        <div id="confirm-delete-wrapper">
-                          <div id="confirm-delete" className="reaction-delete-option" onClick={handleConfirmDelete}>Yes</div>
-                          <div id="cancel-delete" className="reaction-delete-option" onClick={handleCancelDelete}>No</div>
+        <div>
+            <div className="reaction-container">
+                {reaction.author.id === current_user.id && !showPicker ? (
+                    <div id="reaction-button-wrapper">
+                        <div
+                            id="reaction-edit-btn"
+                            title="edit"
+                            onClick={handlePencilClick}
+                        >
+                            <FaPencilAlt />
                         </div>
-                      </div>) : null}
-                </div>
-            ) : null}
-            <img
-                id="reaction-user-img"
-                alt=""
-                src={reaction.author.profileImg}
-                title={reaction.author.username}
-            />
-            <span id="reaction-content">{reaction.content}</span>
+                        <div
+                            id="reaction-delete-btn"
+                            title="delete"
+                            onClick={handleTrashClick}
+                        >
+                            <FaTrashAlt />
+                        </div>
+                        {showDeleteConfirm ? (
+                            <div id="reaction-delete-confirm">
+                                <p>Confirm Delete?</p>
+                                <div id="confirm-delete-wrapper">
+                                    <div
+                                        id="confirm-delete"
+                                        className="reaction-delete-option"
+                                        onClick={handleConfirmDelete}
+                                    >
+                                        Yes
+                                    </div>
+                                    <div
+                                        id="cancel-delete"
+                                        className="reaction-delete-option"
+                                        onClick={handleCancelDelete}
+                                    >
+                                        No
+                                    </div>
+                                </div>
+                            </div>
+                        ) : null}
+                    </div>
+                ) : null}
+                <img
+                    id="reaction-user-img"
+                    alt=""
+                    src={reaction.author.profileImg}
+                    title={reaction.author.username}
+                />
+                {showPicker ? (
+                    <input
+                        type="text"
+                        className="reaction-content"
+                        id="reaction-content-input"
+                        value={reactionContent}
+                        onChange={(e) => setReactionContent(e.target.value)}
+                        onKeyDown={handleBackspace}
+                        autoComplete="off"
+                        onPaste={handlePasteAndDrop}
+                        onDrop={handlePasteAndDrop}
+                    />
+                ) : (
+                    <span className="reaction-content">{reaction.content}</span>
+                )}
+            </div>
+            <div id="picker-wrapper">
+                {showPicker ? (
+                    <div id="picker-buttons">
+                        <div id="confirm-edit" onClick={handleConfirmEdit}>Confirm</div>
+                        <div id="close-picker" onClick={handlePickerClose}>
+                            Close
+                        </div>
+                    </div>
+                ) : null}
+                {showPicker ? (
+                    <Picker
+                        data={data}
+                        emojiButtonSize={40}
+                        emojiSize={38}
+                        perLine={15}
+                        maxFrequentRows={0}
+                        onEmojiSelect={handleEmojiClick}
+                    />
+                ) : null}
+            </div>
         </div>
     );
 }

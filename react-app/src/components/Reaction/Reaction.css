@@ -22,7 +22,7 @@
   border-radius: 50%;
 }
 
-#reaction-content {
+.reaction-content {
   font-size: 4rem;
 }
 
@@ -77,4 +77,14 @@
 
 #cancel-delete:hover {
   cursor: pointer;
+}
+
+#reaction-content-input {
+  background-color: transparent;
+  width: 25rem;
+  border: none;
+}
+
+#reaction-content-input:focus {
+  outline: none;
 }
