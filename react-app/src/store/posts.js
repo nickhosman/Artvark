@@ -67,7 +67,7 @@ export const fetchDeletePost = (postId) => async (dispatch) => {
     const response = await fetch(`/api/posts/${postId}`, { method: "DELETE" });
 
     if (response.ok) {
-        const message = await response.json();
+        // const message = await response.json();
         //   console.log("MESSAGE:", message)
         dispatch(deletePost(postId));
     }
