@@ -1,3 +1,13 @@
+:root {
+    --background-color: #e9cab9;
+    --primary-color: #b18e83;
+    --primary-hover: #816c66;
+    --secondary-color: #715852;
+    --accent-color: #c0aba3;
+    --accent-hover: #968b87;
+    --button-font-color: white;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -6,7 +16,7 @@
 }
 
 html {
-    background-color: #e9cab9;
+    background-color: var(--background-color);
 }
 
 #landing-wrapper {
@@ -57,23 +67,23 @@ html {
 }
 
 #landing-sign-up {
-    background-color: #b18e83;
-    color: white;
+    background-color: var(--primary-color);
+    color: var(--button-font-color);
 }
 
 #landing-sign-up:hover {
     cursor: pointer;
-    background-color: #816c66;
+    background-color: var(--primary-hover);
 }
 
 #landing-login {
-    background-color: #c0aba3;
+    background-color: var(--accent-color);
     color: white;
 }
 
 #landing-login:hover {
     cursor: pointer;
-    background-color: #968b87;
+    background-color: var(--accent-hover);
 }
 
 #call-to-action {
@@ -88,9 +98,10 @@ html {
 #slogan {
     font-size: 40px;
     font-weight: bold;
+    color: var(--secondary-color);
 }
 
 #sign-up-text {
     font-size: 30px;
-    color: #816c66;
+    color: var(--primary-hover);
 }
