@@ -15,7 +15,6 @@ function SignupFormModal() {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
-    // const [profileImg, setProfileImg] = useState("");
     const [errors, setErrors] = useState({});
     const { closeModal } = useModal();
 
@@ -44,14 +43,15 @@ function SignupFormModal() {
 
             const data = await dispatch(signUp(formData));
             if (data) {
-                setErrors(data.errors);
+                console.log("errors", data);
+                setErrors(data);
             } else {
                 closeModal();
             }
         } else {
-            setErrors([
-                "Confirm Password field must be the same as the Password field",
-            ]);
+            setErrors({
+                "confirmPassword": "Confirm Password field must be the same as the Password field"
+        });
         }
     };
 
@@ -60,7 +60,7 @@ function SignupFormModal() {
             <form onSubmit={handleSubmit} id="sign-up-form">
                 <h1>Sign Up</h1>
                 <div>
-                    {Object.keys(errors).length > 0 ? "There were errors" : null}
+                    {Object.keys(errors).length > 0 ? "Fix any errors to continue" : null}
                 </div>
                 <p className="sign-up-label-text">Profile Image</p>
                 <label className="sign-up-label">
@@ -83,6 +83,7 @@ function SignupFormModal() {
                         id="sign-up-image-input"
                         onChange={(e) => setProfileImg(e.target.files[0])}
                     />
+                    {Object.keys(errors).length > 0 ? <p className="errors">{errors.profile_img}</p> : null}
                 </label>
                 <p className="sign-up-label-text">First Name</p>
                 <label className="sign-up-label">
@@ -107,7 +108,7 @@ function SignupFormModal() {
                 <p className="sign-up-label-text">Email</p>
                 <label className="sign-up-label">
                     <input
-                        type="text"
+                        type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
