@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchLoadPosts } from "../../store/posts";
 import Post from "../Posts";
 import RightNav from "../Navigation/RightNav";
+import LeftNav from "../Navigation/LeftNav";
 import "./Home.css"
 
 function Home() {
@@ -23,6 +24,7 @@ function Home() {
 
     return (
         <div id="home-wrapper">
+            <LeftNav />
             <div id="home-post-container">
                 {postArr.sort(sortByDate).map((post) => (
                     <Post post={post} key={post.id} />
