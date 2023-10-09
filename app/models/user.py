@@ -37,6 +37,7 @@ class User(db.Model, UserMixin):
         return check_password_hash(self.password, password)
 
     def to_dict(self):
+        like_dicts = [like.to_dict() for like in self.user_likes]
         return {
             'id': self.id,
             'username': self.username,
@@ -44,4 +45,15 @@ class User(db.Model, UserMixin):
             'firstName': self.first_name,
             'lastName': self.last_name,
             'profileImg': self.profile_img,
+            'likes': like_dicts
+        }
+
+    def to_dict_no_likes(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'email': self.email,
+            'firstName': self.first_name,
+            'lastName': self.last_name,
+            'profileImg': self.profile_img
         }

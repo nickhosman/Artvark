@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
 from ..forms import PostForm, PostImagesForm, ReactionForm, BulkPostImagesForm
-from ..models import Post, PostImage, db, Reaction
+from ..models import Post, PostImage, db, Reaction, User
 from ..api.auth_routes import validation_errors_to_error_messages
 from app.api.aws_helpers import upload_file_to_s3, get_unique_filename, remove_file_from_s3
 
@@ -285,3 +285,21 @@ def remove_like_from_post(postId):
   db.session.commit()
 
   return {"message": "Successfully removed like from post"}, 200
+
+
+@post_routes.route("/liked")
+@login_required
+def get_liked_posts():
+  """
+  Get all posts liked by current user
+  """
+  user = User.query.get(current_user.id)
+  liked_posts = user.user_likes
+
+  post_dict = {}
+  for post in liked_posts:
+    data = post.to_dict()
+
+    post_dict[str(post.id)] = data
+  print("POST DICT", post_dict)
+  return post_dict

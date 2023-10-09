@@ -26,6 +26,19 @@ export const fetchLoadPosts = () => async (dispatch) => {
     }
 };
 
+export const fetchLoadLikedPosts = () => async (dispatch) => {
+    const response = await fetch("/api/posts/liked");
+
+    if (response.ok) {
+        const posts = await response.json()
+        await dispatch(loadPosts(posts));
+        return posts;
+    } else {
+        const errors = await response.json()
+        return errors;
+    }
+}
+
 export const fetchCreatePost = (post) => async (dispatch) => {
     const response = await fetch("/api/posts/new", {
         method: "POST",
@@ -79,7 +92,6 @@ const postReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_POSTS:
             newState = {
-                ...state,
                 ...action.payload,
             };
             return newState;

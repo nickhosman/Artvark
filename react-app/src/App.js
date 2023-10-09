@@ -19,8 +19,11 @@ function App() {
                     <Route exact path="/">
                         <Landing />
                     </Route>
-                    <Route path="/posts">
-                        <Home />
+                    <Route exact path="/posts">
+                        <Home isLikesPage={false}/>
+                    </Route>
+                    <Route path="/posts/liked">
+                        <Home isLikesPage={true}/>
                     </Route>
                 </Switch>
             )}

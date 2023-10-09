@@ -21,6 +21,7 @@ class Post(db.Model):
 
   def to_dict(self):
     image_dict = dict(zip([image.id for image in self.post_images], [image.to_dict() for image in self.post_images]))
+    like_ids = [user.id for user in self.post_likes]
     previewImg = None
     for image in self.post_images:
       if image.preview:
@@ -29,12 +30,13 @@ class Post(db.Model):
     return {
       "id": self.id,
       "title": self.title,
-      "author": self.user.to_dict(),
+      "author": self.user.to_dict_no_likes(),
       "createdAt": self.created_at,
       "updatedAt": self.updated_at,
       "postImages": image_dict,
       "previewImg": previewImg,
-      "numReactions": len(self.reactions)
+      "numReactions": len(self.reactions),
+      "likes": like_ids,
     }
 
   def to_dict_with_reactions(self):
@@ -43,7 +45,7 @@ class Post(db.Model):
     return {
       "id": self.id,
       "title": self.title,
-      "author": self.user.to_dict(),
+      "author": self.user.to_dict_no_likes(),
       "createdAt": self.created_at,
       "updatedAt": self.updated_at,
       "postImages": image_dict,
