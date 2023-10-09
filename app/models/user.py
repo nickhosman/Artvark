@@ -23,6 +23,7 @@ class User(db.Model, UserMixin):
     #relationships
     reactions = db.relationship("Reaction", back_populates="user")
     posts = db.relationship("Post", back_populates="user")
+    user_likes = db.relationship("Post", secondary="likes", back_populates="post_likes")
 
     @property
     def password(self):

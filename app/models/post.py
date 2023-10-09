@@ -17,6 +17,7 @@ class Post(db.Model):
   user = db.relationship("User", back_populates="posts")
   reactions = db.relationship("Reaction", back_populates="post", cascade="all, delete, delete-orphan")
   post_images = db.relationship("PostImage", back_populates="post", cascade="all, delete, delete-orphan")
+  post_likes = db.relationship("User", secondary="likes", back_populates="user_likes")
 
   def to_dict(self):
     image_dict = dict(zip([image.id for image in self.post_images], [image.to_dict() for image in self.post_images]))
