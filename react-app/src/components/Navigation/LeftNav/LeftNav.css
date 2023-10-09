@@ -1,0 +1,45 @@
+.left-nav-item svg {
+  height: 6rem;
+  width: 6rem;
+}
+
+#nav-button {
+  height: 3rem;
+  width: 3rem;
+}
+
+#left-nav-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  position: sticky;
+  top: 2rem;
+  height: fit-content;
+  align-items: flex-end;
+}
+
+.left-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  justify-content: flex-end;
+  font-size: 22px;
+  padding: 1rem;
+}
+
+.left-nav-text {
+  display: none;
+}
+
+.left-nav-item:hover .left-nav-text {
+  display: block;
+}
+
+.left-nav-item:hover {
+  cursor: pointer;
+  border-block: 1px solid var(--secondary-color);
+  border-left: 1px solid var(--secondary-color);
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+  box-shadow: 0 4px 8px var(--accent-color);
+}
