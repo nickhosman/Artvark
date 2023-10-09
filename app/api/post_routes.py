@@ -248,3 +248,40 @@ def add_reaction_to_post(postId):
     db.session.commit()
     return reaction.to_dict(), 201
   return {"errors": validation_errors_to_error_messages(form.errors)}, 400
+
+
+@post_routes.route("/<int:postId>/likes", methods=["POST"])
+@login_required
+def add_like_to_post(postId):
+  """
+  Add a like to a post
+  """
+  post = Post.query.get(postId)
+  if not post:
+    return {"errors": "Post not found"}, 404
+
+  if post in current_user.user_likes:
+    return {"errors": "User already liked this post"}, 400
+
+  post.post_likes.append(current_user)
+  db.session.commit()
+  return {"message": "Successfully liked post"}
+
+
+@post_routes.route("/<int:postId>/likes", methods=["DELETE"])
+@login_required
+def remove_like_from_post(postId):
+  """
+  Remove a like from a post
+  """
+  post = Post.query.get(postId)
+  if not post:
+    return {"errors": "Post not found"}, 404
+
+  if current_user not in post.post_likes:
+    return {"errors": "User has not liked this post"}, 401
+
+  post.post_likes.remove(current_user)
+  db.session.commit()
+
+  return {"message": "Successfully removed like from post"}, 200
