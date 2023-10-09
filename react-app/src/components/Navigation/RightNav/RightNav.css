@@ -18,3 +18,11 @@
   cursor: pointer;
   background-color: #7d655d;
 }
+
+.hidden {
+  display: none;
+}
+
+.profile-dropdown {
+  position: absolute;
+}
