@@ -1,0 +1,42 @@
+#about-wrapper {
+  height: 30rem;
+  width: 50rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+  align-items: center;
+}
+
+#about-column-wrapper {
+  display: flex;
+  gap: 4rem;
+  font-size: 24px;
+}
+
+#developed-by {
+  display: flex;
+  flex-direction: column;
+}
+
+#developed-by a {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+#about-wrapper a {
+  text-decoration: none;
+  color: var(--secondary-color);
+}
+
+#project-code {
+  display: flex;
+  flex-direction: column;
+}
+
+#project-repo {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}

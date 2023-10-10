@@ -76,3 +76,16 @@
 #right-nav-post:hover {
   background-color: var(--primary-color);
 }
+
+#about-links {
+  padding-left: 1rem;
+  width: 15rem;
+  /* display: flex;
+  flex-wrap: wrap;
+  gap: 1rem; */
+}
+
+.about-link-item:hover {
+  cursor: pointer;
+  color: var(--primary-color);
+}
