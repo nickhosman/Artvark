@@ -120,7 +120,7 @@ function ReactionModal({ postId }) {
                             onPaste={handlePasteAndDrop}
                             onDrop={handlePasteAndDrop}
                         />
-                        <button type="submit" id="reaction-submit-btn">
+                        <button type="submit" id="reaction-submit-btn" disabled={!showPicker}>
                             {<IoSend />}
                         </button>
                     </form>
