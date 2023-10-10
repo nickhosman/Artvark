@@ -7,13 +7,13 @@ import { useModal } from "../../context/Modal";
 function UserCard() {
     const user = useSelector((state) => state.session.user);
     const dispatch = useDispatch();
-    const {closeModal} = useModal();
+    const { closeModal } = useModal();
 
     const handleLogOut = (e) => {
-      e.preventDefault();
-      dispatch(logout())
-      closeModal()
-    }
+        e.preventDefault();
+        dispatch(logout());
+        closeModal();
+    };
 
     return (
         <div id="user-card-wrapper">
@@ -37,7 +37,9 @@ function UserCard() {
                     <p id="user-card-email">{user.email}</p>
                 </div>
             </div>
-            <div id="user-card-logout" onClick={handleLogOut}>Log Out</div>
+            <div id="user-card-logout" onClick={handleLogOut}>
+                Log Out
+            </div>
         </div>
     );
 }

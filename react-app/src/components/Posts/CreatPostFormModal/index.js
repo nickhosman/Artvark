@@ -3,9 +3,11 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../../context/Modal";
 import { fetchCreatePost } from "../../../store/posts";
 import "./CreatePostFormModal.css";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 function CreatePostFormModal() {
     const dispatch = useDispatch();
+    const history = useHistory()
     const [image1, setImage1] = useState(null);
     const [previewImage1, setPreviewImage1] = useState("");
     const [image2, setImage2] = useState(null);
@@ -68,6 +70,7 @@ function CreatePostFormModal() {
             setFormErrors(errors);
         } else {
             setImagesLoading(true);
+            history.push("/posts")
             closeModal();
             setFormErrors({});
         }

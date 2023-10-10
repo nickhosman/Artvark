@@ -1,16 +1,21 @@
 import React from "react";
-import { FaGithub, FaReact, FaPython, FaJsSquare, FaGithubSquare } from "react-icons/fa";
+import {
+    FaGithub,
+    FaReact,
+    FaPython,
+    FaJsSquare,
+    FaGithubSquare,
+} from "react-icons/fa";
 import "./About.css";
 
 function About() {
-
     return (
         <div id="about-wrapper">
             <h1>About Artvark</h1>
             <div id="about-column-wrapper">
                 <div id="developed-by">
                     Developed By:
-                    <a href="https://github.com/nickhosman" target="_blank">
+                    <a href="https://github.com/nickhosman" target="_blank" rel="noreferrer">
                         <FaGithub />
                         Nick Hosman
                     </a>
@@ -18,17 +23,22 @@ function About() {
                 <div id="using">
                     Stack:
                     <div>
-                        <FaReact title="React"/>
-                        <FaPython title="Python"/>
-                        <FaJsSquare title="JavaScript"/>
+                        <FaReact title="React" />
+                        <FaPython title="Python" />
+                        <FaJsSquare title="JavaScript" />
                     </div>
                 </div>
                 <div id="project-code">
-                  Project Repo:
-                  <a href="https://github.com/nickhosman/Artvark" target="_blank" id="project-repo">
-                    <FaGithubSquare />
-                    Artvark
-                  </a>
+                    Project Repo:
+                    <a
+                        href="https://github.com/nickhosman/Artvark"
+                        target="_blank"
+                        id="project-repo"
+                        rel="noreferrer"
+                    >
+                        <FaGithubSquare />
+                        Artvark
+                    </a>
                 </div>
             </div>
         </div>

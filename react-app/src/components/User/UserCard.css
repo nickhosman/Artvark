@@ -25,6 +25,7 @@
 #user-card-img {
   aspect-ratio: 1;
   height: 6rem;
+  border-radius: 50%;
 }
 
 #user-card-username {

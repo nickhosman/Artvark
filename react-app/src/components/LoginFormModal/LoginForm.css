@@ -13,6 +13,7 @@
   width: 100%;
   gap: 1rem;
   align-items: center;
+  position: relative;
 }
 
 .log-in-label-text {
@@ -59,4 +60,16 @@
 #log-in-demo:hover {
   cursor: pointer;
   background-color: var(--accent-hover);
+}
+
+#log-in-email-error {
+  position: absolute;
+  top: -2.5rem;
+  right: 2rem;
+}
+
+#log-in-password-error {
+  position: absolute;
+  top: -2.5rem;
+  right: 2rem;
 }

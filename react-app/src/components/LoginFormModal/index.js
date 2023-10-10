@@ -35,11 +35,6 @@ function LoginFormModal() {
         <>
             <form onSubmit={handleSubmit} id="log-in-form">
                 <h1>Log In</h1>
-                <ul>
-                    {errors.map((error, idx) => (
-                        <li key={idx}>{error}</li>
-                    ))}
-                </ul>
                 <p className="log-in-label-text">Email</p>
                 <label className="log-in-label">
                     <input
@@ -49,6 +44,7 @@ function LoginFormModal() {
                         required
                         className="log-in-input"
                     />
+                    {Object.keys(errors).length > 0 ? <p className="errors" id="log-in-email-error">{errors.email}</p> : null}
                 </label>
                 <p className="log-in-label-text">Password</p>
                 <label className="log-in-label">
@@ -59,6 +55,7 @@ function LoginFormModal() {
                         required
                         className="log-in-input"
                     />
+                    {Object.keys(errors).length > 0 ? <p className="errors" id="log-in-password-error">{errors.password}</p> : null}
                 </label>
                 <button type="submit" id="log-in-form-btn">
                     Log In

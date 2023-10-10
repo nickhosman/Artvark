@@ -13,7 +13,7 @@ function Home({ isLikesPage }) {
     // console.log("POSTS:", posts)
 
     useEffect(() => {
-        console.log(isLikesPage);
+        // console.log(isLikesPage);
         if (isLikesPage) {
             dispatch(fetchLoadLikedPosts());
         } else {
