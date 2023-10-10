@@ -25,10 +25,12 @@ function LeftNav() {
             <div id="left-nav-logo">
                 <ArtvarkLogo />
             </div>
-            <div className="left-nav-item" onClick={handleHomeClick}>
-                <FaHome id="nav-button" />
-                <p className="left-nav-text">Home</p>
-            </div>
+            {user ? (
+                <div className="left-nav-item" onClick={handleHomeClick}>
+                    <FaHome id="nav-button" />
+                    <p className="left-nav-text">Home</p>
+                </div>
+            ) : null}
             {user ? (
                 <div className="left-nav-item" onClick={handleLikesClick}>
                     <FaHeart id="nav-button" />
