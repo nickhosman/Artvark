@@ -68,6 +68,7 @@ function ReactionModal({ postId }) {
                 dispatch(fetchLoadPosts());
                 setEmojis("");
                 setShowPicker(false);
+                setSubmitError({});
             }
         }
     };

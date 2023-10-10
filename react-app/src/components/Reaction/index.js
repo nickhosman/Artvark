@@ -80,6 +80,7 @@ function Reaction({ reaction }) {
                 const editedReaction = await response.json();
                 dispatch(fetchLoadReactions(reaction.postId));
                 setShowPicker(false);
+                setFormErrors({});
                 return editedReaction;
             } else {
                 const errors = await response.json();
