@@ -3,9 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../store/session";
 import "./UserCard.css";
 import { useModal } from "../../context/Modal";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 function UserCard() {
     const user = useSelector((state) => state.session.user);
+    const history = useHistory();
     const dispatch = useDispatch();
     const { closeModal } = useModal();
 
@@ -13,6 +15,7 @@ function UserCard() {
         e.preventDefault();
         dispatch(logout());
         closeModal();
+        history.push("/posts");
     };
 
     return (
