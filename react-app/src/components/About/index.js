@@ -27,7 +27,7 @@ function About() {
                   Project Repo:
                   <a href="https://github.com/nickhosman/Artvark" target="_blank" id="project-repo">
                     <FaGithubSquare />
-                    Project Link
+                    Artvark
                   </a>
                 </div>
             </div>
