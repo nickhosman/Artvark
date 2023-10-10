@@ -94,6 +94,7 @@ function SignupFormModal() {
                         required
                         className="sign-up-form-input"
                     />
+                    {Object.keys(errors).length > 0 ? <p className="errors">{errors.first_name}</p> : null}
                 </label>
                 <p className="sign-up-label-text">Last Name</p>
                 <label className="sign-up-label">
@@ -104,6 +105,7 @@ function SignupFormModal() {
                         required
                         className="sign-up-form-input"
                     />
+                    {Object.keys(errors).length > 0 ? <p className="errors">{errors.last_name}</p> : null}
                 </label>
                 <p className="sign-up-label-text">Email</p>
                 <label className="sign-up-label">
@@ -114,6 +116,7 @@ function SignupFormModal() {
                         required
                         className="sign-up-form-input"
                     />
+                    {Object.keys(errors).length > 0 ? <p className="errors">{errors.email}</p> : null}
                 </label>
                 <p className="sign-up-label-text">Username</p>
                 <label className="sign-up-label">
@@ -124,6 +127,7 @@ function SignupFormModal() {
                         required
                         className="sign-up-form-input"
                     />
+                    {Object.keys(errors).length > 0 ? <p className="errors">{errors.username}</p> : null}
                 </label>
                 <p className="sign-up-label-text">Password</p>
                 <label className="sign-up-label">
@@ -134,6 +138,7 @@ function SignupFormModal() {
                         required
                         className="sign-up-form-input"
                     />
+                    {Object.keys(errors).length > 0 ? <p className="errors">{errors.password}</p> : null}
                 </label>
                 <p className="sign-up-label-text">Confirm Password</p>
                 <label className="sign-up-label">

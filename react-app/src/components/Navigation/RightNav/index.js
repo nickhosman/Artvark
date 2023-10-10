@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { FaUser, FaPlus } from "react-icons/fa";
 import CreatePostFormModal from "../../Posts/CreatPostFormModal";
@@ -11,12 +11,6 @@ import LoginFormModal from "../../LoginFormModal";
 
 function RightNav() {
     const current_user = useSelector((state) => state.session.user);
-    const [showDropdown, setShowDropdown] = useState(false);
-
-    const handleLoggedOutUserClick = (e) => {
-        e.preventDefault();
-        setShowDropdown(!showDropdown);
-    };
 
     return (
         <div id="right-nav-wrapper">
@@ -35,10 +29,7 @@ function RightNav() {
                     modalComponent={<UserCard />}
                 />
             ) : (
-                <div
-                    id="user-dropdown"
-                    className={showDropdown ? "show-dropdown" : "hide-dropdown"}
-                >
+                <div id="user-dropdown">
                     <OpenModalElement
                         id="dropdown-log-in"
                         className="dropdown-item"
