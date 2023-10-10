@@ -4,13 +4,18 @@ import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 import { IoSend } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
-import { clearReactions, fetchAddReaction, fetchLoadReactions } from "../../../store/reactions";
+import {
+    clearReactions,
+    fetchAddReaction,
+    fetchLoadReactions,
+} from "../../../store/reactions";
 import { fetchLoadPosts } from "../../../store/posts";
 import "./ReactionModal.css";
 
 function ReactionModal({ postId }) {
     const dispatch = useDispatch();
     const reactions = useSelector((state) => state.reactions);
+    const user = useSelector((state) => state.session.user);
     const [emojis, setEmojis] = useState("");
     const [showPicker, setShowPicker] = useState(false);
     const inputField = useRef(null);
@@ -22,25 +27,25 @@ function ReactionModal({ postId }) {
         dispatch(fetchLoadReactions(postId));
         return () => {
             dispatch(clearReactions());
-        }
+        };
     }, [dispatch, postId]);
 
     useEffect(() => {
         setNumOfEmojis(getEmojiInputLength(emojis));
-    }, [emojis])
+    }, [emojis]);
 
     useEffect(() => {
         if (numOfEmojis > 4) {
-            setErrors("You can post a maximum of 4 emojis.")
+            setErrors("You can post a maximum of 4 emojis.");
         } else {
-            setErrors("")
+            setErrors("");
         }
-    }, [numOfEmojis])
+    }, [numOfEmojis]);
 
     if (!reactions) return null;
 
     const getEmojiInputLength = (str) => {
-        return [...new Intl.Segmenter().segment(str)].length
+        return [...new Intl.Segmenter().segment(str)].length;
     };
 
     const sortByDate = (a, b) => {
@@ -100,32 +105,36 @@ function ReactionModal({ postId }) {
 
     return (
         <div id="reaction-wrapper">
-            <div id="input-wrapper">
-                <form id="reaction-form" onSubmit={handleSubmit}>
-                    <input
-                        id="emoji-input"
-                        type="text"
-                        onClick={handleInputClick}
-                        value={emojis}
-                        onChange={(e) => setEmojis(e.target.value)}
-                        ref={inputField}
-                        onKeyDown={handleBackspace}
-                        autoComplete="off"
-                        onPaste={handlePasteAndDrop}
-                        onDrop={handlePasteAndDrop}
-                    />
-                    <button type="submit" id="reaction-submit-btn">
-                        {<IoSend />}
-                    </button>
-                </form>
-            </div>
+            {user ? (
+                <div id="input-wrapper">
+                    <form id="reaction-form" onSubmit={handleSubmit}>
+                        <input
+                            id="emoji-input"
+                            type="text"
+                            onClick={handleInputClick}
+                            value={emojis}
+                            onChange={(e) => setEmojis(e.target.value)}
+                            ref={inputField}
+                            onKeyDown={handleBackspace}
+                            autoComplete="off"
+                            onPaste={handlePasteAndDrop}
+                            onDrop={handlePasteAndDrop}
+                        />
+                        <button type="submit" id="reaction-submit-btn">
+                            {<IoSend />}
+                        </button>
+                    </form>
+                </div>
+            ) : null}
             {errors.length > 0 ? <p className="errors">{errors}</p> : null}
-            {Object.keys(submitError).length > 0 ? <p className="errors">{submitError.content}</p> : null}
+            {Object.keys(submitError).length > 0 ? (
+                <p className="errors">{submitError.content}</p>
+            ) : null}
             <div id="picker-wrapper">
                 {showPicker ? (
-                        <div id="close-picker-main" onClick={handlePickerClose}>
-                            Close
-                        </div>
+                    <div id="close-picker-main" onClick={handlePickerClose}>
+                        Close
+                    </div>
                 ) : null}
                 {showPicker ? (
                     <Picker
