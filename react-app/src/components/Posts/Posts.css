@@ -64,11 +64,6 @@
   gap: .5em;
 }
 
-#post-stat-reacts svg:hover {
-  cursor: pointer;
-  fill: yellow;
-}
-
 #post-btn-wrapper {
   display: flex;
   gap: .5em;
@@ -95,4 +90,34 @@
   height: 100%;
   width: 100%;
   object-fit: cover;
+}
+
+#post-stats-wrapper {
+  width: fit-content;
+  display: flex;
+  gap: 1rem;
+}
+
+#post-reactions-container {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+#post-reactions-container svg:hover {
+  fill: yellow;
+}
+
+#post-likes-container {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+#post-likes-container svg:hover {
+  fill: red;
+}
+
+#post-stats-wrapper svg:hover {
+  cursor: pointer;
 }

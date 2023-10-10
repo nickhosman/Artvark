@@ -23,8 +23,8 @@ def seed():
         undo_post_images()
         undo_posts()
         undo_users()
-    seed_users()
-    seed_posts()
+    users = seed_users()
+    seed_posts(users)
     seed_post_images()
     seed_reactions()
 

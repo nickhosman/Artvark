@@ -1,11 +1,13 @@
 #right-nav-wrapper {
   position: sticky;
-  top: 2rem;
+  top: 16px;
   height: fit-content;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   gap: 1.5rem;
+  align-items: flex-start;
+  overflow: hidden;
+  margin-bottom: 1rem;
 }
 
 #right-nav-wrapper > button {
@@ -31,7 +33,59 @@
   position: absolute;
 }
 
-#right-nav-spacer {
-  height: 6rem;
-  width: 6rem;
+#right-nav-spacer svg {
+  height: 7rem;
+  width: 7rem;
+  visibility: hidden;
+}
+
+.right-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  justify-content: flex-end;
+  width: 10rem;
+  font-size: 22px;
+  border-block: 1px solid transparent;
+  padding: 1rem;
+  position: relative;
+  left: -5.1rem;
+  transition: left 0.3s ease-in-out;
+}
+
+.right-nav-item svg {
+  fill: var(--secondary-color);
+  height: 3rem;
+  width: 3rem;
+}
+
+.right-nav-item:hover {
+  cursor: pointer;
+  border-block: 1px solid var(--secondary-color);
+  border-right: 1px solid var(--secondary-color);
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+  box-shadow: 0 4px 8px var(--accent-color);
+  left: 0;
+}
+
+#right-nav-post {
+  color: white;
+}
+
+#right-nav-post:hover {
+  background-color: var(--primary-color);
+}
+
+#about-links {
+  padding-left: 1rem;
+  width: 15rem;
+  /* display: flex;
+  flex-wrap: wrap;
+  gap: 1rem; */
+}
+
+.about-link-item:hover {
+  cursor: pointer;
+  color: var(--primary-color);
 }

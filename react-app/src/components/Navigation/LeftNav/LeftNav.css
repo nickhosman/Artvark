@@ -1,45 +1,56 @@
 .left-nav-item svg {
-  height: 6rem;
-  width: 6rem;
+    height: 6rem;
+    width: 6rem;
+    fill: var(--secondary-color);
+}
+
+#left-nav-logo svg {
+    height: 7rem;
+    width: 7rem;
+}
+
+#left-nav-logo {
+    padding-right: 0.5rem;
 }
 
 #nav-button {
-  height: 3rem;
-  width: 3rem;
+    height: 3rem;
+    width: 3rem;
 }
 
 #left-nav-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  position: sticky;
-  top: 2rem;
-  height: fit-content;
-  align-items: flex-end;
+    position: sticky;
+    top: 16px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: flex-end;
+    overflow: hidden;
+    margin-bottom: 1rem;
 }
 
 .left-nav-item {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  justify-content: flex-end;
-  font-size: 22px;
-  padding: 1rem;
-}
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    justify-content: flex-start;
+    border-block: 1px solid transparent;
+    width: 10rem;
+    font-size: 22px;
+    padding: 1rem;
+    position: relative;
+    right: -5rem;
+    transition: right 0.3s ease-in-out;
 
-.left-nav-text {
-  display: none;
-}
-
-.left-nav-item:hover .left-nav-text {
-  display: block;
 }
 
 .left-nav-item:hover {
-  cursor: pointer;
-  border-block: 1px solid var(--secondary-color);
-  border-left: 1px solid var(--secondary-color);
-  border-top-left-radius: 50px;
-  border-bottom-left-radius: 50px;
-  box-shadow: 0 4px 8px var(--accent-color);
+    cursor: pointer;
+    border-block: 1px solid var(--secondary-color);
+    border-left: 1px solid var(--secondary-color);
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    box-shadow: 0 4px 8px var(--accent-color);
+    right: 0;
 }
