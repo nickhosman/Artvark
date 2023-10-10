@@ -31,6 +31,9 @@ function Home({ isLikesPage }) {
         <div id="home-wrapper">
             <LeftNav />
             <div id="home-post-container">
+                <div id="home-header">
+                    <h2>{isLikesPage ? "Likes" : "Home"}</h2>
+                </div>
                 {Object.keys(posts).length > 0 ? (
                     Object.values(posts)
                         .sort(sortByDate)
@@ -42,7 +45,7 @@ function Home({ isLikesPage }) {
                             />
                         ))
                 ) : (
-                    <p>There's nothing here yet...</p>
+                    <h3 id="nothing-here">There's nothing here yet...</h3>
                 )}
             </div>
             <RightNav />

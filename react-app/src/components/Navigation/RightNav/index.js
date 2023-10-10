@@ -1,23 +1,30 @@
 import React from "react";
-import CreatePostFormModal from "../../Posts/CreatPostFormModal";
-import OpenModalButton from "../../OpenModalButton";
-import "./RightNav.css";
 import { useSelector } from "react-redux";
+import { FaUser, FaPlus } from "react-icons/fa";
+import CreatePostFormModal from "../../Posts/CreatPostFormModal";
+import OpenModalElement from "../../OpenModalElement";
 import ProfileButton from "../ProfileButton";
+import { ReactComponent as ArtvarkLogo } from "../../../public/artvark-brown.svg";
+import "./RightNav.css";
 
 function RightNav() {
     const current_user = useSelector((state) => state.session.user);
 
     return (
         <div id="right-nav-wrapper">
-            <div id="right-nav-spacer"></div>
-            <ProfileButton user={current_user} />
+            <div id="right-nav-spacer">
+                <svg></svg>
+            </div>
+            <div className="right-nav-item">
+                <p className="right-nav-text">Profile</p>
+                <FaUser id="nav-button" />
+            </div>
             {current_user ? (
-                <OpenModalButton
+                <OpenModalElement
                     id="right-nav-post"
-                    className="nav-button"
+                    className="right-nav-item"
                     modalComponent={<CreatePostFormModal />}
-                    buttonText={"Create Post"}
+                    text={<><p>Post</p><FaPlus /></>}
                 />
             ) : null}
         </div>

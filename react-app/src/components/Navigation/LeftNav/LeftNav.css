@@ -19,15 +19,15 @@
 }
 
 #left-nav-wrapper {
+    position: sticky;
+    top: 16px;
+    height: fit-content;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    position: sticky;
-    top: 2rem;
-    height: fit-content;
     align-items: flex-end;
     overflow: hidden;
-    padding-bottom: 1rem;
+    margin-bottom: 1rem;
 }
 
 .left-nav-item {
