@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../../context/Modal";
 import { fetchCreatePost } from "../../../store/posts";
-import "./CreatePostFormModal.css";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { FaPlus } from "react-icons/fa";
+import "./CreatePostFormModal.css";
 
 function CreatePostFormModal() {
     const dispatch = useDispatch();
@@ -88,7 +89,7 @@ function CreatePostFormModal() {
                 <div id="create-post-img-wrapper">
                     <label className="create-post-image">
                         {!previewImage1 ? (
-                            <div className="create-post-thumb"></div>
+                            <div className="create-post-thumb"><FaPlus /></div>
                         ) : (
                             <div className="create-post-thumb">
                                 <img
@@ -99,6 +100,7 @@ function CreatePostFormModal() {
                             </div>
                         )}
                         <input
+                            className="file-input"
                             type="file"
                             accept="image/*"
                             onChange={(e) => setImage1(e.target.files[0])}
@@ -109,7 +111,7 @@ function CreatePostFormModal() {
                     </label>
                     <label className="create-post-image">
                         {!previewImage2 ? (
-                            <div className="create-post-thumb"></div>
+                            <div className="create-post-thumb"><FaPlus /></div>
                         ) : (
                             <div className="create-post-thumb">
                                 <img
@@ -120,6 +122,7 @@ function CreatePostFormModal() {
                             </div>
                         )}
                         <input
+                            className="file-input"
                             type="file"
                             accept="image/*"
                             onChange={(e) => setImage2(e.target.files[0])}
@@ -130,7 +133,7 @@ function CreatePostFormModal() {
                     </label>
                     <label className="create-post-image">
                         {!previewImage3 ? (
-                            <div className="create-post-thumb"></div>
+                            <div className="create-post-thumb"><FaPlus /></div>
                         ) : (
                             <div className="create-post-thumb">
                                 <img
@@ -141,6 +144,7 @@ function CreatePostFormModal() {
                             </div>
                         )}
                         <input
+                            className="file-input"
                             type="file"
                             accept="image/*"
                             onChange={(e) => setImage3(e.target.files[0])}
@@ -151,7 +155,7 @@ function CreatePostFormModal() {
                     </label>
                     <label className="create-post-image">
                         {!previewImage4 ? (
-                            <div className="create-post-thumb"></div>
+                            <div className="create-post-thumb"><FaPlus /></div>
                         ) : (
                             <div className="create-post-thumb">
                                 <img
@@ -162,6 +166,7 @@ function CreatePostFormModal() {
                             </div>
                         )}
                         <input
+                            className="file-input"
                             type="file"
                             accept="image/*"
                             onChange={(e) => setImage4(e.target.files[0])}
@@ -171,12 +176,14 @@ function CreatePostFormModal() {
                         ) : null}
                     </label>
                 </div>
-                <label>
-                    Title
+                <label id="title-label">
+                    <p id="title-label-text">Give it a Title</p>
                     <input
                         type="text"
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
+                        id="title-input"
+                        placeholder="Between 1 and 25 characters..."
                     />
                     {Object.keys(formErrors).length > 0 ? (
                         <p className="errors">{formErrors.title}</p>
