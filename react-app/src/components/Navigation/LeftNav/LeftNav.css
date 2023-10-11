@@ -20,8 +20,9 @@
 
 #left-nav-wrapper {
     position: sticky;
-    top: 16px;
-    height: fit-content;
+    top: 0;
+    padding-top: 16px;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
