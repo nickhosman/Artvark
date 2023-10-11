@@ -12,7 +12,7 @@ import {
 import { fetchLoadPosts } from "../../../store/posts";
 import "./ReactionModal.css";
 
-function ReactionModal({ postId }) {
+function ReactionModal({ post }) {
     const dispatch = useDispatch();
     const reactions = useSelector((state) => state.reactions);
     const user = useSelector((state) => state.session.user);
@@ -22,6 +22,7 @@ function ReactionModal({ postId }) {
     const [numOfEmojis, setNumOfEmojis] = useState(null);
     const [errors, setErrors] = useState("");
     const [submitError, setSubmitError] = useState({});
+    const postId = post.id;
 
     useEffect(() => {
         dispatch(fetchLoadReactions(postId));
@@ -106,6 +107,10 @@ function ReactionModal({ postId }) {
 
     return (
         <div id="reaction-wrapper">
+            <div id="reaction-post-wrapper">
+                <h2 id="reaction-post-title">{post.title}</h2>
+                <img alt="" src={post.previewImg} id="reaction-post-img" />
+            </div>
             {user ? (
                 <div id="input-wrapper">
                     <form id="reaction-form" onSubmit={handleSubmit}>
@@ -121,7 +126,11 @@ function ReactionModal({ postId }) {
                             onPaste={handlePasteAndDrop}
                             onDrop={handlePasteAndDrop}
                         />
-                        <button type="submit" id="reaction-submit-btn" disabled={!showPicker}>
+                        <button
+                            type="submit"
+                            id="reaction-submit-btn"
+                            disabled={!showPicker}
+                        >
                             {<IoSend />}
                         </button>
                     </form>

@@ -22,7 +22,7 @@ function LeftNav() {
 
     return (
         <div id="left-nav-wrapper">
-            <div id="left-nav-logo">
+            <div id="left-nav-logo" title="Artvark">
                 <ArtvarkLogo />
             </div>
             {user ? (

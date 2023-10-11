@@ -4,8 +4,8 @@
   align-items: center;
   padding: 2rem;
   border-radius: 20px;
-  background-color: #e9cab9;
   gap: 2rem;
+  color: var(--secondary-color);
 }
 
 #create-post-form {
@@ -16,31 +16,89 @@
 }
 
 #create-post-form > button {
-  height: 3rem;
-  width: 8rem;
-  border-radius: 30px;
+  height: 5rem;
+  width: 100%;
+  border-radius: 50px;
   border: none;
-  background-color: #705852;
-  color: white;
+  font-size: 24px;
+  background-color: var(--primary-color);
+  color: var(--button-font-color);
 }
 
 #create-post-form > button:hover {
   cursor: pointer;
-  background-color: #3c2f2c;
+  background-color: var(--primary-hover);
 }
 
 .create-post-thumb {
-  border: 1px solid #3c2f2c;
+  border: 1px solid var(--secondary-color);
   height: 10rem;
   aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+}
+
+.create-post-thumb:hover {
+  cursor: pointer;
 }
 
 #create-post-img-wrapper {
   display: flex;
+  width: fit-content;
+  gap: 2rem;
 }
 
 .create-post-image {
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
+  border-radius: 15px;
+}
+
+.file-input {
+  width: .1px;
+  height: .1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.file-input:focus > label {
+  outline: 1px dotted #000;
+  outline: -webkit-focus-ring-color auto 5px;
+}
+
+#image-label {
+  font-size: 24px;
+  font-weight: bold;
+  align-self: flex-start;
+}
+
+.image-thumb {
+  object-fit: cover;
+  aspect-ratio: 1;
+  width: 100%;
+  border-radius: 15px;
+}
+
+#title-label {
+  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+#title-label-text {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+#title-input {
+  width: 45rem;
+  height: 4rem;
+  font-size: 24px;
 }
