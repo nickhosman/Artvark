@@ -44,10 +44,10 @@
 
 #user-card-logout {
   position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
+  top: 1rem;
+  right: 1rem;
   padding: .5rem;
-  border-radius: 30px;
+  border-radius: 15px;
   background-color: var(--primary-color);
   color: var(--button-font-color);
 }
