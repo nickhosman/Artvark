@@ -1,12 +1,16 @@
 .left-nav-item svg {
     height: 6rem;
     width: 6rem;
-    fill: var(--secondary-color);
+    color: var(--secondary-color);
 }
 
 #left-nav-logo svg {
     height: 7rem;
     width: 7rem;
+}
+
+#left-nav-logo svg path {
+    fill: var(--secondary-color);
 }
 
 #left-nav-logo {
@@ -41,6 +45,7 @@
     font-size: 22px;
     padding: 1rem;
     position: relative;
+    color: var(--secondary-color);
     right: -7rem;
     transition: right 0.3s ease-in-out;
 

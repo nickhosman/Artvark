@@ -43,7 +43,7 @@ function Home({ isLikesPage }) {
         );
         document.documentElement.style.setProperty(
             "--accent-color",
-            currTheme.secondary
+            currTheme.accent
         );
         document.documentElement.style.setProperty(
             "--button-font-color",

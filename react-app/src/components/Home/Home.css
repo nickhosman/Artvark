@@ -26,6 +26,7 @@
   background-color: var(--background-color);
   opacity: .8;
   z-index: 1;
+  color: var(--secondary-color);
 }
 
 #nothing-here {

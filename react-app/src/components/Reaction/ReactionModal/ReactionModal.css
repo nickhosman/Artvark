@@ -17,6 +17,10 @@
   width: 100%;
 }
 
+#reaction-post-title {
+  color: var(--secondary-color);
+}
+
 #reaction-post-img {
   height: 20rem;
   width: 34rem;
@@ -43,7 +47,7 @@
   width: 30rem;
   border-inline: none;
   border-top: none;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid var(--secondary-color);
   background-color: var(--background-color);
   font-size: 4rem;
 }
@@ -58,7 +62,7 @@
   width: 6rem;
   border-inline: none;
   border-top: none;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid var(--secondary-color);
   background-color: var(--background-color);
 }
 

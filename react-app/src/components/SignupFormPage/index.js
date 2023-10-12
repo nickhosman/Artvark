@@ -23,7 +23,7 @@ function SignupFormPage() {
           setErrors(data)
         }
     } else {
-        setErrors(['Confirm Password field must be the same as the Password field']);
+        setErrors(prevState => ({"errors": {...(prevState.errors), confirmPassword: "Confirm Password field must be the same as the Password field"}}));
     }
   };
 

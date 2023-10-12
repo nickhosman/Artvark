@@ -1,11 +1,12 @@
 :root {
     --background-color: hsl(21, 52%, 82%);
     --primary-color: hsl(14, 23%, 60%);
-    --primary-hover: hsl(13, 12%, 45%);
+    --primary-hover: hsl(14, 20%, 50%);
     --secondary-color: hsl(12, 16%, 38%);
+    --secondary-hover: hsl(12, 13%, 28%);
     --accent-color: hsl(17, 19%, 70%);
-    --accent-hover: hsl(16, 7%, 56%);
-    --button-font-color: hsl(0, 0%, 100%);
+    --accent-hover: hsl(17, 16%, 60%);
+    --button-font-color-light: hsl(0, 0%, 100%);
 }
 
 * {
