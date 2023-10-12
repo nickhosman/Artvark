@@ -1,6 +1,7 @@
 .theme {
   padding: 2rem;
   overflow: hidden;
+  color: var(--secondary-color);
 }
 
 .theme-preview {

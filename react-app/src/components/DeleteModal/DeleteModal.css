@@ -6,6 +6,7 @@
   border-radius: 20px;
   background-color: var(--background-color);
   gap: 2rem;
+  color: var(--secondary-color);
 }
 
 #delete-btn-wrapper {

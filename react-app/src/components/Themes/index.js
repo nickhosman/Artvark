@@ -29,7 +29,7 @@ const themes = {
         primary: "hsl(255, 18%, 53%)",
         secondary: "hsl(0, 0%, 100%)",
         accent: "hsl(300, 7%, 50%)",
-        buttonFont: "hsl(240, 12%, 22%);",
+        buttonFont: "hsl(0, 0%, 100%)",
     },
 };
 
