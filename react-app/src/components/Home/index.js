@@ -24,31 +24,33 @@ function Home({ isLikesPage }) {
     }, [dispatch, isLikesPage]);
 
     useEffect(() => {
-        dispatch(loadTheme(JSON.parse(localStorage.getItem("theme"))));
+            dispatch(loadTheme(JSON.parse(localStorage.getItem("theme"))));
     }, [dispatch]);
 
     useEffect(() => {
-        console.log("CURR THEME", currTheme);
-        document.documentElement.style.setProperty(
-            "--background-color",
-            currTheme.background
-        );
-        document.documentElement.style.setProperty(
-            "--primary-color",
-            currTheme.primary
-        );
-        document.documentElement.style.setProperty(
-            "--secondary-color",
-            currTheme.secondary
-        );
-        document.documentElement.style.setProperty(
-            "--accent-color",
-            currTheme.accent
-        );
-        document.documentElement.style.setProperty(
-            "--button-font-color",
-            currTheme.buttonFont
-        );
+        if (Object.keys(currTheme).length > 0) {
+            // console.log("CURRTHEME", currTheme);
+            document.documentElement.style.setProperty(
+                "--background-color",
+                currTheme.background
+            );
+            document.documentElement.style.setProperty(
+                "--primary-color",
+                currTheme.primary
+            );
+            document.documentElement.style.setProperty(
+                "--secondary-color",
+                currTheme.secondary
+            );
+            document.documentElement.style.setProperty(
+                "--accent-color",
+                currTheme.accent
+            );
+            document.documentElement.style.setProperty(
+                "--button-font-color",
+                currTheme.buttonFont
+            );
+        }
     }, [currTheme]);
 
     const sortByDate = (a, b) => {
