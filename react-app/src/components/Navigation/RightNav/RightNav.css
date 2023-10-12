@@ -55,10 +55,11 @@
   transition: left 0.3s ease-in-out;
   z-index: 2;
   background-color: var(--background-color);
+  color: var(--secondary-color);
 }
 
 .right-nav-item svg {
-  fill: var(--secondary-color);
+  color: var(--secondary-color);
   height: 3rem;
   width: 3rem;
 }
@@ -74,7 +75,7 @@
 }
 
 #right-nav-post {
-  color: white;
+  color: var(--button-font-color);
 }
 
 #right-nav-post:hover {
@@ -87,6 +88,7 @@
   /* display: flex;
   flex-wrap: wrap;
   gap: 1rem; */
+  color: var(--secondary-color);
 }
 
 .about-link-item:hover {
