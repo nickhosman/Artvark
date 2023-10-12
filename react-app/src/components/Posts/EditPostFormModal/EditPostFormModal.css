@@ -1,11 +1,14 @@
 #edit-post-form-wrapper {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  padding: 2rem;
   border-radius: 20px;
-  background-color: #e9cab9;
+  gap: 2rem;
+  color: var(--secondary-color);
 }
 
-#file-upload-wrapper {
+#file-picker-wrapper {
   display: flex;
   gap: 2rem;
 }
@@ -15,39 +18,48 @@
   flex-direction: column;
   align-items: center;
   gap: 2rem;
-  padding: 2rem;
-  border-radius: 20px;
 }
 
 #edit-post-form > button {
-  height: 3rem;
-  width: 8rem;
-  border-radius: 30px;
+  height: 5rem;
+  width: 100%;
+  border-radius: 50px;
   border: none;
-  background-color: #705852;
-  color: white;
+  font-size: 24px;
+  background-color: var(--primary-color);
+  color: var(--button-font-color);
 }
 
 #edit-post-form > button:hover {
   cursor: pointer;
-  background-color: #3c2f2c;
+  background-color: var(--primary-hover);
 }
 
 #edit-image-thumb {
-  border: 1px solid #3c2f2c;
+  border: 1px solid var(--secondary-color);
   height: 10rem;
   aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+}
+
+#edit-image-thumb:hover {
+  cursor: pointer;
 }
 
 .image-thumb {
   object-fit: cover;
   aspect-ratio: 1;
   width: 100%;
+  border-radius: 15px;
 }
 
 #file-picker-wrapper {
   display: flex;
-  align-items: center;
+  width: fit-content;
+  gap: 2rem;
 }
 
 #edit-image {

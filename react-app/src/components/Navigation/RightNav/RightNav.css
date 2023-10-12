@@ -1,7 +1,8 @@
 #right-nav-wrapper {
   position: sticky;
-  top: 16px;
-  height: fit-content;
+  padding-top: 16px;
+  top: 0;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -15,14 +16,14 @@
   width: 12rem;
   border-radius: 30px;
   border: none;
-  background-color: #b18e83;
-  color: white;
+  background-color: var(--primary-color);
+  color: var(--button-font-color);
   font-size: 20px;
 }
 
 #right-nav-wrapper > button:hover {
   cursor: pointer;
-  background-color: #7d655d;
+  background-color: var(--primary-hover);
 }
 
 .hidden {

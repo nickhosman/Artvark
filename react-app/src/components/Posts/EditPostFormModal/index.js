@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../../context/Modal";
 import { useHistory } from "react-router-dom";
-import "./EditPostFormModal.css";
+import { FaPlus } from "react-icons/fa";
 import { fetchLoadPosts } from "../../../store/posts";
+import "./EditPostFormModal.css";
 
 function EditPostFormModal({ post }) {
     const dispatch = useDispatch();
@@ -253,6 +254,7 @@ function EditPostFormModal({ post }) {
                 id="edit-post-form"
             >
                 <h1>Edit Post</h1>
+                <p id="image-label">Change or Add Artwork</p>
                 <div id="file-picker-wrapper">
                     <label id="edit-image">
                         {!previewNewImage1 ? (
@@ -263,7 +265,7 @@ function EditPostFormModal({ post }) {
                                         src={image1.url}
                                         className="image-thumb"
                                     />
-                                ) : null}
+                                ) : <FaPlus />}
                             </div>
                         ) : (
                             <div id="edit-image-thumb">
@@ -279,6 +281,7 @@ function EditPostFormModal({ post }) {
                             type="file"
                             accept="image/*"
                             onChange={handleSelectNewImage1}
+                            className="file-input"
                         />
                     </label>
                     <label id="edit-image">
@@ -290,7 +293,7 @@ function EditPostFormModal({ post }) {
                                         src={image2.url}
                                         className="image-thumb"
                                     />
-                                ) : null}
+                                ) : <FaPlus />}
                             </div>
                         ) : (
                             <div id="edit-image-thumb">
@@ -306,6 +309,7 @@ function EditPostFormModal({ post }) {
                             type="file"
                             accept="image/*"
                             onChange={handleSelectNewImage2}
+                            className="file-input"
                         />
                     </label>
                     <label id="edit-image">
@@ -317,7 +321,7 @@ function EditPostFormModal({ post }) {
                                         src={image3.url}
                                         className="image-thumb"
                                     />
-                                ) : null}
+                                ) : <FaPlus />}
                             </div>
                         ) : (
                             <div id="edit-image-thumb">
@@ -333,6 +337,7 @@ function EditPostFormModal({ post }) {
                             type="file"
                             accept="image/*"
                             onChange={handleSelectNewImage3}
+                            className="file-input"
                         />
                     </label>
                     <label id="edit-image">
@@ -344,7 +349,7 @@ function EditPostFormModal({ post }) {
                                         src={image4.url}
                                         className="image-thumb"
                                     />
-                                ) : null}
+                                ) : <FaPlus />}
                             </div>
                         ) : (
                             <div id="edit-image-thumb">
@@ -360,13 +365,15 @@ function EditPostFormModal({ post }) {
                             type="file"
                             accept="image/*"
                             onChange={handleSelectNewImage4}
+                            className="file-input"
                         />
                     </label>
                 </div>
                 {Object.keys(formErrors).length > 0 ? <p className="errors">{formErrors.image}</p> : null}
-                <label>
-                    Title
+                <label id="title-label">
+                    <p id="title-label-text">Change the Title</p>
                     <input
+                        id="title-input"
                         type="text"
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}

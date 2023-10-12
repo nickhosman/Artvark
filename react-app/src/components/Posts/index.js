@@ -103,7 +103,7 @@ function Post({ post, isLikesPage }) {
                         <OpenModalElement
                             id="post-reactions"
                             text={<FaRegGrin />}
-                            modalComponent={<ReactionModal postId={post.id} />}
+                            modalComponent={<ReactionModal post={post} />}
                             title={"Reactions"}
                         />
                         <span>{post.numReactions}</span>

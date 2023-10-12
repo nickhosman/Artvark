@@ -14,10 +14,12 @@
 }
 
 #delete-btn-wrapper button {
-  width: 8rem;
-  height: 3rem;
+  width: 15rem;
+  height: 4rem;
   border-radius: 30px;
   border: none;
+  font-size: 18px;
+  color: var(--button-font-color);
 }
 
 #delete-btn-wrapper button:hover {

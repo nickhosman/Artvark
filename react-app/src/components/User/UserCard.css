@@ -8,6 +8,7 @@
   align-items: center;
   gap: 1.5rem;
   position: relative;
+  color: var(--secondary-color);
 }
 
 #user-card-header {
