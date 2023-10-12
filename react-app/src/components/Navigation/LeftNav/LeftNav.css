@@ -11,6 +11,7 @@
 
 #left-nav-logo {
     padding-right: 0.5rem;
+    fill: var(--secondary-color);
 }
 
 #nav-button {
@@ -39,11 +40,11 @@
     border-block: 1px solid transparent;
     width: 12rem;
     font-size: 22px;
+    color: var(--secondary-color);
     padding: 1rem;
     position: relative;
     right: -7rem;
     transition: right 0.3s ease-in-out;
-
 }
 
 .left-nav-item:hover {
