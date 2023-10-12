@@ -47,7 +47,7 @@
 .post-wrapper {
   padding-block: 3rem;
   padding-inline: 2rem;
-  border-bottom: 1px solid brown;
+  border-bottom: 1px solid var(--secondary-color);
   display: flex;
   flex-direction: column;
   gap: .5rem;

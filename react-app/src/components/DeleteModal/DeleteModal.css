@@ -4,7 +4,7 @@
   align-items: center;
   padding: 2rem;
   border-radius: 20px;
-  background-color: #e9cab9;
+  background-color: var(--background-color);
   gap: 2rem;
 }
 
