@@ -14,6 +14,7 @@
   position: absolute;
   right: 1.5rem;
   top: 1.5rem;
+  color: var(--secondary-color);
 }
 
 #reaction-user-img {
