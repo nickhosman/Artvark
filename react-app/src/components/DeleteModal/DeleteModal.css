@@ -24,4 +24,5 @@
 
 #delete-btn-wrapper button:hover {
   cursor: pointer;
+  filter: saturate(160%);
 }

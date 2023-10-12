@@ -37,7 +37,7 @@
 }
 
 #sign-up-form-btn:hover {
-    background-color: var(--primary-hover);
+    filter: saturate(160%);
     cursor: pointer;
 }
 

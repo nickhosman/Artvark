@@ -23,7 +23,7 @@
 
 #right-nav-wrapper > button:hover {
   cursor: pointer;
-  background-color: var(--primary-hover);
+  filter: saturate(160%);
 }
 
 .hidden {

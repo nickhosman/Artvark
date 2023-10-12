@@ -74,10 +74,12 @@
 
 #confirm-delete:hover {
   cursor: pointer;
+  filter: saturate(160%);
 }
 
 #cancel-delete:hover {
   cursor: pointer;
+  filter: saturate(160%);
 }
 
 #reaction-content-input {

@@ -112,15 +112,24 @@
   color: yellow;
 }
 
+#post-react {
+  height: 1.3rem;
+  width: 1.3rem;
+}
+
 #post-likes-container {
   display: flex;
   align-items: center;
   gap: .5rem;
 }
 
+#post-like {
+  height: 1.3rem;
+  width: 1.3rem;
+}
+
 #post-likes-container svg:hover {
   color: red;
-  --var: hsl(0, 0%, 0%);
 }
 
 #post-stats-wrapper svg:hover {

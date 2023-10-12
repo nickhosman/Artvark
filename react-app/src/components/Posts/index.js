@@ -102,7 +102,7 @@ function Post({ post, isLikesPage }) {
                     <div id="post-reactions-container">
                         <OpenModalElement
                             id="post-reactions"
-                            text={<FaRegGrin />}
+                            text={<FaRegGrin id="post-react"/>}
                             modalComponent={<ReactionModal post={post} />}
                             title={"Reactions"}
                         />
@@ -111,11 +111,11 @@ function Post({ post, isLikesPage }) {
                     <div id="post-likes-container" onClick={handleLikeClick}>
                         {!isLiked ? (
                             <div id="post-likes">
-                                <FaRegHeart />
+                                <FaRegHeart id="post-like"/>
                             </div>
                         ) : (
                             <div id="post-likes">
-                                <FaHeart />
+                                <FaHeart id="post-like"/>
                             </div>
                         )}
                         <span>{post.likes.length}</span>
