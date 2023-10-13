@@ -1,5 +1,5 @@
 .reaction-container {
-  border-bottom: 1px solid var(--secondary-color);
+  border-top: 1px solid var(--secondary-color);
   display: flex;
   gap: 2rem;
   padding: 2rem;
@@ -87,6 +87,7 @@
   background-color: transparent;
   width: 25rem;
   border: none;
+  color: var(--secondary-color);
 }
 
 #reaction-content-input:focus {
