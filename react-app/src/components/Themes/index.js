@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useDispatch } from "react-redux";
-import "./ThemesModal.css";
 import { loadTheme } from "../../store/themes";
+import "./ThemesModal.css";
 
 const themes = {
     morningCoffee: {
@@ -35,76 +35,92 @@ const themes = {
 
 function ThemesModal() {
     const dispatch = useDispatch();
+    const themeItemArr = useRef([]);
 
     const handleThemeSelect = (theme) => () => {
-        console.log("THEME", theme);
+        // console.log("THEME", theme);
         localStorage.setItem("theme", JSON.stringify(theme));
         dispatch(loadTheme(theme));
     };
 
+    const handleThemeSelectBorder = (e) => {
+        // console.log(themeItemArr);
+        themeItemArr.current.forEach((ele) => (ele.className = "unselected-theme"));
+
+        e.currentTarget.className = "selected-theme";
+    };
+
     return (
         <div id="themes-wrapper">
-            {Object.values(themes).map((theme) => (
+            {Object.values(themes).map((theme, index) => (
                 <div className="theme" id={theme.name} key={theme.id}>
                     <p className="theme-name">{theme.name}</p>
                     <div
-                        className="theme-preview"
-                        style={{ backgroundColor: theme.background }}
-                        onClick={handleThemeSelect(theme)}
+                        className="unselected-theme"
+                        onClick={handleThemeSelectBorder}
+                        ref={(element) =>
+                            (themeItemArr.current[index] = element)
+                        }
                     >
-                        <div className="left-theme-preview">
-                            <div
-                                className="theme-preview-logo"
-                                style={{ background: theme.secondary }}
-                            ></div>
-                            <div
-                                className="theme-preview-item"
-                                style={{ background: theme.secondary }}
-                            ></div>
-                            <div
-                                className="theme-preview-item"
-                                style={{ background: theme.secondary }}
-                            ></div>
-                        </div>
                         <div
-                            className="middle-theme-preview"
-                            style={{
-                                borderInline: `1px solid ${theme.secondary}`,
-                            }}
+                            className="theme-preview"
+                            style={{ backgroundColor: theme.background }}
+                            onClick={handleThemeSelect(theme)}
                         >
-                            <div
-                                className="middle-img-container"
-                                style={{
-                                    borderBottom: `1px solid ${theme.secondary}`,
-                                }}
-                            >
+                            <div className="left-theme-preview">
                                 <div
-                                    className="middle-theme-img"
-                                    style={{ background: theme.accent }}
+                                    className="theme-preview-logo"
+                                    style={{ background: theme.secondary }}
+                                ></div>
+                                <div
+                                    className="theme-preview-item"
+                                    style={{ background: theme.secondary }}
+                                ></div>
+                                <div
+                                    className="theme-preview-item"
+                                    style={{ background: theme.secondary }}
                                 ></div>
                             </div>
                             <div
-                                className="middle-img-container"
+                                className="middle-theme-preview"
                                 style={{
-                                    borderBottom: `1px solid ${theme.secondary}`,
+                                    borderInline: `1px solid ${theme.secondary}`,
                                 }}
                             >
                                 <div
-                                    className="middle-theme-img"
-                                    style={{ background: theme.accent }}
+                                    className="middle-img-container"
+                                    style={{
+                                        borderBottom: `1px solid ${theme.secondary}`,
+                                    }}
+                                >
+                                    <div
+                                        className="middle-theme-img"
+                                        style={{ background: theme.accent }}
+                                    ></div>
+                                </div>
+                                <div
+                                    className="middle-img-container"
+                                    style={{
+                                        borderBottom: `1px solid ${theme.secondary}`,
+                                    }}
+                                >
+                                    <div
+                                        className="middle-theme-img"
+                                        style={{ background: theme.accent }}
+                                    ></div>
+                                </div>
+                            </div>
+                            <div className="right-theme-preview">
+                                <div className="right-theme-preview-spacer"></div>
+                                <div
+                                    className="right-theme-preview-item"
+                                    style={{ background: theme.secondary }}
+                                ></div>
+                                <div
+                                    className="theme-preview-create-post"
+                                    style={{ background: theme.primary }}
                                 ></div>
                             </div>
-                        </div>
-                        <div className="right-theme-preview">
-                            <div className="right-theme-preview-spacer"></div>
-                            <div
-                                className="right-theme-preview-item"
-                                style={{ background: theme.secondary }}
-                            ></div>
-                            <div
-                                className="theme-preview-create-post"
-                                style={{ background: theme.primary }}
-                            ></div>
                         </div>
                     </div>
                 </div>
