@@ -1,5 +1,5 @@
 .reaction-container {
-  border-bottom: 1px solid black;
+  border-top: 1px solid var(--secondary-color);
   display: flex;
   gap: 2rem;
   padding: 2rem;
@@ -14,12 +14,14 @@
   position: absolute;
   right: 1.5rem;
   top: 1.5rem;
+  color: var(--secondary-color);
 }
 
 #reaction-user-img {
   aspect-ratio: 1;
   height: 6rem;
   border-radius: 50%;
+  border: 1px solid var(--secondary-color);
 }
 
 .reaction-content {
@@ -37,7 +39,7 @@
 }
 
 #reaction-delete-confirm {
-  border: 1px solid black;
+  border: 1px solid var(--secondary-color);
   padding: 1rem;
   border-radius: 20px;
   display: flex;
@@ -45,7 +47,7 @@
   align-items: center;
   gap: 1rem;
   position: absolute;
-  background-color: #eacaba;
+  background-color: var(--background-color);
   right: 1px;
   top: 1.5rem;
 }
@@ -62,27 +64,30 @@
 }
 
 #confirm-delete {
-  background-color: #a94526;
-  color: white;
+  background-color: var(--primary-color);
+  color: var(--button-font-color);
 }
 
 #cancel-delete {
-  background-color: #c0aba3;
-  color: white;
+  background-color: var(--accent-color);
+  color: var(--button-font-color);
 }
 
 #confirm-delete:hover {
   cursor: pointer;
+  filter: saturate(160%);
 }
 
 #cancel-delete:hover {
   cursor: pointer;
+  filter: saturate(160%);
 }
 
 #reaction-content-input {
   background-color: transparent;
   width: 25rem;
   border: none;
+  color: var(--secondary-color);
 }
 
 #reaction-content-input:focus {

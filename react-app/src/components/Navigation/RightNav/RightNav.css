@@ -8,7 +8,6 @@
   gap: 1.5rem;
   align-items: flex-start;
   overflow: hidden;
-  margin-bottom: 1rem;
 }
 
 #right-nav-wrapper > button {
@@ -23,7 +22,7 @@
 
 #right-nav-wrapper > button:hover {
   cursor: pointer;
-  background-color: var(--primary-hover);
+  filter: saturate(160%);
 }
 
 .hidden {
@@ -47,6 +46,7 @@
   justify-content: flex-end;
   width: 10rem;
   font-size: 22px;
+  color: var(--secondary-color);
   border-block: 1px solid transparent;
   padding: 1rem;
   position: relative;
@@ -54,10 +54,11 @@
   transition: left 0.3s ease-in-out;
   z-index: 2;
   background-color: var(--background-color);
+  color: var(--secondary-color);
 }
 
 .right-nav-item svg {
-  fill: var(--secondary-color);
+  color: var(--secondary-color);
   height: 3rem;
   width: 3rem;
 }
@@ -73,7 +74,7 @@
 }
 
 #right-nav-post {
-  color: white;
+  color: var(--button-font-color);
 }
 
 #right-nav-post:hover {
@@ -86,6 +87,7 @@
   /* display: flex;
   flex-wrap: wrap;
   gap: 1rem; */
+  color: var(--secondary-color);
 }
 
 .about-link-item:hover {

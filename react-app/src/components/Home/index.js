@@ -4,11 +4,13 @@ import { fetchLoadLikedPosts, fetchLoadPosts } from "../../store/posts";
 import Post from "../Posts";
 import RightNav from "../Navigation/RightNav";
 import LeftNav from "../Navigation/LeftNav";
+import { loadTheme } from "../../store/themes";
 import "./Home.css";
 
 function Home({ isLikesPage }) {
     const dispatch = useDispatch();
     const posts = useSelector((state) => state.posts);
+    const currTheme = useSelector((state) => state.theme);
 
     // console.log("POSTS:", posts)
 
@@ -20,6 +22,36 @@ function Home({ isLikesPage }) {
             dispatch(fetchLoadPosts());
         }
     }, [dispatch, isLikesPage]);
+
+    useEffect(() => {
+            dispatch(loadTheme(JSON.parse(localStorage.getItem("theme"))));
+    }, [dispatch]);
+
+    useEffect(() => {
+        if (Object.keys(currTheme).length > 0) {
+            // console.log("CURRTHEME", currTheme);
+            document.documentElement.style.setProperty(
+                "--background-color",
+                currTheme.background
+            );
+            document.documentElement.style.setProperty(
+                "--primary-color",
+                currTheme.primary
+            );
+            document.documentElement.style.setProperty(
+                "--secondary-color",
+                currTheme.secondary
+            );
+            document.documentElement.style.setProperty(
+                "--accent-color",
+                currTheme.accent
+            );
+            document.documentElement.style.setProperty(
+                "--button-font-color",
+                currTheme.buttonFont
+            );
+        }
+    }, [currTheme]);
 
     const sortByDate = (a, b) => {
         return new Date(b.createdAt) - new Date(a.createdAt);

@@ -37,14 +37,14 @@
 }
 
 #sign-up-form-btn:hover {
-    background-color: var(--primary-hover);
+    filter: saturate(160%);
     cursor: pointer;
 }
 
 #sign-up-form-thumb {
     aspect-ratio: 1;
     height: 5rem;
-    border: 1px solid black;
+    border: 1px solid var(--secondary-color);
     border-radius: 50%;
     display: flex;
     align-items: center;

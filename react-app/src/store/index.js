@@ -3,11 +3,13 @@ import thunk from 'redux-thunk';
 import session from './session'
 import postReducer from './posts';
 import reactionReducer from './reactions';
+import themeReducer from './themes';
 
 const rootReducer = combineReducers({
   session,
   posts: postReducer,
   reactions: reactionReducer,
+  theme: themeReducer,
 });
 
 

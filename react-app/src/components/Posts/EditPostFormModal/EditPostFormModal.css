@@ -32,7 +32,7 @@
 
 #edit-post-form > button:hover {
   cursor: pointer;
-  background-color: var(--primary-hover);
+  filter: saturate(160%);
 }
 
 #edit-image-thumb {

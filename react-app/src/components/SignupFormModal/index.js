@@ -33,13 +33,13 @@ function SignupFormModal() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (password === confirmPassword) {
-						const formData = new FormData();
-						formData.append("username", username)
-						formData.append("email", email)
-						formData.append("password", password)
-						formData.append("first_name", firstName)
-						formData.append("last_name", lastName)
-						formData.append("profile_img", profileImg)
+            const formData = new FormData();
+            formData.append("username", username);
+            formData.append("email", email);
+            formData.append("password", password);
+            formData.append("first_name", firstName);
+            formData.append("last_name", lastName);
+            formData.append("profile_img", profileImg);
 
             const data = await dispatch(signUp(formData));
             if (data) {
@@ -50,8 +50,9 @@ function SignupFormModal() {
             }
         } else {
             setErrors({
-                "confirmPassword": "Confirm Password field must be the same as the Password field"
-        });
+                confirmPassword:
+                    "Confirm Password field must be the same as the Password field",
+            });
         }
     };
 
@@ -60,7 +61,9 @@ function SignupFormModal() {
             <form onSubmit={handleSubmit} id="sign-up-form">
                 <h1>Sign Up</h1>
                 <div>
-                    {Object.keys(errors).length > 0 ? "Fix any errors to continue" : null}
+                    {Object.keys(errors).length > 0
+                        ? "Fix any errors to continue"
+                        : null}
                 </div>
                 <p className="sign-up-label-text">Profile Image</p>
                 <label className="sign-up-label">
@@ -83,7 +86,9 @@ function SignupFormModal() {
                         id="sign-up-image-input"
                         onChange={(e) => setProfileImg(e.target.files[0])}
                     />
-                    {Object.keys(errors).length > 0 ? <p className="errors">{errors.profile_img}</p> : null}
+                    {Object.keys(errors).length > 0 ? (
+                        <p className="errors">{errors.profile_img}</p>
+                    ) : null}
                 </label>
                 <p className="sign-up-label-text">First Name</p>
                 <label className="sign-up-label">
@@ -94,7 +99,9 @@ function SignupFormModal() {
                         required
                         className="sign-up-form-input"
                     />
-                    {Object.keys(errors).length > 0 ? <p className="errors">{errors.first_name}</p> : null}
+                    {Object.keys(errors).length > 0 ? (
+                        <p className="errors">{errors.first_name}</p>
+                    ) : null}
                 </label>
                 <p className="sign-up-label-text">Last Name</p>
                 <label className="sign-up-label">
@@ -105,7 +112,9 @@ function SignupFormModal() {
                         required
                         className="sign-up-form-input"
                     />
-                    {Object.keys(errors).length > 0 ? <p className="errors">{errors.last_name}</p> : null}
+                    {Object.keys(errors).length > 0 ? (
+                        <p className="errors">{errors.last_name}</p>
+                    ) : null}
                 </label>
                 <p className="sign-up-label-text">Email</p>
                 <label className="sign-up-label">
@@ -116,7 +125,9 @@ function SignupFormModal() {
                         required
                         className="sign-up-form-input"
                     />
-                    {Object.keys(errors).length > 0 ? <p className="errors">{errors.email}</p> : null}
+                    {Object.keys(errors).length > 0 ? (
+                        <p className="errors">{errors.email}</p>
+                    ) : null}
                 </label>
                 <p className="sign-up-label-text">Username</p>
                 <label className="sign-up-label">
@@ -127,7 +138,9 @@ function SignupFormModal() {
                         required
                         className="sign-up-form-input"
                     />
-                    {Object.keys(errors).length > 0 ? <p className="errors">{errors.username}</p> : null}
+                    {Object.keys(errors).length > 0 ? (
+                        <p className="errors">{errors.username}</p>
+                    ) : null}
                 </label>
                 <p className="sign-up-label-text">Password</p>
                 <label className="sign-up-label">
@@ -138,7 +151,9 @@ function SignupFormModal() {
                         required
                         className="sign-up-form-input"
                     />
-                    {Object.keys(errors).length > 0 ? <p className="errors">{errors.password}</p> : null}
+                    {Object.keys(errors).length > 0 ? (
+                        <p className="errors">{errors.password}</p>
+                    ) : null}
                 </label>
                 <p className="sign-up-label-text">Confirm Password</p>
                 <label className="sign-up-label">
@@ -149,6 +164,9 @@ function SignupFormModal() {
                         required
                         className="sign-up-form-input"
                     />
+                    {Object.keys(errors).length > 0 ? (
+                        <p className="errors">{errors.confirmPassword}</p>
+                    ) : null}
                 </label>
                 <button type="submit" id="sign-up-form-btn">
                     Sign Up

@@ -1,7 +1,7 @@
 .left-nav-item svg {
     height: 6rem;
     width: 6rem;
-    fill: var(--secondary-color);
+    color: var(--secondary-color);
 }
 
 #left-nav-logo svg {
@@ -9,8 +9,13 @@
     width: 7rem;
 }
 
+#left-nav-logo svg path {
+    fill: var(--secondary-color);
+}
+
 #left-nav-logo {
     padding-right: 0.5rem;
+    fill: var(--secondary-color);
 }
 
 #nav-button {
@@ -28,7 +33,6 @@
     gap: 1.5rem;
     align-items: flex-end;
     overflow: hidden;
-    margin-bottom: 1rem;
 }
 
 .left-nav-item {
@@ -39,11 +43,12 @@
     border-block: 1px solid transparent;
     width: 12rem;
     font-size: 22px;
+    color: var(--secondary-color);
     padding: 1rem;
     position: relative;
+    color: var(--secondary-color);
     right: -7rem;
     transition: right 0.3s ease-in-out;
-
 }
 
 .left-nav-item:hover {

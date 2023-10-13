@@ -1,10 +1,12 @@
 import React from "react";
 import { ReactComponent as ArtvarkLogo } from "../../../public/artvark-brown.svg";
-import { FaHeart, FaHome } from "react-icons/fa";
-// import { FaPalette} from "react-icons/fa"
-import "./LeftNav.css";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useSelector } from "react-redux";
+import { FaHeart, FaHome } from "react-icons/fa";
+import { FaPalette } from "react-icons/fa";
+import OpenModalElement from "../../OpenModalElement";
+import ThemesModal from "../../Themes";
+import "./LeftNav.css";
 
 function LeftNav() {
     const history = useHistory();
@@ -37,10 +39,18 @@ function LeftNav() {
                     <p className="left-nav-text">Likes</p>
                 </div>
             ) : null}
-            {/*<div className="left-nav-item">
-                <FaPalette id="nav-button"/>
-                <p className="left-nav-text">Themes</p>
-            </div>*/}
+            {
+                /*<OpenModalElement
+                    className="left-nav-item"
+                    text={
+                        <>
+                            <FaPalette id="nav-button" />
+                            <p className="left-nav-text">Themes</p>
+                        </>
+                    }
+                    modalComponent={<ThemesModal />}
+                />*/
+            }
         </div>
     );
 }

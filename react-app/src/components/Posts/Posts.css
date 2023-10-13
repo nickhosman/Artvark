@@ -9,6 +9,7 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  color: var(--secondary-color);
 }
 
 #post-btn-wrapper {
@@ -32,6 +33,7 @@
   aspect-ratio: 1;
   height: 3rem;
   border-radius: 50%;
+  border: 1px solid var(--secondary-color);
 }
 
 .post-title {
@@ -47,7 +49,7 @@
 .post-wrapper {
   padding-block: 3rem;
   padding-inline: 2rem;
-  border-bottom: 1px solid brown;
+  border-bottom: 1px solid var(--secondary-color);
   display: flex;
   flex-direction: column;
   gap: .5rem;
@@ -68,6 +70,7 @@
   display: flex;
   gap: .5em;
   justify-self: flex-end;
+  color: var(--secondary-color);
 }
 
 /* .carousel .thumbs {
@@ -96,6 +99,7 @@
   width: fit-content;
   display: flex;
   gap: 1rem;
+  color: var(--secondary-color);
 }
 
 #post-reactions-container {
@@ -105,7 +109,12 @@
 }
 
 #post-reactions-container svg:hover {
-  fill: yellow;
+  color: yellow;
+}
+
+#post-react {
+  height: 1.3rem;
+  width: 1.3rem;
 }
 
 #post-likes-container {
@@ -114,8 +123,13 @@
   gap: .5rem;
 }
 
+#post-like {
+  height: 1.3rem;
+  width: 1.3rem;
+}
+
 #post-likes-container svg:hover {
-  fill: red;
+  color: red;
 }
 
 #post-stats-wrapper svg:hover {
