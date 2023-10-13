@@ -21,8 +21,8 @@ html {
     display: flex;
     gap: 1rem;
     height: 100%;
-    padding-top: 20rem;
     justify-content: center;
+    height: 100vh;
 }
 
 #landing-left {
