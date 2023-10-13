@@ -40,7 +40,7 @@ function LeftNav() {
                 </div>
             ) : null}
             {
-                <OpenModalElement
+                /*<OpenModalElement
                     className="left-nav-item"
                     text={
                         <>
@@ -49,7 +49,7 @@ function LeftNav() {
                         </>
                     }
                     modalComponent={<ThemesModal />}
-                />
+                />*/
             }
         </div>
     );
