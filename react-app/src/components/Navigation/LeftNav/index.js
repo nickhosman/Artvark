@@ -3,9 +3,9 @@ import { ReactComponent as ArtvarkLogo } from "../../../public/artvark-brown.svg
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useSelector } from "react-redux";
 import { FaHeart, FaHome } from "react-icons/fa";
-import { FaPalette } from "react-icons/fa";
-import OpenModalElement from "../../OpenModalElement";
-import ThemesModal from "../../Themes";
+// import { FaPalette } from "react-icons/fa";
+// import OpenModalElement from "../../OpenModalElement";
+// import ThemesModal from "../../Themes";
 import "./LeftNav.css";
 
 function LeftNav() {

@@ -15,10 +15,10 @@ def edit_reaction(id):
   reaction = Reaction.query.get(id)
 
   if not reaction:
-    return {"error": "Reaction not found"}
+    return {"error": "Reaction not found"}, 404
 
   if reaction.user_id != current_user.id:
-    return {"error": "Unauthorized"}
+    return {"error": "Unauthorized"}, 401
 
   form = ReactionForm()
   form['csrf_token'].data = request.cookies['csrf_token']
@@ -38,12 +38,12 @@ def delete_reaction(id):
   reaction = Reaction.query.get(id)
 
   if not reaction:
-    return {"error": "Reaction not found"}
+    return {"error": "Reaction not found"}, 404
 
   if reaction.user_id != current_user.id:
-    return {"error": "Unauthorized"}
+    return {"error": "Unauthorized"}, 401
 
   db.session.delete(reaction)
   db.session.commit()
 
-  return {"message": "Successfully deleted post"}
+  return {"message": "Successfully deleted reaction"}
