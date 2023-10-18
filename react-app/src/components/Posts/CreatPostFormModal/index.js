@@ -55,6 +55,9 @@ function CreatePostFormModal() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        setImagesLoading(true);
+
         const formData = new FormData();
         formData.append("title", title);
         formData.append("image1", image1);
@@ -66,11 +69,11 @@ function CreatePostFormModal() {
         // console.log("RESPONSE", response)
 
         if (response.errors) {
+            setImagesLoading(false);
             const errors = response.errors;
             // console.log("ERRORS",errors)
             setFormErrors(errors);
         } else {
-            setImagesLoading(true);
             history.push("/posts");
             closeModal();
             setFormErrors({});
@@ -89,7 +92,9 @@ function CreatePostFormModal() {
                 <div id="create-post-img-wrapper">
                     <label className="create-post-image">
                         {!previewImage1 ? (
-                            <div className="create-post-thumb"><FaPlus /></div>
+                            <div className="create-post-thumb">
+                                <FaPlus />
+                            </div>
                         ) : (
                             <div className="create-post-thumb">
                                 <img
@@ -111,7 +116,9 @@ function CreatePostFormModal() {
                     </label>
                     <label className="create-post-image">
                         {!previewImage2 ? (
-                            <div className="create-post-thumb"><FaPlus /></div>
+                            <div className="create-post-thumb">
+                                <FaPlus />
+                            </div>
                         ) : (
                             <div className="create-post-thumb">
                                 <img
@@ -133,7 +140,9 @@ function CreatePostFormModal() {
                     </label>
                     <label className="create-post-image">
                         {!previewImage3 ? (
-                            <div className="create-post-thumb"><FaPlus /></div>
+                            <div className="create-post-thumb">
+                                <FaPlus />
+                            </div>
                         ) : (
                             <div className="create-post-thumb">
                                 <img
@@ -155,7 +164,9 @@ function CreatePostFormModal() {
                     </label>
                     <label className="create-post-image">
                         {!previewImage4 ? (
-                            <div className="create-post-thumb"><FaPlus /></div>
+                            <div className="create-post-thumb">
+                                <FaPlus />
+                            </div>
                         ) : (
                             <div className="create-post-thumb">
                                 <img
@@ -189,8 +200,16 @@ function CreatePostFormModal() {
                         <p className="errors">{formErrors.title}</p>
                     ) : null}
                 </label>
-                <button type="submit">Create Post</button>
-                {imagesLoading && <p>Loading...</p>}
+                {!imagesLoading ? (
+                    <button type="submit">Create Post</button>
+                ) : (
+                    <div class="lds-ring">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                )}
             </form>
         </div>
     );

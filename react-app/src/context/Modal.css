@@ -23,4 +23,5 @@
   position: absolute;
   background-color: var(--background-color);
   border-radius: 20px;
+  max-width: 80%;
 }
