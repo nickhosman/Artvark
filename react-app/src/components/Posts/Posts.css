@@ -49,7 +49,7 @@
 .post-wrapper {
   padding-block: 3rem;
   padding-inline: 2rem;
-  border-bottom: 1px solid var(--secondary-color);
+  border-top: 1px solid var(--secondary-color);
   display: flex;
   flex-direction: column;
   gap: .5rem;
@@ -83,6 +83,14 @@
 
 .slider {
   border-radius: 20px;
+}
+
+.slide img {
+  max-height: 30rem;
+}
+
+.slide:hover {
+  cursor: pointer;
 }
 
 .carousel .slider-wrapper {

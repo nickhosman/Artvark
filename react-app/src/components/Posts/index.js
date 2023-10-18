@@ -7,14 +7,17 @@ import { FaRegHeart, FaHeart } from "react-icons/fa";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import OpenModalElement from "../OpenModalElement";
+import ImageModal from "../ImageModal";
 import DeleteModal from "../DeleteModal";
 import EditPostFormModal from "./EditPostFormModal";
 import ReactionModal from "../Reaction/ReactionModal";
-import "./Posts.css";
 import { fetchLoadLikedPosts, fetchLoadPosts } from "../../store/posts";
+import { useModal } from "../../context/Modal";
+import "./Posts.css";
 
 function Post({ post, isLikesPage }) {
     const dispatch = useDispatch();
+    const { setModalContent } = useModal();
     const current_user = useSelector((state) => state.session.user);
     const postLikes = post.likes;
     const [isLiked, setIsLiked] = useState(false);
@@ -52,6 +55,11 @@ function Post({ post, isLikesPage }) {
         }
     };
 
+    const handleImageClick = (index, item) => {
+        const imageUrl = item.props.src;
+        setModalContent(<ImageModal imageUrl={imageUrl} />)
+    }
+
     return (
         <div className="post-wrapper">
             <div className="post-header">
@@ -87,6 +95,7 @@ function Post({ post, isLikesPage }) {
                 showIndicators={false}
                 showStatus={false}
                 thumbsWidth={200}
+                onClickItem={handleImageClick}
             >
                 {postImages.map((image) => (
                     <img
