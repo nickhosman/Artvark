@@ -10,7 +10,16 @@ def seed_users():
     User(
         username='marnie', email='marnie@aa.io', password='password', first_name='Marnie', last_name='Smith', profile_img="https://cdnstorage.sendbig.com/unreal/female.webp"),
     User(
-        username='bobbie', email='bobbie@aa.io', password='password', first_name='Bobbie', last_name='Jacobs', profile_img="https://images.pexels.com/photos/3482947/pexels-photo-3482947.jpeg")
+        username='bobbie', email='bobbie@aa.io', password='password', first_name='Bobbie', last_name='Jacobs', profile_img="https://images.pexels.com/photos/3482947/pexels-photo-3482947.jpeg"),
+    User(
+        username='elefan', email='ellie@aa.io', password='password2', first_name='Ellie', last_name='Jacobs', profile_img='https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/boho-elephant-pink-forest-cafe.jpg'
+    ),
+    User(
+        username='rheubarb', email='rheuben@aa.io', password='password3', first_name='Rheuben', last_name='Belheim', profile_img='https://www.alphafoodie.com/wp-content/uploads/2023/03/Rhubarb-and-how-to-freeze-it-square.jpeg'
+    ),
+    User(
+        username='saulophone', email='saulp@gg.com', password='wordpass', first_name="Saul", last_name='Paulson', profile_img='https://i0.wp.com/www.artbyraette.com/wp-content/uploads/2022/06/Every-Little-Movement.jpg?fit=600%2C600&ssl=1'
+    )
     ]
 
     db.session.add_all(users)
