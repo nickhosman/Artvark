@@ -32,6 +32,46 @@ def seed_reactions():
       post_id = 3,
       user_id = 2,
       content = "👨‍🍳🕶"
+    ),
+    Reaction(
+      post_id = 4,
+      user_id = 1,
+      content = "🍨📜💂"
+    ),
+    Reaction(
+      post_id = 4,
+      user_id = 6,
+      content = "🔶👥🚑🐲"
+    ),
+    Reaction(
+      post_id = 5,
+      user_id = 3,
+      content = "🚱🕍"
+    ),
+    Reaction(
+      post_id = 6,
+      user_id = 4,
+      content = "🍦👏"
+    ),
+    Reaction(
+      post_id = 8,
+      user_id = 4,
+      content = "💒🚛"
+    ),
+    Reaction(
+      post_id = 8,
+      user_id = 2,
+      content = "📵💜"
+    ),
+    Reaction(
+      post_id = 8,
+      user_id = 5,
+      content = "🍱🍺🤑"
+    ),
+    Reaction(
+      post_id = 9,
+      user_id = 1,
+      content = "🏞🐣🏙💯"
     )
   ]
 
