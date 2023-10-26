@@ -109,7 +109,6 @@ function ReactionModal({ post }) {
         <div id="reaction-wrapper">
             <div id="reaction-post-wrapper">
                 <h2 id="reaction-post-title">{post.title}</h2>
-                <img alt="" src={post.previewImg} id="reaction-post-img" />
             </div>
             {user ? (
                 <div id="input-wrapper">

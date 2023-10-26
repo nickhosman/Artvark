@@ -4,8 +4,6 @@ import { FaRegGrin } from "react-icons/fa";
 import { FaPencilAlt } from "react-icons/fa";
 import { FaTrashAlt } from "react-icons/fa";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Carousel } from "react-responsive-carousel";
 import OpenModalElement from "../OpenModalElement";
 import ImageModal from "../ImageModal";
 import DeleteModal from "../DeleteModal";
@@ -55,10 +53,9 @@ function Post({ post, isLikesPage }) {
         }
     };
 
-    const handleImageClick = (index, item) => {
-        const imageUrl = item.props.src;
-        setModalContent(<ImageModal imageUrl={imageUrl} />)
-    }
+    const handleImageClick = (idx) => () => {
+        setModalContent(<ImageModal idx={idx} images={postImages} />);
+    };
 
     return (
         <div className="post-wrapper">
@@ -89,29 +86,36 @@ function Post({ post, isLikesPage }) {
                     </div>
                 ) : null}
             </div>
-            <Carousel
-                showArrows={false}
-                useKeyboardArrows={true}
-                showIndicators={false}
-                showStatus={false}
-                thumbsWidth={200}
-                onClickItem={handleImageClick}
-            >
-                {postImages.map((image) => (
-                    <img
-                        src={image.url}
-                        alt=""
-                        key={image.id}
-                        className="carousel-image"
-                    />
+            <div id="post-image-container">
+                {postImages.map((image, idx) => (
+                    <div
+                        className="post-image-wrapper"
+                        id={
+                            postImages.length === 1
+                                ? `post-image-single`
+                                : postImages.length === 2
+                                ? `post-image-double-${idx}`
+                                : postImages.length === 3
+                                ? `post-image-triple-${idx}`
+                                : `post-image-${idx}`
+                        }
+                    >
+                        <img
+                            src={image.url}
+                            alt=""
+                            key={image.id}
+                            className="carousel-image"
+                            onClick={handleImageClick(idx)}
+                        />
+                    </div>
                 ))}
-            </Carousel>
+            </div>
             <div className="post-stats">
                 <div id="post-stats-wrapper">
                     <div id="post-reactions-container">
                         <OpenModalElement
                             id="post-reactions"
-                            text={<FaRegGrin id="post-react"/>}
+                            text={<FaRegGrin id="post-react" />}
                             modalComponent={<ReactionModal post={post} />}
                             title={"Reactions"}
                         />
@@ -120,11 +124,11 @@ function Post({ post, isLikesPage }) {
                     <div id="post-likes-container" onClick={handleLikeClick}>
                         {!isLiked ? (
                             <div id="post-likes">
-                                <FaRegHeart id="post-like"/>
+                                <FaRegHeart id="post-like" />
                             </div>
                         ) : (
                             <div id="post-likes">
-                                <FaHeart id="post-like"/>
+                                <FaHeart id="post-like" />
                             </div>
                         )}
                         <span>{post.likes.length}</span>

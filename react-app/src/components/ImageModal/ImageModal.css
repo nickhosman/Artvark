@@ -5,10 +5,44 @@
   align-items: center;
   justify-content: center;
   padding: 2rem;
+  position: relative;
 }
 
 #full-img {
   width: 100%;
   height: auto;
   max-height: 80vh;
+  user-select: none;
+}
+
+.img-nav {
+  position: absolute;
+  color: white;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 30%;
+}
+
+.img-nav-arrows {
+  opacity: 0;
+  transition: opacity .3s ease-in-out;
+}
+
+.img-nav:hover .img-nav-arrows {
+  opacity: 1;
+}
+
+.img-nav:hover {
+  cursor: pointer;
+}
+
+#img-nav-left {
+  left: 4rem;
+  justify-content: flex-start;
+}
+
+#img-nav-right {
+  right: 4rem;
+  justify-content: flex-end;
 }
