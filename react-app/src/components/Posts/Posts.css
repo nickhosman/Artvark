@@ -1,76 +1,75 @@
 .post-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 #post-info {
-  padding-left: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  color: var(--secondary-color);
+    padding-left: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--secondary-color);
 }
 
 #post-btn-wrapper {
-  padding-right: 1rem;
-  display: flex;
-  align-items: center;
-  gap: .5rem;
+    padding-right: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 #post-update:hover {
-  color: blue;
-  cursor: pointer;
+    color: blue;
+    cursor: pointer;
 }
 
 #post-delete:hover {
-  color: red;
-  cursor: pointer;
+    color: red;
+    cursor: pointer;
 }
 
 .author-icon {
-  aspect-ratio: 1;
-  height: 3rem;
-  border-radius: 50%;
-  border: 1px solid var(--secondary-color);
+    aspect-ratio: 1;
+    height: 3rem;
+    border-radius: 50%;
 }
 
 .post-title {
-  font-size: 24px;
-  font-weight: bold;
+    font-size: 24px;
+    font-weight: bold;
 }
 
 .post-image {
-  width: 50rem;
-  border-radius: 20px;
+    width: 50rem;
+    border-radius: 20px;
 }
 
 .post-wrapper {
-  padding-block: 3rem;
-  padding-inline: 2rem;
-  border-top: 1px solid var(--secondary-color);
-  display: flex;
-  flex-direction: column;
-  gap: .5rem;
-  width: 100%;
+    padding-block: 3rem;
+    padding-inline: 2rem;
+    border-top: 1px solid var(--secondary-color);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
 }
 
 .post-stats {
-  display: flex;
-  margin-left: 1rem;
+    display: flex;
+    margin-left: 1rem;
 }
 
 #post-stat-reacts {
-  display: flex;
-  gap: .5em;
+    display: flex;
+    gap: 0.5em;
 }
 
 #post-btn-wrapper {
-  display: flex;
-  gap: .5em;
-  justify-self: flex-end;
-  color: var(--secondary-color);
+    display: flex;
+    gap: 0.5em;
+    justify-self: flex-end;
+    color: var(--secondary-color);
 }
 
 /* .carousel .thumbs {
@@ -81,65 +80,117 @@
   margin-right: 300px;
 } */
 
-.slider {
-  border-radius: 20px;
-}
-
-.slide img {
-  max-height: 30rem;
-}
-
-.slide:hover {
-  cursor: pointer;
-}
-
-.carousel .slider-wrapper {
-  border-radius: 20px;
-}
-
 .carousel-image {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
 }
 
 #post-stats-wrapper {
-  width: fit-content;
-  display: flex;
-  gap: 1rem;
-  color: var(--secondary-color);
+    width: fit-content;
+    display: flex;
+    gap: 1rem;
+    color: var(--secondary-color);
 }
 
 #post-reactions-container {
-  display: flex;
-  align-items: center;
-  gap: .5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 #post-reactions-container svg:hover {
-  color: yellow;
+    color: yellow;
 }
 
 #post-react {
-  height: 1.3rem;
-  width: 1.3rem;
+    height: 1.3rem;
+    width: 1.3rem;
 }
 
 #post-likes-container {
-  display: flex;
-  align-items: center;
-  gap: .5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 #post-like {
-  height: 1.3rem;
-  width: 1.3rem;
+    height: 1.3rem;
+    width: 1.3rem;
 }
 
 #post-likes-container svg:hover {
-  color: red;
+    color: red;
 }
 
 #post-stats-wrapper svg:hover {
+    cursor: pointer;
+}
+
+#post-image-container {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-rows: 50% 50%;
+    height: 30rem;
+    border-radius: 30px;
+    overflow: hidden;
+    gap: .4rem;
+}
+
+.post-image-wrapper {
+  max-height: 30rem;
+}
+
+.post-image-wrapper:hover {
   cursor: pointer;
+}
+
+#post-image-single {
+    grid-column: span 4;
+    grid-row: span 2;
+}
+
+#post-image-double-0 {
+    grid-column: 2 span;
+    grid-row: 2 span;
+}
+
+#post-image-double-1 {
+    grid-column: 2 span;
+    grid-row: 2 span;
+}
+
+#post-image-triple-0 {
+  grid-column: 1 / 2 span;
+  grid-row: 2 span;
+}
+
+#post-image-triple-1 {
+  grid-column: 3 / 5;
+  grid-row: 1;
+}
+
+#post-image-triple-2 {
+  grid-column: 3 / 5;
+  grid-row: 2;
+}
+
+#post-image-0 {
+  grid-column: 2 span;
+  grid-row: 2 span;
+}
+
+#post-image-1 {
+  grid-column: 3 / 5;
+  grid-row: 1;
+}
+
+#post-image-2 {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+#post-image-3 {
+  grid-column: 4;
+  grid-row: 2;
 }

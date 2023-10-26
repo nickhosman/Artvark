@@ -21,7 +21,6 @@
   aspect-ratio: 1;
   height: 6rem;
   border-radius: 50%;
-  border: 1px solid var(--secondary-color);
 }
 
 .reaction-content {
