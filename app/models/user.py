@@ -24,6 +24,8 @@ class User(db.Model, UserMixin):
     reactions = db.relationship("Reaction", back_populates="user")
     posts = db.relationship("Post", back_populates="user")
     user_likes = db.relationship("Post", secondary="likes", back_populates="post_likes")
+    followers = db.relationship("User", secondary="follows", back_populates="following")
+    following = db.relationship("User", secondary="follows", back_populates="followers")
 
     @property
     def password(self):
@@ -45,7 +47,7 @@ class User(db.Model, UserMixin):
             'firstName': self.first_name,
             'lastName': self.last_name,
             'profileImg': self.profile_img,
-            'likes': like_dicts
+            'likes': like_dicts,
         }
 
     def to_dict_no_likes(self):
