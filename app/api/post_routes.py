@@ -303,3 +303,33 @@ def get_liked_posts():
     post_dict[str(post.id)] = data
   print("POST DICT", post_dict)
   return post_dict
+
+
+@post_routes.route("/users/<int:userId>")
+def get_posts_by_user(userId):
+  """
+  Get all posts by a user
+  """
+  user_posts = Post.query.filter_by(user_id = userId).all()
+  post_dict = {}
+  for post in user_posts:
+    data = post.to_dict()
+
+    post_dict[str(post.id)] = data
+  return post_dict
+
+
+@post_routes.route("/following")
+@login_required
+def get_posts_by_followed():
+  """
+  Get all posts by followed users
+  """
+  print("FOLLOWING", current_user.following)
+  followed_posts = Post.query.filter(Post.user_id.in_([f.id for f in current_user.following])).all()
+  post_dict = {}
+  for post in followed_posts:
+    data = post.to_dict()
+
+    post_dict[str(post.id)] = data
+  return post_dict

@@ -139,7 +139,7 @@
 
 .post-image-wrapper {
     max-height: 30rem;
-    transition: all .2s ease-in-out;
+    transition: all 0.2s ease-in-out;
 }
 
 .post-image-wrapper:hover {
@@ -195,4 +195,8 @@
 #post-image-3 {
     grid-column: 4;
     grid-row: 2;
+}
+
+.author-icon:hover {
+    cursor: pointer;
 }

@@ -5,3 +5,4 @@ from .reaction import Reaction
 from .post_image import PostImage
 from .db import environment, SCHEMA
 from .like import likes
+from .follow import follows

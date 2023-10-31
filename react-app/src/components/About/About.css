@@ -47,3 +47,9 @@
   align-items: center;
   gap: .5rem;
 }
+
+#social-wrapper {
+  display: flex;
+  width: 100%;
+  gap: 1rem;
+}
