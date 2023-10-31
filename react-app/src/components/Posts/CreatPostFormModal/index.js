@@ -107,7 +107,7 @@ function CreatePostFormModal() {
                         <input
                             className="file-input"
                             type="file"
-                            accept="image/*"
+                            accept="image/png, image/jpg, image/jpeg, image/gif, image/webp"
                             onChange={(e) => setImage1(e.target.files[0])}
                         />
                         {Object.keys(formErrors).length > 0 ? (
@@ -131,7 +131,7 @@ function CreatePostFormModal() {
                         <input
                             className="file-input"
                             type="file"
-                            accept="image/*"
+                            accept="image/png, image/jpg, image/jpeg, image/gif, image/webp"
                             onChange={(e) => setImage2(e.target.files[0])}
                         />
                         {Object.keys(formErrors).length > 0 ? (
@@ -155,7 +155,7 @@ function CreatePostFormModal() {
                         <input
                             className="file-input"
                             type="file"
-                            accept="image/*"
+                            accept="image/png, image/jpg, image/jpeg, image/gif, image/webp"
                             onChange={(e) => setImage3(e.target.files[0])}
                         />
                         {Object.keys(formErrors).length > 0 ? (
@@ -179,7 +179,7 @@ function CreatePostFormModal() {
                         <input
                             className="file-input"
                             type="file"
-                            accept="image/*"
+                            accept="image/png, image/jpg, image/jpeg, image/gif, image/webp"
                             onChange={(e) => setImage4(e.target.files[0])}
                         />
                         {Object.keys(formErrors).length > 0 ? (
