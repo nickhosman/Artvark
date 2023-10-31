@@ -25,6 +25,9 @@ function App() {
                     <Route path="/posts/liked">
                         <Home isLikesPage={true}/>
                     </Route>
+                    <Route path="/:username">
+
+                    </Route>
                 </Switch>
             )}
         </>

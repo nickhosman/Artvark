@@ -40,6 +40,7 @@ class User(db.Model, UserMixin):
 
     def to_dict(self):
         like_dicts = [like.to_dict() for like in self.user_likes]
+        # following_dicts = [user.to_dict_no_likes() for user in self.following]
         return {
             'id': self.id,
             'username': self.username,

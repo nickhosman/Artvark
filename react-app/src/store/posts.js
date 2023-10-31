@@ -30,14 +30,27 @@ export const fetchLoadLikedPosts = () => async (dispatch) => {
     const response = await fetch("/api/posts/liked");
 
     if (response.ok) {
-        const posts = await response.json()
+        const posts = await response.json();
         await dispatch(loadPosts(posts));
         return posts;
     } else {
-        const errors = await response.json()
+        const errors = await response.json();
         return errors;
     }
-}
+};
+
+export const fetchLoadUserPosts = (userId) => async (dispatch) => {
+    const response = await fetch(`/api/posts/users/${userId}`);
+
+    if (response.ok) {
+        const posts = await response.json();
+        await dispatch(loadPosts(posts));
+        return posts;
+    } else {
+        const errors = await response.json();
+        return errors;
+    }
+};
 
 export const fetchCreatePost = (post) => async (dispatch) => {
     const response = await fetch("/api/posts/new", {
