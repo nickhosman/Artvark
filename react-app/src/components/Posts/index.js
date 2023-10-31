@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 import { useDispatch, useSelector } from "react-redux";
 import { FaRegGrin } from "react-icons/fa";
 import { FaPencilAlt } from "react-icons/fa";
@@ -61,12 +62,19 @@ function Post({ post, isLikesPage }) {
         <div className="post-wrapper">
             <div className="post-header">
                 <div id="post-info">
-                    <img
-                        className="author-icon"
-                        title={post.author.username}
-                        alt=""
-                        src={post.author.profileImg}
-                    />
+                    <NavLink
+                        to={{
+                            pathname: `/${post.author.username}`,
+                            state: { user: post.author },
+                        }}
+                    >
+                        <img
+                            className="author-icon"
+                            title={post.author.username}
+                            alt=""
+                            src={post.author.profileImg}
+                        />
+                    </NavLink>
                     <span className="post-title">{post.title}</span>
                 </div>
                 {current_user && current_user?.id === post.author.id ? (

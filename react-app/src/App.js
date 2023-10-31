@@ -4,6 +4,8 @@ import { Route, Switch } from "react-router-dom";
 import { authenticate } from "./store/session";
 import Landing from "./components/Landing";
 import Home from "./components/Home";
+import UserPage from "./components/User/UserPage";
+import Following from "./components/Following/Following";
 
 function App() {
     const dispatch = useDispatch();
@@ -20,13 +22,16 @@ function App() {
                         <Landing />
                     </Route>
                     <Route exact path="/posts">
-                        <Home isLikesPage={false}/>
+                        <Home isLikesPage={false} />
                     </Route>
                     <Route path="/posts/liked">
-                        <Home isLikesPage={true}/>
+                        <Home isLikesPage={true} />
+                    </Route>
+                    <Route path="/posts/following">
+                        <Following />
                     </Route>
                     <Route path="/:username">
-
+                        <UserPage />
                     </Route>
                 </Switch>
             )}

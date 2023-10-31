@@ -1,42 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
-import LeftNav from "../../Navigation/LeftNav";
-import RightNav from "../../Navigation/RightNav";
-import Post from "../../Posts/index";
-import { clearPosts, fetchLoadUserPosts } from "../../../store/posts";
-import { authenticate } from "../../../store/session";
-import { loadTheme } from "../../../store/themes";
-import "../../Home/Home.css";
-import "./UserPage.css";
+import LeftNav from "../Navigation/LeftNav";
+import RightNav from "../Navigation/RightNav";
+import Post from "../Posts";
+import { clearPosts, fetchLoadFollowedPosts } from "../../store/posts";
+import { authenticate } from "../../store/session";
+import { loadTheme } from "../../store/themes";
+import "../Home/Home.css";
 
-function UserPage() {
+function Following() {
     const location = useLocation();
     const dispatch = useDispatch();
     const posts = useSelector((state) => state.posts);
     const currTheme = useSelector((state) => state.theme);
     const currUser = useSelector((state) => state.session.user);
-    const [isFollowed, setIsFollowed] = useState(false);
-    const user = location.state.user;
 
     useEffect(() => {
-        dispatch(fetchLoadUserPosts(user.id));
-        // console.log(user);
+        dispatch(fetchLoadFollowedPosts());
 
         return () => {
             dispatch(clearPosts());
         };
-    }, [dispatch, user]);
+    }, [dispatch]);
 
     useEffect(() => {
         dispatch(loadTheme(JSON.parse(localStorage.getItem("theme"))));
     }, [dispatch]);
-
-    useEffect(() => {
-        if (currUser.following.includes(user.username)) {
-            setIsFollowed(true);
-        }
-    }, [currUser, user]);
 
     useEffect(() => {
         if (Object.keys(currTheme).length > 0) {
@@ -68,44 +58,22 @@ function UserPage() {
         return new Date(b.createdAt) - new Date(a.createdAt);
     };
 
-    const handleFollowClick = async () => {
-        await fetch(`/api/follow/${user.id}`, { method: "POST" });
-        setIsFollowed(true);
-        dispatch(authenticate());
-    };
-
-    const handleUnfollowClick = async () => {
-        await fetch(`/api/follow/${user.id}`, { method: "DELETE" });
-        setIsFollowed(false);
-        dispatch(authenticate());
-    };
-
-    if (!user) return null;
-
     return (
         <div id="home-wrapper">
             <LeftNav />
             <div id="home-post-container">
-                <div id="user-info">
-                    <div id="user-wrapper">
-                        <img src={user.profileImg} alt="" id="user-pic" />
-                        <h2>@{user.username}</h2>
-                    </div>
-                    {currUser.username ===
-                    user.username ? null : !isFollowed ? (
-                        <div id="follow-user" onClick={handleFollowClick}>
-                            Follow
-                        </div>
-                    ) : (
-                        <div id="unfollow-user" onClick={handleUnfollowClick}>
-                            Unfollow
-                        </div>
-                    )}
+                <div id="home-header">
+                    <h2>Following</h2>
                 </div>
                 {Object.keys(posts).length > 0 ? (
                     Object.values(posts)
                         .sort(sortByDate)
-                        .map((post) => <Post post={post} key={post.id} />)
+                        .map((post) => (
+                            <Post
+                                post={post}
+                                key={post.id}
+                            />
+                        ))
                 ) : (
                     <h3 id="nothing-here">There's nothing here yet...</h3>
                 )}
@@ -115,4 +83,4 @@ function UserPage() {
     );
 }
 
-export default UserPage;
+export default Following;

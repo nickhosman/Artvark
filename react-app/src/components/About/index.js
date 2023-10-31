@@ -5,6 +5,7 @@ import {
     FaPython,
     FaJsSquare,
     FaGithubSquare,
+    FaLinkedin,
 } from "react-icons/fa";
 import "./About.css";
 
@@ -15,17 +16,28 @@ function About() {
             <div id="about-column-wrapper">
                 <div id="developed-by">
                     Developed By:
-                    <a href="https://github.com/nickhosman" target="_blank" rel="noreferrer">
-                        <FaGithub />
+                    <a
+                        href="http://nickhosman.me"
+                        target="_blacnk"
+                        rel="noreferrer"
+                    >
                         Nick Hosman
                     </a>
-                </div>
-                <div id="using">
-                    Stack:
-                    <div>
-                        <FaReact title="React" />
-                        <FaPython title="Python" />
-                        <FaJsSquare title="JavaScript" />
+                    <div id="social-wrapper">
+                        <a
+                            href="https://github.com/nickhosman"
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            <FaGithub />
+                        </a>
+                        <a
+                            href="https://www.linkedin.com/in/nicholas-hosman-428558206/"
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            <FaLinkedin />
+                        </a>
                     </div>
                 </div>
                 <div id="project-code">
@@ -37,7 +49,7 @@ function About() {
                         rel="noreferrer"
                     >
                         <FaGithubSquare />
-                        Artvark
+                        On Github
                     </a>
                 </div>
             </div>

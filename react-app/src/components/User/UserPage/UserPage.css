@@ -1,0 +1,63 @@
+#user-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 2rem;
+    position: sticky;
+    top: 0;
+    border-bottom: 1px solid var(--secondary-color);
+    background-color: var(--background-color);
+    z-index: 3;
+    gap: 2rem;
+}
+
+#user-info h2 {
+  color: var(--secondary-color);
+}
+
+#user-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+#user-pic {
+    aspect-ratio: 1;
+    height: 5rem;
+    border-radius: 50%;
+}
+
+#follow-user {
+  width: 6rem;
+  height: 3rem;
+  background-color: var(--primary-color);
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--button-font-color);
+}
+
+#follow-user:hover {
+  cursor: pointer;
+  filter: saturate(160%);
+}
+
+#unfollow-user {
+  width: 6rem;
+  height: 3rem;
+  background-color: var(--background-color);
+  border: 1px solid var(--secondary-color);
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--secondary-color);
+}
+
+#unfollow-user:hover {
+  cursor: pointer;
+  background-color: var(--accent-color);
+  color: var(--button-font-color);
+}

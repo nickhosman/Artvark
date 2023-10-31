@@ -44,13 +44,13 @@
   align-items: center;
   gap: 1.5rem;
   justify-content: flex-end;
-  width: 10rem;
+  width: 13rem;
   font-size: 22px;
   color: var(--secondary-color);
   border-block: 1px solid transparent;
   padding: 1rem;
   position: relative;
-  left: -5.1rem;
+  left: -8rem;
   transition: left 0.3s ease-in-out;
   z-index: 2;
   background-color: var(--background-color);

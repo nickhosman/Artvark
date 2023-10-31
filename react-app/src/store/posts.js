@@ -1,5 +1,6 @@
 const LOAD_POSTS = "posts/LOAD_POSTS";
 const DELETE_POST = "posts/DELETE_POST";
+const CLEAR_POSTS = "posts/CLEAR_POSTS";
 
 const loadPosts = (posts) => ({
     type: LOAD_POSTS,
@@ -9,6 +10,10 @@ const loadPosts = (posts) => ({
 const deletePost = (postId) => ({
     type: DELETE_POST,
     payload: postId,
+});
+
+export const clearPosts = () => ({
+    type: CLEAR_POSTS,
 });
 
 export const fetchLoadPosts = () => async (dispatch) => {
@@ -41,6 +46,19 @@ export const fetchLoadLikedPosts = () => async (dispatch) => {
 
 export const fetchLoadUserPosts = (userId) => async (dispatch) => {
     const response = await fetch(`/api/posts/users/${userId}`);
+
+    if (response.ok) {
+        const posts = await response.json();
+        await dispatch(loadPosts(posts));
+        return posts;
+    } else {
+        const errors = await response.json();
+        return errors;
+    }
+};
+
+export const fetchLoadFollowedPosts = () => async (dispatch) => {
+    const response = await fetch("/api/posts/following");
 
     if (response.ok) {
         const posts = await response.json();
@@ -113,6 +131,9 @@ const postReducer = (state = initialState, action) => {
                 ...state,
             };
             delete newState[action.payload];
+            return newState;
+        case CLEAR_POSTS:
+            newState = initialState;
             return newState;
         default:
             return state;

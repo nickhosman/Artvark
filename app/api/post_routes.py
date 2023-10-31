@@ -317,3 +317,19 @@ def get_posts_by_user(userId):
 
     post_dict[str(post.id)] = data
   return post_dict
+
+
+@post_routes.route("/following")
+@login_required
+def get_posts_by_followed():
+  """
+  Get all posts by followed users
+  """
+  print("FOLLOWING", current_user.following)
+  followed_posts = Post.query.filter(Post.user_id.in_([f.id for f in current_user.following])).all()
+  post_dict = {}
+  for post in followed_posts:
+    data = post.to_dict()
+
+    post_dict[str(post.id)] = data
+  return post_dict
