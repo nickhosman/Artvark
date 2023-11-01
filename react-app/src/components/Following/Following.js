@@ -1,20 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import LeftNav from "../Navigation/LeftNav";
 import RightNav from "../Navigation/RightNav";
 import Post from "../Posts";
 import { clearPosts, fetchLoadFollowedPosts } from "../../store/posts";
-import { authenticate } from "../../store/session";
 import { loadTheme } from "../../store/themes";
 import "../Home/Home.css";
 
 function Following() {
-    const location = useLocation();
     const dispatch = useDispatch();
     const posts = useSelector((state) => state.posts);
     const currTheme = useSelector((state) => state.theme);
-    const currUser = useSelector((state) => state.session.user);
 
     useEffect(() => {
         dispatch(fetchLoadFollowedPosts());

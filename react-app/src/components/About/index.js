@@ -1,9 +1,6 @@
 import React from "react";
 import {
     FaGithub,
-    FaReact,
-    FaPython,
-    FaJsSquare,
     FaGithubSquare,
     FaLinkedin,
 } from "react-icons/fa";

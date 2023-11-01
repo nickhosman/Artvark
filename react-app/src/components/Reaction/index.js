@@ -183,10 +183,14 @@ function Reaction({ reaction }) {
                     <span className="reaction-content">{reaction.content}</span>
                 )}
             </div>
-            {editErrors.length > 0 ? (
-                <p className="errors">{editErrors}</p>
-            ) : null}
-            {Object.keys(formErrors).length > 0 ? <p className="errors">{formErrors.content}</p> : null}
+            <div id="reaction-error-wrapper">
+                {editErrors.length > 0 ? (
+                    <p className="errors">{editErrors}</p>
+                ) : null}
+                {Object.keys(formErrors).length > 0 ? (
+                    <p className="errors">{formErrors.content}</p>
+                ) : null}
+            </div>
             <div id="picker-wrapper">
                 {showPicker ? (
                     <div id="picker-buttons">

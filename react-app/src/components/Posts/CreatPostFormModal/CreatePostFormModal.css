@@ -15,17 +15,28 @@
   gap: 2rem;
 }
 
-#create-post-form > button {
+#create-post-btn {
   height: 5rem;
   width: 100%;
   border-radius: 50px;
   border: none;
   font-size: 24px;
-  background-color: var(--primary-color);
   color: var(--button-font-color);
 }
 
-#create-post-form > button:hover {
+.disabled {
+  background-color: var(--accent-color);
+}
+
+.disabled:hover {
+  cursor: not-allowed;
+}
+
+.enabled {
+  background-color: var(--primary-color);
+}
+
+.enabled:hover {
   cursor: pointer;
   filter: saturate(160%);
 }

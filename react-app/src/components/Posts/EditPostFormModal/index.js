@@ -409,7 +409,7 @@ function EditPostFormModal({ post }) {
                 {!loadingImages ? (
                     <button type="submit">Edit Post</button>
                 ) : (
-                    <div class="lds-ring">
+                    <div className="lds-ring">
                         <div></div>
                         <div></div>
                         <div></div>

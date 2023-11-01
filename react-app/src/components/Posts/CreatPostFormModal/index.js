@@ -20,7 +20,14 @@ function CreatePostFormModal() {
     const [title, setTitle] = useState("");
     const [imagesLoading, setImagesLoading] = useState(false);
     const [formErrors, setFormErrors] = useState({});
+    const [isDisabled, setIsDisabled] = useState(true);
     const { closeModal } = useModal();
+
+    useEffect(() => {
+        if (image1 && title) {
+            setIsDisabled(false);
+        }
+    }, [image1, title]);
 
     useEffect(() => {
         let imageUrl1;
@@ -107,7 +114,7 @@ function CreatePostFormModal() {
                         <input
                             className="file-input"
                             type="file"
-                            accept="image/*"
+                            accept="image/png, image/jpg, image/jpeg, image/gif, image/webp"
                             onChange={(e) => setImage1(e.target.files[0])}
                         />
                         {Object.keys(formErrors).length > 0 ? (
@@ -131,7 +138,7 @@ function CreatePostFormModal() {
                         <input
                             className="file-input"
                             type="file"
-                            accept="image/*"
+                            accept="image/png, image/jpg, image/jpeg, image/gif, image/webp"
                             onChange={(e) => setImage2(e.target.files[0])}
                         />
                         {Object.keys(formErrors).length > 0 ? (
@@ -155,7 +162,7 @@ function CreatePostFormModal() {
                         <input
                             className="file-input"
                             type="file"
-                            accept="image/*"
+                            accept="image/png, image/jpg, image/jpeg, image/gif, image/webp"
                             onChange={(e) => setImage3(e.target.files[0])}
                         />
                         {Object.keys(formErrors).length > 0 ? (
@@ -179,7 +186,7 @@ function CreatePostFormModal() {
                         <input
                             className="file-input"
                             type="file"
-                            accept="image/*"
+                            accept="image/png, image/jpg, image/jpeg, image/gif, image/webp"
                             onChange={(e) => setImage4(e.target.files[0])}
                         />
                         {Object.keys(formErrors).length > 0 ? (
@@ -201,9 +208,21 @@ function CreatePostFormModal() {
                     ) : null}
                 </label>
                 {!imagesLoading ? (
-                    <button type="submit">Create Post</button>
+                    <button
+                        type="submit"
+                        disabled={isDisabled}
+                        id="create-post-btn"
+                        className={isDisabled ? "disabled" : "enabled"}
+                        title={
+                            isDisabled
+                                ? "Requires a title and at least one image"
+                                : null
+                        }
+                    >
+                        Create Post
+                    </button>
                 ) : (
-                    <div class="lds-ring">
+                    <div className="lds-ring">
                         <div></div>
                         <div></div>
                         <div></div>
