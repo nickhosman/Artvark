@@ -6,11 +6,14 @@ import Post from "../Posts";
 import { clearPosts, fetchLoadFollowedPosts } from "../../store/posts";
 import { loadTheme } from "../../store/themes";
 import "../Home/Home.css";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 function Following() {
     const dispatch = useDispatch();
+    const history = useHistory();
     const posts = useSelector((state) => state.posts);
     const currTheme = useSelector((state) => state.theme);
+    const currUser = useSelector((state) => state.session.user);
 
     useEffect(() => {
         dispatch(fetchLoadFollowedPosts());
@@ -54,6 +57,8 @@ function Following() {
         return new Date(b.createdAt) - new Date(a.createdAt);
     };
 
+    if (!currUser) history.push("/posts");
+
     return (
         <div id="home-wrapper">
             <LeftNav />
@@ -64,12 +69,7 @@ function Following() {
                 {Object.keys(posts).length > 0 ? (
                     Object.values(posts)
                         .sort(sortByDate)
-                        .map((post) => (
-                            <Post
-                                post={post}
-                                key={post.id}
-                            />
-                        ))
+                        .map((post) => <Post post={post} key={post.id} />)
                 ) : (
                     <h3 id="nothing-here">There's nothing here yet...</h3>
                 )}

@@ -16,6 +16,7 @@ function RightNav() {
 
     const handleFollowingClick = () => {
         history.push("/posts/following");
+        window.scrollTo(0, 0);
     };
 
     return (

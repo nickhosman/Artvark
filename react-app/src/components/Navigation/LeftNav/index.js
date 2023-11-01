@@ -15,11 +15,13 @@ function LeftNav() {
     const handleLikesClick = (e) => {
         e.preventDefault();
         history.push("/posts/liked");
+        window.scrollTo(0, 0);
     };
 
     const handleHomeClick = (e) => {
         e.preventDefault();
         history.push("/posts");
+        window.scrollTo(0, 0);
     };
 
     return (
@@ -27,12 +29,10 @@ function LeftNav() {
             <div id="left-nav-logo" title="Artvark">
                 <ArtvarkLogo />
             </div>
-            {user ? (
-                <div className="left-nav-item" onClick={handleHomeClick}>
-                    <FaHome id="nav-button" />
-                    <p className="left-nav-text">Home</p>
-                </div>
-            ) : null}
+            <div className="left-nav-item" onClick={handleHomeClick}>
+                <FaHome id="nav-button" />
+                <p className="left-nav-text">Home</p>
+            </div>
             {user ? (
                 <div className="left-nav-item" onClick={handleLikesClick}>
                     <FaHeart id="nav-button" />
