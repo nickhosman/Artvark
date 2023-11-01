@@ -24,7 +24,7 @@ function Home({ isLikesPage }) {
     }, [dispatch, isLikesPage]);
 
     useEffect(() => {
-            dispatch(loadTheme(JSON.parse(localStorage.getItem("theme"))));
+        dispatch(loadTheme(JSON.parse(localStorage.getItem("theme"))));
     }, [dispatch]);
 
     useEffect(() => {

@@ -33,7 +33,7 @@ function UserPage() {
     }, [dispatch]);
 
     useEffect(() => {
-        if (currUser.following.includes(user.username)) {
+        if (currUser?.following.includes(user.username)) {
             setIsFollowed(true);
         }
     }, [currUser, user]);
@@ -91,16 +91,21 @@ function UserPage() {
                         <img src={user.profileImg} alt="" id="user-pic" />
                         <h2>@{user.username}</h2>
                     </div>
-                    {currUser.username ===
-                    user.username ? null : !isFollowed ? (
-                        <div id="follow-user" onClick={handleFollowClick}>
-                            Follow
-                        </div>
-                    ) : (
-                        <div id="unfollow-user" onClick={handleUnfollowClick}>
-                            Unfollow
-                        </div>
-                    )}
+                    {currUser ? (
+                        currUser?.username ===
+                        user.username ? null : !isFollowed ? (
+                            <div id="follow-user" onClick={handleFollowClick}>
+                                Follow
+                            </div>
+                        ) : (
+                            <div
+                                id="unfollow-user"
+                                onClick={handleUnfollowClick}
+                            >
+                                Unfollow
+                            </div>
+                        )
+                    ) : null}
                 </div>
                 {Object.keys(posts).length > 0 ? (
                     Object.values(posts)
