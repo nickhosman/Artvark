@@ -135,10 +135,18 @@ function ReactionModal({ post }) {
                     </form>
                 </div>
             ) : null}
-            {errors.length > 0 ? <p className="errors">{errors}</p> : null}
-            {Object.keys(submitError).length > 0 ? (
-                <p className="errors">{submitError.content}</p>
-            ) : null}
+            <div id="reaction-error-wrapper">
+                {errors.length > 0 ? (
+                    <p className="errors" id="reaction-error">
+                        {errors}
+                    </p>
+                ) : null}
+                {Object.keys(submitError).length > 0 ? (
+                    <p className="errors" id="submit-reaction-error">
+                        {submitError.content}
+                    </p>
+                ) : null}
+            </div>
             <div id="picker-wrapper">
                 {showPicker ? (
                     <div id="close-picker-main" onClick={handlePickerClose}>

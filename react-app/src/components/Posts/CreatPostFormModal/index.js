@@ -20,7 +20,14 @@ function CreatePostFormModal() {
     const [title, setTitle] = useState("");
     const [imagesLoading, setImagesLoading] = useState(false);
     const [formErrors, setFormErrors] = useState({});
+    const [isDisabled, setIsDisabled] = useState(true);
     const { closeModal } = useModal();
+
+    useEffect(() => {
+        if (image1 && title) {
+            setIsDisabled(false);
+        }
+    }, [image1, title]);
 
     useEffect(() => {
         let imageUrl1;
@@ -201,9 +208,21 @@ function CreatePostFormModal() {
                     ) : null}
                 </label>
                 {!imagesLoading ? (
-                    <button type="submit">Create Post</button>
+                    <button
+                        type="submit"
+                        disabled={isDisabled}
+                        id="create-post-btn"
+                        className={isDisabled ? "disabled" : "enabled"}
+                        title={
+                            isDisabled
+                                ? "Requires a title and at least one image"
+                                : null
+                        }
+                    >
+                        Create Post
+                    </button>
                 ) : (
-                    <div class="lds-ring">
+                    <div className="lds-ring">
                         <div></div>
                         <div></div>
                         <div></div>

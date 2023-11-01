@@ -107,11 +107,11 @@ function Post({ post, isLikesPage }) {
                                 ? `post-image-triple-${idx}`
                                 : `post-image-${idx}`
                         }
+                        key={image.id}
                     >
                         <img
                             src={image.url}
                             alt=""
-                            key={image.id}
                             className="carousel-image"
                             onClick={handleImageClick(idx)}
                         />
