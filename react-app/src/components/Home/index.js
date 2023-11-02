@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchLoadLikedPosts, fetchLoadPosts } from "../../store/posts";
 import Post from "../Posts";
@@ -11,16 +11,27 @@ function Home({ isLikesPage }) {
     const dispatch = useDispatch();
     const posts = useSelector((state) => state.posts);
     const currTheme = useSelector((state) => state.theme);
+    const [loading, setLoading] = useState(false);
 
     // console.log("POSTS:", posts)
 
     useEffect(() => {
         // console.log(isLikesPage);
-        if (isLikesPage) {
-            dispatch(fetchLoadLikedPosts());
-        } else {
-            dispatch(fetchLoadPosts());
-        }
+        const fetchData = async () => {
+            setLoading(true);
+            try {
+                if (isLikesPage) {
+                    await dispatch(fetchLoadLikedPosts());
+                } else {
+                    await dispatch(fetchLoadPosts());
+                }
+            } catch (error) {
+                console.error(error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchData();
     }, [dispatch, isLikesPage]);
 
     useEffect(() => {
@@ -66,7 +77,14 @@ function Home({ isLikesPage }) {
                 <div id="home-header">
                     <h2>{isLikesPage ? "Likes" : "Home"}</h2>
                 </div>
-                {Object.keys(posts).length > 0 ? (
+                {loading ? (
+                    <div class="lds-ring">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                ) : Object.keys(posts).length > 0 ? (
                     Object.values(posts)
                         .sort(sortByDate)
                         .map((post) => (

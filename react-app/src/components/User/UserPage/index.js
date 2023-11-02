@@ -17,11 +17,22 @@ function UserPage() {
     const currTheme = useSelector((state) => state.theme);
     const currUser = useSelector((state) => state.session.user);
     const [isFollowed, setIsFollowed] = useState(false);
+    const [loading, setLoading] = useState(false);
     const user = location.state.user;
 
     useEffect(() => {
-        dispatch(fetchLoadUserPosts(user.id));
+        const fetchData = async () => {
+            setLoading(true);
+            try {
+                await dispatch(fetchLoadUserPosts(user.id));
+            } catch (error) {
+                console.error(error);
+            } finally {
+                setLoading(false);
+            }
+        };
         // console.log(user);
+        fetchData();
 
         return () => {
             dispatch(clearPosts());
@@ -107,7 +118,14 @@ function UserPage() {
                         )
                     ) : null}
                 </div>
-                {Object.keys(posts).length > 0 ? (
+                {loading ? (
+                    <div class="lds-ring">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                ) : Object.keys(posts).length > 0 ? (
                     Object.values(posts)
                         .sort(sortByDate)
                         .map((post) => <Post post={post} key={post.id} />)

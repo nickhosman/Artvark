@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import LeftNav from "../Navigation/LeftNav";
 import RightNav from "../Navigation/RightNav";
@@ -14,9 +14,20 @@ function Following() {
     const posts = useSelector((state) => state.posts);
     const currTheme = useSelector((state) => state.theme);
     const currUser = useSelector((state) => state.session.user);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        dispatch(fetchLoadFollowedPosts());
+        const fetchData = async () => {
+            setLoading(true);
+            try {
+                await dispatch(fetchLoadFollowedPosts());
+            } catch (error) {
+                console.error(error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchData();
 
         return () => {
             dispatch(clearPosts());
@@ -66,7 +77,14 @@ function Following() {
                 <div id="home-header">
                     <h2>Following</h2>
                 </div>
-                {Object.keys(posts).length > 0 ? (
+                {loading ? (
+                    <div class="lds-ring">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                ) : Object.keys(posts).length > 0 ? (
                     Object.values(posts)
                         .sort(sortByDate)
                         .map((post) => <Post post={post} key={post.id} />)
