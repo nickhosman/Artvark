@@ -15,6 +15,7 @@
 
 html {
     background-color: var(--background-color);
+    height: 100vh;
 }
 
 #landing-wrapper {
@@ -22,7 +23,6 @@ html {
     gap: 1rem;
     height: 100%;
     justify-content: center;
-    height: 100vh;
 }
 
 #landing-left {
@@ -109,4 +109,26 @@ html {
 
 .errors {
     color: red;
+}
+
+#landing-wrapper-wrapper {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#landing-about-wrapper {
+    display: flex;
+    justify-content: space-around;
+    justify-self: flex-end;
+    padding-bottom: 2rem;
+}
+
+.landing-about-item {
+    display: flex;
+    align-items: center;
+    gap: .3rem;
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-size: 20px;
 }

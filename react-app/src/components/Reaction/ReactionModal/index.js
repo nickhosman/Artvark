@@ -63,7 +63,6 @@ function ReactionModal({ post }) {
 
             const newReaction = await dispatch(fetchAddReaction(postId, data));
             if (newReaction.errors) {
-                // console.log("HELLO", newReaction.errors);
                 setSubmitError(newReaction.errors);
             } else {
                 dispatch(fetchLoadPosts());

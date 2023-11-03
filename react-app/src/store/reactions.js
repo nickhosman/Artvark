@@ -41,7 +41,6 @@ export const fetchAddReaction = (postId, reaction) => async (dispatch) => {
         return newReaction;
     } else {
         const errors = await response.json();
-        // console.log(errors)
         return errors;
     }
 };

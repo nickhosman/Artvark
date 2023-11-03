@@ -43,7 +43,6 @@ function SignupFormModal() {
 
             const data = await dispatch(signUp(formData));
             if (data) {
-                console.log("errors", data);
                 setErrors(data);
             } else {
                 closeModal();

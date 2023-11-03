@@ -20,12 +20,10 @@ export const fetchLoadPosts = () => async (dispatch) => {
     const response = await fetch("/api/posts");
 
     if (response.ok) {
-        // console.log("RESPONSE OK")
         const posts = await response.json();
         await dispatch(loadPosts(posts));
         return posts;
     } else {
-        // console.log("ERRORS")
         const errors = await response.json();
         return errors;
     }
@@ -78,26 +76,6 @@ export const fetchCreatePost = (post) => async (dispatch) => {
 
     if (response.ok) {
         const resPost = await response.json();
-        // console.log("RESPOST:", resPost)
-
-        // for (let image of images) {
-        //     console.log("IMAGES:", images)
-        //     const imageFormData = new FormData()
-        //     imageFormData.append("image", image)
-
-        //     console.log("IMAGE FORM DATA:", imageFormData)
-
-        //     let imageResponse = await fetch(`/api/posts/${resPost.id}/images`, {
-        //         method: "POST",
-        //         body: imageFormData,
-        //     })
-
-        //     if (!imageResponse.ok) {
-        //         const error = await imageResponse.json()
-        //         console.log("IMAGE ERROR", error)
-        //         return error;
-        //     }
-        // }
 
         dispatch(fetchLoadPosts());
         return resPost;
@@ -111,8 +89,6 @@ export const fetchDeletePost = (postId) => async (dispatch) => {
     const response = await fetch(`/api/posts/${postId}`, { method: "DELETE" });
 
     if (response.ok) {
-        // const message = await response.json();
-        //   console.log("MESSAGE:", message)
         dispatch(deletePost(postId));
     }
 };

@@ -31,7 +31,6 @@ function UserPage() {
                 setLoading(false);
             }
         };
-        // console.log(user);
         fetchData();
 
         return () => {
@@ -51,7 +50,6 @@ function UserPage() {
 
     useEffect(() => {
         if (Object.keys(currTheme).length > 0) {
-            // console.log("CURRTHEME", currTheme);
             document.documentElement.style.setProperty(
                 "--background-color",
                 currTheme.background

@@ -38,13 +38,11 @@ function ThemesModal() {
     const themeItemArr = useRef([]);
 
     const handleThemeSelect = (theme) => () => {
-        // console.log("THEME", theme);
         localStorage.setItem("theme", JSON.stringify(theme));
         dispatch(loadTheme(theme));
     };
 
     const handleThemeSelectBorder = (e) => {
-        // console.log(themeItemArr);
         themeItemArr.current.forEach((ele) => (ele.className = "unselected-theme"));
 
         e.currentTarget.className = "selected-theme";
