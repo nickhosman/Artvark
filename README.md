@@ -44,8 +44,27 @@ https://artvark.onrender.com/
 
 </div>
 
-## Wiki Pages:
+## About Artvark:
+Artvark is an image focused social site for sharing your artwork with the world. Currently users can create, update and delete posts with up to 4 images and a title. They can also create, edit and delete emoji only reactions that are tied to each post.
 
+## Planned Features:
+### Custom Themes:
+* Add the ability for a user to create their own custom themes that can then be applied site-wide
+* The user should be able to choose a background color, font color, primary color, secondary color, and accent color which will then be saved for future access on the theme tab.
+
+## Landing Page
+![image](https://github.com/nickhosman/Artvark/assets/116920331/6dd12921-fa8b-4439-8a69-341556d1281f)
+
+## Posts
+![image](https://github.com/nickhosman/Artvark/assets/116920331/eb892789-7a37-4a1b-8807-04274011b97f)
+
+## Reactions
+![image](https://github.com/nickhosman/Artvark/assets/116920331/f550394e-be32-43f3-9a38-78b3e92f8c71)
+
+## Image View
+![image](https://github.com/nickhosman/Artvark/assets/116920331/56f4c913-9827-41d6-9bbf-1cce47e2a2c6)
+
+## Wiki Pages:
 ### Home (About):
 
 https://github.com/nickhosman/Artvark/wiki
@@ -77,8 +96,3 @@ https://github.com/nickhosman/Artvark/wiki/User-Stories
 ### Wireframe:
 
 https://github.com/nickhosman/Artvark/wiki/Wireframe
-
-## Planned Features:
-### Custom Themes:
-* Add the ability for a user to create their own custom themes that can then be applied site-wide
-* The user should be able to choose a background color, font color, primary color, secondary color, and accent color which will then be saved for future access on the theme tab.
