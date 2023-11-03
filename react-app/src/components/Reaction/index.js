@@ -84,7 +84,6 @@ function Reaction({ reaction }) {
                 return editedReaction;
             } else {
                 const errors = await response.json();
-                // console.log(errors);
                 setFormErrors(errors.errors);
                 return errors;
             }

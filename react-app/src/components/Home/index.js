@@ -13,10 +13,7 @@ function Home({ isLikesPage }) {
     const currTheme = useSelector((state) => state.theme);
     const [loading, setLoading] = useState(false);
 
-    // console.log("POSTS:", posts)
-
     useEffect(() => {
-        // console.log(isLikesPage);
         const fetchData = async () => {
             setLoading(true);
             try {
@@ -40,7 +37,6 @@ function Home({ isLikesPage }) {
 
     useEffect(() => {
         if (Object.keys(currTheme).length > 0) {
-            // console.log("CURRTHEME", currTheme);
             document.documentElement.style.setProperty(
                 "--background-color",
                 currTheme.background

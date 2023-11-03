@@ -15,7 +15,7 @@ function About() {
                     Developed By:
                     <a
                         href="http://nickhosman.me"
-                        target="_blacnk"
+                        target="_blank"
                         rel="noreferrer"
                     >
                         Nick Hosman

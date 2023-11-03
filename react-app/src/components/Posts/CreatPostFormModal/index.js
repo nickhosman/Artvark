@@ -73,12 +73,10 @@ function CreatePostFormModal() {
         formData.append("image4", image4);
 
         const response = await dispatch(fetchCreatePost(formData));
-        // console.log("RESPONSE", response)
 
         if (response.errors) {
             setImagesLoading(false);
             const errors = response.errors;
-            // console.log("ERRORS",errors)
             setFormErrors(errors);
         } else {
             history.push("/posts");

@@ -40,7 +40,6 @@ function Following() {
 
     useEffect(() => {
         if (Object.keys(currTheme).length > 0) {
-            // console.log("CURRTHEME", currTheme);
             document.documentElement.style.setProperty(
                 "--background-color",
                 currTheme.background
