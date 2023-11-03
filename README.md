@@ -78,62 +78,7 @@ https://github.com/nickhosman/Artvark/wiki/User-Stories
 
 https://github.com/nickhosman/Artvark/wiki/Wireframe
 
-## Frontend Routes:
-
-### Landing Page: `"/"`
-![landing](https://github.com/nickhosman/Artvark/assets/116920331/baf5ae51-7e46-4bca-b8a3-9b55424df4b3)
-
-### Home/Posts: `"/posts"`
-![home logged in](https://github.com/nickhosman/Artvark/assets/116920331/82827f53-59bc-4d4c-a3d9-a93d2df95cc3)
-
-![home logged out](https://github.com/nickhosman/Artvark/assets/116920331/ec34b58a-be4e-43a4-8ec2-fc4a112c8f04)
-
-
-### Liked Posts: `"/posts/liked"`
-![liked nothing](https://github.com/nickhosman/Artvark/assets/116920331/66762af9-9dbe-4a78-aa1f-0d2f0d5bb230)
-
-![with likes](https://github.com/nickhosman/Artvark/assets/116920331/cf76889c-4445-46a4-af6a-c0ec5b104eb2)
-
-## Modals:
-
-### Posts:
-
-**Create Post:**
-![create post](https://github.com/nickhosman/Artvark/assets/116920331/d9ccccf0-163f-4660-a615-034d139e675b)
-
-**Edit Post:**
-![edit post](https://github.com/nickhosman/Artvark/assets/116920331/c88d9df5-3e38-4e77-b88e-5caf312f713b)
-
-**Delete Post:**
-![delete post](https://github.com/nickhosman/Artvark/assets/116920331/38308b54-6dde-44eb-9df8-cceff33831e3)
-
-### Reactions:
-
-**View Reactions:**
-![reactions](https://github.com/nickhosman/Artvark/assets/116920331/d160bd45-6496-42fa-ae25-28d4564c828e)
-
-![image scrolled down](https://github.com/nickhosman/Artvark/assets/116920331/b85f2f77-de9a-4ff4-9282-10abd00515cc)
-
-**Create Reaction:**
-![create reaction](https://github.com/nickhosman/Artvark/assets/116920331/b2310390-e12f-4a0c-9607-a1a79c5ddffe)
-
-**Edit Reaction:**
-![edit reaction](https://github.com/nickhosman/Artvark/assets/116920331/acea58a6-639d-4dc8-baa8-a7c72427f410)
-
-**Delete Reaction:**
-![delete reaction](https://github.com/nickhosman/Artvark/assets/116920331/6c1e7f71-5e42-4871-8e76-59ede55274c4)
-
-### User:
-
-**Signup:**
-![signup](https://github.com/nickhosman/Artvark/assets/116920331/6bbacd85-af01-455e-afac-150a0f7454db)
-
-
-**Login:**
-![login](https://github.com/nickhosman/Artvark/assets/116920331/7dac2f1b-c39e-4f2c-88cb-da0eed68c9ae)
-
-**User Card:**
-![user](https://github.com/nickhosman/Artvark/assets/116920331/db982104-d1ff-47a6-b86d-e20c2fcd63a7)
-
-### About:
-![about](https://github.com/nickhosman/Artvark/assets/116920331/eb50b14e-713f-42be-845c-9bf8cfe72a75)
+## Planned Features:
+### Custom Themes:
+* Add the ability for a user to create their own custom themes that can then be applied site-wide
+* The user should be able to choose a background color, font color, primary color, secondary color, and accent color which will then be saved for future access on the theme tab.
